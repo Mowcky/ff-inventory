@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-20 14:13",
+ "generated": "2026-10-20 14:35",
  "people": [
   {
    "pos": "GPW-00",
@@ -2705,6 +2705,119 @@
    "office": "RAP",
    "reviewed": "2026-09-24",
    "items": [],
+   "history": [],
+   "requests": []
+  },
+  {
+   "pos": "ARC-01",
+   "name": "Leanna Saupp",
+   "title": null,
+   "office": "Archived",
+   "reviewed": "2026-09-24",
+   "archived": {
+    "date": "2026-09-24",
+    "note": "No longer with Foundation First. Reconcile each item: returned, reassigned or disposed."
+   },
+   "former": [
+    {
+     "name": "Leanna Saupp",
+     "left": "2026-09-24"
+    }
+   ],
+   "items": [
+    {
+     "name": "HP Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Monitor",
+     "status": "Assigned",
+     "id": "ipl1xtfkpw1b0"
+    },
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk",
+     "status": "Assigned",
+     "id": "ixvkxjoco1j83"
+    },
+    {
+     "name": "Sound Bar",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Sound bar",
+     "status": "Assigned",
+     "id": "ikk7cvova7dl8"
+    },
+    {
+     "name": "Desk Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "id": "iny7m2m6xo5sc"
+    },
+    {
+     "name": "2 Drawer Rolling Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "id": "im6fac4171gwx"
+    },
+    {
+     "name": "2 Drawer Filing Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "id": "ivbd3z025r8sy"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "id": "ir2myok8pdjft"
+    },
+    {
+     "name": "Standing Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Standing desk",
+     "qty": 1,
+     "unitCost": 104.7,
+     "total": 104.7,
+     "status": "Assigned",
+     "notes": "Reimbursement",
+     "id": "ih27rybh3pdiy"
+    },
+    {
+     "name": "Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Monitor",
+     "status": "Assigned",
+     "id": "iro8tjwxhwpp2"
+    },
+    {
+     "name": "Portable Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "desc": "Portable Monitor",
+     "status": "Assigned",
+     "id": "i6uy0uc1rdgbw"
+    },
+    {
+     "name": "Dell Laptop",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Laptop",
+     "status": "Assigned",
+     "id": "ig8srk5jugadj"
+    }
+   ],
    "history": [],
    "requests": []
   }
