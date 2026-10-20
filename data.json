@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-20 14:35",
+ "generated": "2026-10-20 14:41",
  "people": [
   {
    "pos": "GPW-00",
@@ -1548,7 +1548,101 @@
    "title": "Program Success Specialist – LFC Area",
    "office": "LFC",
    "reviewed": "2026-09-24",
-   "items": [],
+   "items": [
+    {
+     "name": "HP Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Monitor",
+     "status": "Assigned",
+     "id": "imvh0yeulrlqgd",
+     "assigned": "2026-10-05",
+     "notes": "From ARC-01 on 10/05/2026"
+    },
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk",
+     "status": "Assigned",
+     "id": "imvh0ynq6msyoo",
+     "assigned": "2026-10-05",
+     "notes": "From ARC-01 on 10/05/2026"
+    },
+    {
+     "name": "Sound Bar",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Sound bar",
+     "status": "Assigned",
+     "id": "imvh0z1itkp389",
+     "assigned": "2026-10-05",
+     "notes": "From ARC-01 on 10/05/2026"
+    },
+    {
+     "name": "Desk Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "id": "imvh0z9spozwo4",
+     "assigned": "2026-10-05",
+     "notes": "From ARC-01 on 10/05/2026"
+    },
+    {
+     "name": "2 Drawer Rolling Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "id": "imvh0zgj9shdxc",
+     "assigned": "2026-10-05",
+     "notes": "From ARC-01 on 10/05/2026"
+    },
+    {
+     "name": "2 Drawer Filing Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "id": "imvh0zmhahmvu7",
+     "assigned": "2026-10-05",
+     "notes": "From ARC-01 on 10/05/2026"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "id": "imvh138e14dg8o",
+     "assigned": "2026-10-05",
+     "notes": "From ARC-01 on 10/05/2026"
+    },
+    {
+     "name": "Standing Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Standing desk",
+     "qty": 1,
+     "unitCost": 104.7,
+     "total": 104.7,
+     "status": "Assigned",
+     "notes": "Reimbursement | From ARC-01 on 10/05/2026",
+     "id": "imvh13ha4hkj61",
+     "assigned": "2026-10-05"
+    },
+    {
+     "name": "Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Monitor",
+     "status": "Assigned",
+     "id": "imvh13o2hqjc7h",
+     "assigned": "2026-10-05",
+     "notes": "From ARC-01 on 10/05/2026"
+    }
+   ],
    "history": [],
    "requests": []
   },
@@ -2724,14 +2818,18 @@
      "left": "2026-09-24"
     }
    ],
-   "items": [
+   "items": [],
+   "history": [
     {
      "name": "HP Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Monitor",
      "status": "Assigned",
-     "id": "ipl1xtfkpw1b0"
+     "id": "ipl1xtfkpw1b0",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "L-Shaped Desk",
@@ -2739,7 +2837,10 @@
      "location": "On-Site Office",
      "desc": "Desk",
      "status": "Assigned",
-     "id": "ixvkxjoco1j83"
+     "id": "ixvkxjoco1j83",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "Sound Bar",
@@ -2747,7 +2848,10 @@
      "location": "On-Site Office",
      "desc": "Sound bar",
      "status": "Assigned",
-     "id": "ikk7cvova7dl8"
+     "id": "ikk7cvova7dl8",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "Desk Chair",
@@ -2755,7 +2859,10 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "id": "iny7m2m6xo5sc"
+     "id": "iny7m2m6xo5sc",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "2 Drawer Rolling Cabinet",
@@ -2763,7 +2870,10 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "id": "im6fac4171gwx"
+     "id": "im6fac4171gwx",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "2 Drawer Filing Cabinet",
@@ -2771,7 +2881,10 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "id": "ivbd3z025r8sy"
+     "id": "ivbd3z025r8sy",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "Bookshelf",
@@ -2779,7 +2892,10 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "id": "ir2myok8pdjft"
+     "id": "ir2myok8pdjft",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "Standing Desk",
@@ -2791,7 +2907,10 @@
      "total": 104.7,
      "status": "Assigned",
      "notes": "Reimbursement",
-     "id": "ih27rybh3pdiy"
+     "id": "ih27rybh3pdiy",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "Monitor",
@@ -2799,7 +2918,10 @@
      "location": "Home Office",
      "desc": "Monitor",
      "status": "Assigned",
-     "id": "iro8tjwxhwpp2"
+     "id": "iro8tjwxhwpp2",
+     "reason": "Transferred",
+     "removed": "2026-10-05",
+     "to": "LFC-07 – Libby Sparace"
     },
     {
      "name": "Portable Monitor",
@@ -2807,7 +2929,9 @@
      "location": "Portable",
      "desc": "Portable Monitor",
      "status": "Assigned",
-     "id": "i6uy0uc1rdgbw"
+     "id": "i6uy0uc1rdgbw",
+     "reason": "Returned to Office",
+     "removed": "2026-10-05"
     },
     {
      "name": "Dell Laptop",
@@ -2815,10 +2939,11 @@
      "location": "Home Office",
      "desc": "Laptop",
      "status": "Assigned",
-     "id": "ig8srk5jugadj"
+     "id": "ig8srk5jugadj",
+     "reason": "Returned to Office",
+     "removed": "2026-10-05"
     }
    ],
-   "history": [],
    "requests": []
   }
  ],
