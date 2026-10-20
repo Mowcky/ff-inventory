@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-20 14:41",
+ "generated": "2026-10-20 15:00",
  "people": [
   {
    "pos": "GPW-00",
@@ -2950,5 +2950,88 @@
  "settings": {
   "requestEmail": "dawn@foundationfirstva.org",
   "approver": "Dawn Chapman"
+ },
+ "supplies": {
+  "allowance": 100,
+  "overrides": {},
+  "purchases": [
+   {
+    "name": "Pua Yule",
+    "date": "2026-08-17",
+    "item": "TECKNET Ergonomic Mouse, 4800 DPI Wireless Bluetooth Vertical, 3-Device | Switch Among 3 Devices, 6 DPI Levels, BT 5.0/2.4G USB-A, Quiet Clicks, 6 Buttons, Battery-Powered, Right-Handed, Pink-PurpleTECKNET Ergonomic Mouse, 4800 DPI Wireless Bluetooth Vertical,",
+    "vendor": "Amazon",
+    "amount": 23.99,
+    "receipt": "Order # 111-1129652-0766668",
+    "addedToInventory": true,
+    "pos": "GPW-03",
+    "id": "pmvh1ta9ibjym"
+   },
+   {
+    "name": "Pua Yule",
+    "date": "2026-08-17",
+    "item": "Small Cork Bulletin Board Tiles, Felt Wall Decor and Office Desk Accessories",
+    "vendor": "Amazon",
+    "amount": 12.59,
+    "receipt": "Order # 111-1129652-0766668",
+    "addedToInventory": true,
+    "pos": "GPW-03",
+    "id": "pmvh1ta9iqbrk"
+   },
+   {
+    "name": "Pua Yule",
+    "date": "2026-08-17",
+    "item": "Laborio Computer Keyboard Wrist Rest, Keyboard Riser Stand for Desktop",
+    "vendor": "Amazon",
+    "amount": 19.99,
+    "receipt": "Order # 111-1129652-0766668",
+    "addedToInventory": true,
+    "pos": "GPW-03",
+    "id": "pmvh1ta9i7o35"
+   },
+   {
+    "name": "Paula Bellville",
+    "date": "2026-08-18",
+    "item": "Mouse pad",
+    "vendor": "Amazon",
+    "amount": 13.29,
+    "receipt": "Order # 112-1150102-6869860",
+    "addedToInventory": false,
+    "pos": "RAP-05",
+    "id": "pmvh1ta9i7ncz"
+   },
+   {
+    "name": "Pua Yule",
+    "date": "2026-09-11",
+    "item": "FRABUY Soft Corduroy Pencil Case Pen Pouch Organizer,",
+    "vendor": "Amazon",
+    "amount": 5.99,
+    "receipt": "Order # 112-8672716-4546610",
+    "addedToInventory": false,
+    "pos": "GPW-03",
+    "id": "pmvh1ta9izgpf"
+   },
+   {
+    "name": "Pua Yule",
+    "date": "2026-09-11",
+    "item": "Paper Mate InkJoy 100RT Retractable Ballpoint Pens",
+    "vendor": "Amazon",
+    "amount": 7.99,
+    "receipt": "Order # 112-8672716-4546610",
+    "addedToInventory": false,
+    "pos": "GPW-03",
+    "id": "pmvh1ta9iaunb"
+   },
+   {
+    "name": "Pua Yule",
+    "date": "2026-09-11",
+    "item": "BAGSMART Electronics Organizer Travel Case for Cords Chargers Phones",
+    "vendor": "Amazon",
+    "amount": 9.99,
+    "receipt": "Order # 112-8672716-4546610",
+    "addedToInventory": false,
+    "pos": "GPW-03",
+    "id": "pmvh1ta9inhvl"
+   }
+  ]
  }
 }
