@@ -2,6 +2,7 @@
 
 - `index.html` – the website: office dashboards, QR cards, item lists, adding/editing/transferring/archiving, sticker printing
 - `data.json` – the inventory data
+- `request.html` – the request page for staff: only the request form, no inventory
 - `publish.html` – optional: import Excel files (replaces everything)
 
 ## One-time setup
@@ -32,12 +33,10 @@ After that, every change shows an **Unsaved changes** bar. Choose **Save to GitH
 ## Item requests
 
 1. On the website, open **Settings & backup → Item requests**, enter the email address requests should go to, choose **Save request settings**, then **Save to GitHub**.
-2. Staff open their page (scan their sticker or bookmark it) and choose **Request an item**. They paste the link, add the quantity, price and reason, and choose **Send request**. Their email app opens with everything filled in, addressed to you.
-3. The email has a link at the bottom. Open it on a device connected to GitHub and choose **Add as Pending**.
-4. On their page, choose **Approve** or **Not approved** (a reason is required, and staff can see it). Then **Mark ordered**, and when it arrives, **Received: add to inventory**, which adds it to their list with the details already filled in.
-5. Open requests show on the home page, on each office card and in the Excel export (Requests tab).
-
-Staff never need a GitHub account. Without a token, the site hides the editing buttons and only shows **Request an item**.
+2. In the same panel, copy the **request page** link (it ends in `request.html`) and send it to staff, or choose **Print a poster** with a QR code for each office. The request page shows only the request form, never anyone's inventory.
+3. Staff choose their name, paste the item link, add the quantity, price and reason, and choose **Send request**. Their email app opens with everything filled in, addressed to you; they press Send.
+4. The email ends with a link. Open it on a device connected to GitHub and choose **Add as Pending**.
+5. On their page, choose **Approve** or **Not approved** (a reason is required). Then **Mark ordered**, and when it arrives, **Received: add to inventory**, which adds it to their list with the details filled in.
 
 ## Privacy
 

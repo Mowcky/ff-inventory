@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Request an item | Foundation First</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--navy:#0D1B2A;--navy2:#1A2D40;--gold:#C9A84C;--gold2:#E8C76A;--paper:#F0EDE8;--ink:#0D1B2A;--muted:#6B7280;--line:#E5E7EB;
+  --rap:#0F8A5F;--gpw:#1B6CA8;--lfc:#D9731A;--bad:#B91C1C;--ok:#065F46;--okbg:#D1FAE5;--warnbg:#FEF3C7}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Figtree","Segoe UI",Arial,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.5;min-height:100vh;padding-bottom:env(safe-area-inset-bottom,0px)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.bar{background:var(--navy);color:#fff;padding:env(safe-area-inset-top,0px) 0 0}
+.bar-in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px 18px}
+.mark{width:34px;height:34px;border-radius:8px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:13px;flex:none}
+.bar b{font-size:15px}
+main{max-width:720px;margin:0 auto;padding:22px 18px 60px}
+.hero{background:var(--navy);color:#fff;border-radius:14px;padding:24px 24px 22px;margin-bottom:18px;border-bottom:4px solid var(--gold)}
+.hero h1{font-size:28px;font-weight:800;line-height:1.15}
+.hero p{color:#B8C4D1;margin-top:8px;font-size:15px}
+.card{background:#fff;border-radius:14px;padding:22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.full{grid-column:1 / -1}
+label{display:block;font-size:13.5px;font-weight:700;color:#374151;margin-bottom:5px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #D1D5DB;border-radius:9px;font-size:16px;font-family:inherit;background:#fff;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+.hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+.btn{border:1px solid transparent;border-radius:10px;padding:13px 20px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-gold{background:var(--gold);color:var(--navy)}.btn-gold:hover{background:var(--gold2)}
+.btn-line{background:#fff;border-color:#D1D5DB;color:var(--navy)}
+.foot{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
+.err{color:var(--bad);font-size:14.5px;font-weight:600}
+.done{background:#fff;border-radius:14px;padding:24px}
+.done h2{font-size:22px;font-weight:800;margin-bottom:8px}
+.done ol{padding-left:22px;margin:10px 0}
+.done li{margin:4px 0}
+.mail{background:#F7F5F0;border-radius:10px;padding:12px 14px;font-size:13.5px;white-space:pre-wrap;word-break:break-word;margin-top:12px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.note{font-size:13px;color:var(--muted);margin-top:16px}
+.banner{background:var(--warnbg);color:#7C4A03;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:14.5px}
+@media (max-width:620px){.grid{grid-template-columns:1fr}.hero h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in"><div class="mark" aria-hidden="true">FF</div><b>Foundation First</b></div></header>
+<main id="app"><p>Loading…</p></main>
+<script>
+var CFG=null;
+var FUNDS=["Mixed Delivery","Business Academy","ITSN","General Operating","Other Grant"];
+var OFF={RAP:'RAP Office',GPW:'GPW Office',LFC:'LFC Office'};
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function fdate(s){var p=String(s||'').split('-');return p.length===3?p[1]+'/'+p[2]+'/'+p[0]:'';}
+function b64url(s){return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function siteBase(){return location.href.split('#')[0].split('?')[0].replace(/request\.html$/i,'');}
+function people(){
+  return (CFG.people||[]).filter(function(p){return p.pos&&!p.archived&&!/-00$/.test(p.pos)&&!/^vacant$/i.test(p.name||'')&&!/vacant/i.test(p.title||'')&&!/extra desk/i.test(p.name||'');});
+}
+function form(){
+  var pre=decodeURIComponent(location.hash.replace(/^#/,'')).toUpperCase();
+  var opts=['RAP','GPW','LFC'].map(function(o){
+    var ps=people().filter(function(p){return p.office===o;}).sort(function(a,b){return a.pos<b.pos?-1:1;});
+    if(!ps.length)return '';
+    return '<optgroup label="'+OFF[o]+'">'+ps.map(function(p){var lab=p.name+(p.sheetLabel?' ('+p.sheetLabel+')':'');return '<option value="'+esc(p.pos)+'"'+(p.pos===pre?' selected':'')+'>'+esc(lab)+'</option>';}).join('')+'</optgroup>';
+  }).join('');
+  var h=(CFG.preview?'<div class="banner">Preview. On the live site, Send opens the person’s email app. Here you’ll see the email that would be sent.</div>':'')+
+   '<section class="hero"><h1>Request an item</h1><p>Need something for your work? Paste a link to it below. Your request goes to the operations team for approval, and you’ll hear back by email.</p></section>'+
+   '<form class="card" id="f" novalidate><div class="grid">'+
+   '<div class="full"><label for="who">Who is this for? *</label><select id="who"><option value="">Choose your name</option>'+opts+'</select></div>'+
+   '<div class="full"><label for="item">What do you need? *</label><input id="item" placeholder="For example: Logitech wireless mouse"></div>'+
+   '<div class="full"><label for="link">Link to the item *</label><input id="link" type="url" inputmode="url" placeholder="https://"><div class="hint">Paste the Amazon or store page so it can be ordered exactly.</div></div>'+
+   '<div><label for="qty">Quantity</label><input id="qty" type="number" min="1" step="1" value="1"></div>'+
+   '<div><label for="cost">Price each ($)</label><input id="cost" type="number" min="0" step="0.01" inputmode="decimal"><div class="hint">From the link, if you know it</div></div>'+
+   '<div><label for="needed">Needed by</label><input id="needed" type="date"></div>'+
+   '<div><label for="funding">Funding source</label><select id="funding"><option value="">Not sure</option>'+FUNDS.map(function(f){return '<option>'+f+'</option>';}).join('')+'</select></div>'+
+   '<div class="full"><label for="reason">Why do you need it?</label><textarea id="reason"></textarea></div>'+
+   '</div><div class="foot"><button class="btn btn-gold" type="submit">Send request</button><span class="err" id="err" role="alert"></span></div></form>'+
+   '<p class="note">Your name isn’t listed, or something looks wrong? Contact the operations team.</p>';
+  document.getElementById('app').innerHTML=h;
+  document.getElementById('f').onsubmit=submit;
+  document.getElementById(pre&&document.querySelector('option[value="'+pre+'"]')?'item':'who').focus();
+}
+function v(id){return document.getElementById(id).value.trim();}
+function submit(e){
+  e.preventDefault();
+  var err=document.getElementById('err');
+  var pos=v('who'),item=v('item'),link=v('link');
+  if(!pos){err.textContent='Choose your name.';return;}
+  if(!item){err.textContent='Say what you need.';return;}
+  if(!link){err.textContent='Paste a link to the item.';return;}
+  err.textContent='';
+  var p=people().find(function(x){return x.pos===pos;});
+  var r={by:p.name,item:item,link:link,qty:+v('qty')||1,submitted:today(),status:'Pending',id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};
+  if(v('cost')!==''&&!isNaN(+v('cost')))r.cost=+v('cost');
+  ['needed','funding','reason'].forEach(function(k){if(v(k))r[k]=v(k);});
+  var add=siteBase()+'#'+pos+'/request/'+b64url(JSON.stringify(r));
+  var lines=['New inventory request','','For: '+p.name+' ('+pos+')','Item: '+r.item,'Link: '+r.link,'Quantity: '+r.qty];
+  if(r.cost!=null)lines.push('Price each: $'+r.cost.toFixed(2));if(r.needed)lines.push('Needed by: '+fdate(r.needed));if(r.funding)lines.push('Funding: '+r.funding);if(r.reason)lines.push('Why: '+r.reason);
+  lines.push('','To add this to the inventory tracker, open:',add);
+  var to=(CFG.settings||{}).requestEmail||'';
+  var subject='Inventory request – '+pos+' – '+r.item;
+  var href='mailto:'+encodeURIComponent(to)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));
+  if(!CFG.preview){var a=document.createElement('a');a.href=href;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},1000);}
+  document.getElementById('app').innerHTML='<div class="done"><h2>'+(CFG.preview?'Here’s the email that would be sent':'Almost done: press Send in your email')+'</h2>'+
+    (CFG.preview?'':'<p>Your email app should have opened a message to the operations team with your request filled in.</p><ol><li>Switch to your email app.</li><li>Press <b>Send</b>.</li></ol><p>You’ll hear back once it’s approved or not.</p>')+
+    '<div class="mail"><b>To:</b> '+esc(to||'(request email not set yet)')+'\n<b>Subject:</b> '+esc(subject)+'\n\n'+esc(lines.join('\n'))+'</div>'+
+    '<div class="foot">'+(CFG.preview?'':'<a class="btn btn-gold" href="'+esc(href)+'">Open the email again</a>')+'<button class="btn btn-line" id="again">Request something else</button></div></div>';
+  document.getElementById('again').onclick=function(){form();window.scrollTo(0,0);};
+  window.scrollTo(0,0);
+}
+function notReady(msg){document.getElementById('app').innerHTML='<section class="hero"><h1>Requests aren’t open yet</h1><p>'+msg+'</p></section>';}
+function start(cfg){
+  CFG=cfg;
+  if(!cfg.preview&&!(cfg.settings&&cfg.settings.requestEmail))return notReady('The operations team hasn’t turned on item requests yet. Please check back soon or contact them directly.');
+  if(cfg.locked)return notReady('This request page needs an update. Please contact the operations team.');
+  form();
+}
+if(window.__DATA__)start(Object.assign({preview:true},window.__DATA__));
+else fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(start).catch(function(){notReady('The page couldn’t load. Check your connection and refresh.');});
+window.addEventListener('hashchange',function(){if(CFG&&document.getElementById('f'))form();});
+</script>
+</body>
+</html>
