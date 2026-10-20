@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19 15:32",
+ "generated": "2026-10-20 13:14",
  "people": [
   {
    "pos": "GPW-00",
@@ -14,7 +14,8 @@
      "location": "On-Site Office",
      "desc": "Blue couch",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsq06chn"
     },
     {
      "name": "Side Table",
@@ -22,7 +23,8 @@
      "location": "On-Site Office",
      "desc": "Side table",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqyhxlt"
     },
     {
      "name": "Chairs (16)",
@@ -30,7 +32,8 @@
      "location": "On-Site Office",
      "desc": "Conference room chairs",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsq347ss"
     },
     {
      "name": "Side Shelf",
@@ -38,7 +41,8 @@
      "location": "On-Site Office",
      "desc": "Side shelf for toy storage",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqu06em"
     },
     {
      "name": "Tables (9)",
@@ -46,7 +50,8 @@
      "location": "On-Site Office",
      "desc": "Conference room tables",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqk35ah"
     },
     {
      "name": "Blue Chairs (2)",
@@ -54,7 +59,8 @@
      "location": "On-Site Office",
      "desc": "Conference room blue chairs",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsq5theu"
     },
     {
      "name": "Television",
@@ -62,49 +68,56 @@
      "location": "On-Site Office",
      "desc": "Roku Television",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqsa9oq"
     },
     {
      "name": "Kitchen Table",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Kitchen table",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqqsbvv"
     },
     {
      "name": "High Top Chairs (4)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "High top chairs",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqgupoh"
     },
     {
      "name": "Coffee Bar Table",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Coffee bar table",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq5w2gg"
     },
     {
      "name": "Metal Shelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Metal shelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqtk6pb"
     },
     {
      "name": "Microwave",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Microwave",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqyl6g9"
     },
     {
      "name": "Printer",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Lexmark Printer",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqcl8hb"
     },
     {
      "name": "Bathroom Shelf",
@@ -112,10 +125,12 @@
      "location": "On-Site Office",
      "desc": "Bathroom shelf",
      "status": "Assigned",
-     "notes": "Bathroom"
+     "notes": "Bathroom",
+     "id": "imvgx0wsqj7q9y"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "GPW-01",
@@ -129,73 +144,84 @@
      "category": "Technology Accessories",
      "desc": "NexiGo StreamCam N930E with Software, 1080P Webcam with Ring Light and Privacy Cover, Auto-Focus",
      "vendor": "Amazon Order #113-4970501-7401841",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq6q7n7"
     },
     {
      "name": "L-Shaped Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "L shaped desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqj27hm"
     },
     {
      "name": "Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Computer chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqiyu8i"
     },
     {
      "name": "Bookshelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Bookshelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq8mc9h"
     },
     {
      "name": "Rolling Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Rolling cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqbt17s"
     },
     {
      "name": "File Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "File cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqyb787"
     },
     {
      "name": "Dell Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Dell Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqz95jj"
     },
     {
      "name": "LG Monitor",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqnwlik"
     },
     {
      "name": "Dell Laptop",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Laptop",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqkmgmg"
     },
     {
      "name": "Portable Monitor",
      "category": "Technology & Electronics",
      "location": "Portable",
      "desc": "Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqr4edc"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "GPW-02",
@@ -204,7 +230,8 @@
    "office": "GPW",
    "reviewed": "2026-09-24",
    "items": [],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "GPW-03",
@@ -218,35 +245,40 @@
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "L shaped desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq8nu7t"
     },
     {
      "name": "Computer Chairs (2)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "2 Computer chairs",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqd1emt"
     },
     {
      "name": "Bookshelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Bookshelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqyqz5g"
     },
     {
      "name": "Rolling Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Rolling cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq8s4t9"
     },
     {
      "name": "Dell Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Dell Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqviji6"
     },
     {
      "name": "Standing Desk",
@@ -258,38 +290,44 @@
      "unitCost": 139.99,
      "total": 139.99,
      "status": "Assigned",
-     "notes": "2025.05.08-Amazon $139.99"
+     "notes": "2025.05.08-Amazon $139.99",
+     "id": "imvgx0wsqj3zx3"
     },
     {
      "name": "Dell Laptop",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Dell Laptop",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqpfdyt"
     },
     {
      "name": "LG Monitor",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "LG Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq9vrtc"
     },
     {
      "name": "MNN Tech Portable Monitor",
      "category": "Technology & Electronics",
      "location": "Portable",
      "desc": "Portable Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqbwr1v"
     },
     {
      "name": "Canon Printer",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Canon Printer",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqjkn4u"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "GPW-04",
@@ -298,7 +336,8 @@
    "office": "GPW",
    "reviewed": "2026-09-24",
    "items": [],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "GPW-05",
@@ -311,49 +350,57 @@
      "name": "Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqivmk7"
     },
     {
      "name": "Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqsvxka"
     },
     {
      "name": "Rolling chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq4d262"
     },
     {
      "name": "Docking station",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqnc8zx"
     },
     {
      "name": "Bluetooth Mouse",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq0brcf"
     },
     {
      "name": "Bluetooth Keyboard",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqwkwe4"
     },
     {
      "name": "DELL Desktop Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq2vfak"
     },
     {
      "name": "DELL Desktop Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqs4g03"
     },
     {
      "name": "Toshiba 4TB External Harddrive",
@@ -366,7 +413,8 @@
      "unitCost": 119.99,
      "total": 119.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqrmyil"
     },
     {
      "name": "27\" Monitor",
@@ -379,7 +427,8 @@
      "unitCost": 109.97,
      "total": 109.97,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq4o0e8"
     },
     {
      "name": "Desk Mount",
@@ -390,7 +439,8 @@
      "qty": 1,
      "unitCost": 35.99,
      "total": 35.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqwe0e4"
     },
     {
      "name": "Canon All-in-One Printer",
@@ -403,7 +453,8 @@
      "unitCost": 69,
      "total": 69,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqpa7y5"
     },
     {
      "name": "Sceptre Curved 27\" Monitor",
@@ -415,7 +466,8 @@
      "qty": 1,
      "unitCost": 109.97,
      "total": 109.97,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqkyocl"
     },
     {
      "name": "Vivo Extra Tall Monitor Desk Stand",
@@ -426,24 +478,28 @@
      "qty": 1,
      "unitCost": 35.99,
      "total": 35.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqm77st"
     },
     {
      "name": "Trashcan",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Trashcan",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqwxkqy"
     },
     {
      "name": "Mousepad",
      "category": "Miscellaneous",
      "location": "On-Site Office",
      "desc": "Mousepad",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq9apoc"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "GPW-06",
@@ -457,49 +513,56 @@
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqgnmcj"
     },
     {
      "name": "Bookshelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Bookshelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqqub7a"
     },
     {
      "name": "Rolling Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Rolling Cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqhrvhv"
     },
     {
      "name": "File Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "File Cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqro75x"
     },
     {
      "name": "L-Shaped Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "L Shaped Desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqyc9r9"
     },
     {
      "name": "Computer Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Computer Chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq9sudd"
     },
     {
      "name": "Desk & Chair (conf. room)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Desk & Chair from conference room",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqcgjki"
     },
     {
      "name": "Standing Desk",
@@ -511,38 +574,44 @@
      "unitCost": 199.99,
      "total": 199.99,
      "status": "Assigned",
-     "notes": "2025.05.13-Amazon $199.99"
+     "notes": "2025.05.13-Amazon $199.99",
+     "id": "imvgx0wsq9hmt0"
     },
     {
      "name": "Dell Laptop",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Laptop Computer",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqjufix"
     },
     {
      "name": "Dell Monitor",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Monitor for computer",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq63fj6"
     },
     {
      "name": "Portable Monitor",
      "category": "Technology & Electronics",
      "location": "Portable",
      "desc": "Portable Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqfkm3b"
     },
     {
      "name": "Canon Printer",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Canon Printer",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqg5520"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "GPW-07",
@@ -552,7 +621,8 @@
    "reviewed": "2026-09-24",
    "items": [],
    "history": [],
-   "sheetLabel": "GPW Office"
+   "sheetLabel": "GPW Office",
+   "requests": []
   },
   {
    "pos": "LFC-00",
@@ -567,7 +637,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqt5w94"
     },
     {
      "name": "Small Black Chair",
@@ -575,7 +646,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqjyb19"
     },
     {
      "name": "Brown Coffee Table",
@@ -583,7 +655,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqy706m"
     },
     {
      "name": "Small Brown End Table",
@@ -591,7 +664,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsq1z773"
     },
     {
      "name": "3 Tier Shelf",
@@ -599,7 +673,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqsk9gz"
     },
     {
      "name": "Cabinet",
@@ -607,7 +682,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsq0pe7e"
     },
     {
      "name": "Copy Machine",
@@ -615,7 +691,8 @@
      "location": "On-Site Office",
      "desc": "Copier",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqics2p"
     },
     {
      "name": "Brown Desk Chair",
@@ -623,7 +700,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsq5skg7"
     },
     {
      "name": "Desk",
@@ -631,7 +709,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqfsjyb"
     },
     {
      "name": "Hallway Console Table",
@@ -639,14 +718,16 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqzvok0"
     },
     {
      "name": "Partitions",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqe4zi3"
     },
     {
      "name": "Console Table",
@@ -654,14 +735,16 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqogdai"
     },
     {
      "name": "Area Rug",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqt2vkx"
     },
     {
      "name": "Chairs (2)",
@@ -669,7 +752,8 @@
      "location": "On-Site Office",
      "desc": "Decorative Chairs",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsq20k61"
     },
     {
      "name": "Circular Coffee Table",
@@ -677,7 +761,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqvisgk"
     },
     {
      "name": "Couch",
@@ -685,7 +770,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsq7synk"
     },
     {
      "name": "TV Stand",
@@ -693,7 +779,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqdj0na"
     },
     {
      "name": "3 Tiered Stand (OWL)",
@@ -701,35 +788,40 @@
      "location": "On-Site Office",
      "desc": "On wheels for OWL",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqjop4w"
     },
     {
      "name": "Computer Cart",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsq5lh2v"
     },
     {
      "name": "TV",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqjb0gy"
     },
     {
      "name": "Tables (10)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqofkeu"
     },
     {
      "name": "Chairs (20)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqrrx5m"
     },
     {
      "name": "Book Shelf",
@@ -737,7 +829,8 @@
      "location": "On-Site Office",
      "desc": "Extra office space",
      "status": "Assigned",
-     "notes": "Extra Office"
+     "notes": "Extra Office",
+     "id": "imvgx0wsqtch75"
     },
     {
      "name": "Monitor",
@@ -745,7 +838,8 @@
      "location": "On-Site Office",
      "desc": "Extra office space",
      "status": "Assigned",
-     "notes": "Extra Office"
+     "notes": "Extra Office",
+     "id": "imvgx0wsq8plcy"
     },
     {
      "name": "Black Storage Cabinet",
@@ -753,7 +847,8 @@
      "location": "On-Site Office",
      "desc": "Extra office space",
      "status": "Assigned",
-     "notes": "Extra Office"
+     "notes": "Extra Office",
+     "id": "imvgx0wsqipuig"
     },
     {
      "name": "Small 2-Shelf Rolling Cabinet",
@@ -761,7 +856,8 @@
      "location": "On-Site Office",
      "desc": "Extra office space",
      "status": "Assigned",
-     "notes": "Extra Office"
+     "notes": "Extra Office",
+     "id": "imvgx0wsqfc63m"
     },
     {
      "name": "Sound Bar",
@@ -769,7 +865,8 @@
      "location": "On-Site Office",
      "desc": "Extra office space",
      "status": "Assigned",
-     "notes": "Extra Office"
+     "notes": "Extra Office",
+     "id": "imvgx0wsqr1ftp"
     },
     {
      "name": "Desk Chair",
@@ -777,10 +874,12 @@
      "location": "On-Site Office",
      "desc": "Extra office space",
      "status": "Assigned",
-     "notes": "Extra Office"
+     "notes": "Extra Office",
+     "id": "imvgx0wsqsfyzh"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "LFC-01",
@@ -790,7 +889,8 @@
    "reviewed": "2026-09-24",
    "items": [],
    "history": [],
-   "sheetLabel": "LFC Office"
+   "sheetLabel": "LFC Office",
+   "requests": []
   },
   {
    "pos": "LFC-02",
@@ -808,7 +908,8 @@
      "qty": 1,
      "unitCost": 80.85,
      "total": 80.85,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq0s10c"
     },
     {
      "name": "27\" Monitor",
@@ -819,7 +920,8 @@
      "qty": 1,
      "unitCost": 159.99,
      "total": 159.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqnx8vu"
     },
     {
      "name": "Epson EcoTank Printer",
@@ -832,7 +934,8 @@
      "unitCost": 159,
      "total": 159,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqlqjj6"
     },
     {
      "name": "Keyboard",
@@ -844,7 +947,8 @@
      "unitCost": 36.99,
      "total": 36.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqohqxy"
     },
     {
      "name": "Monitor Mount",
@@ -855,87 +959,100 @@
      "qty": 1,
      "unitCost": 34.32,
      "total": 34.32,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqgkfd6"
     },
     {
      "name": "L-Shaped Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "L-shaped desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqe9b70"
     },
     {
      "name": "Desk Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Rolling desk chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqb8aq3"
     },
     {
      "name": "Office Chair (Guest)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Guest chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqdxwrm"
     },
     {
      "name": "Bookshelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Bookshelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqrp4xa"
     },
     {
      "name": "2 Drawer Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Small 2-drawer cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqkamdw"
     },
     {
      "name": "2 Drawer Filing Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Rolling 2-drawer filing cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqv7mcd"
     },
     {
      "name": "Dell Laptop",
      "category": "Technology & Electronics",
      "location": "Portable",
      "desc": "Laptop for office and home use",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq3bzts"
     },
     {
      "name": "Portable Monitor",
      "category": "Technology & Electronics",
      "location": "Portable",
      "desc": "MNN Portable Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqibx9z"
     },
     {
      "name": "HP Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Desktop Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqgg6r5"
     },
     {
      "name": "Dell Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Desktop Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq5w4fl"
     },
     {
      "name": "Canon Printer",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Color inkjet printer",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq3fk4j"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "LFC-03",
@@ -953,7 +1070,8 @@
      "qty": 1,
      "unitCost": 79.98,
      "total": 79.98,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqg49mm"
     },
     {
      "name": "Monitor Mount",
@@ -964,7 +1082,8 @@
      "qty": 1,
      "unitCost": 35.99,
      "total": 35.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqr2ic8"
     },
     {
      "name": "Standing Desk",
@@ -975,7 +1094,8 @@
      "qty": 1,
      "unitCost": 159.99,
      "total": 159.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq6cqbt"
     },
     {
      "name": "Laptop Charger",
@@ -986,7 +1106,8 @@
      "qty": 1,
      "unitCost": 53.49,
      "total": 53.49,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq4435l"
     },
     {
      "name": "Dell Laptop Charger",
@@ -997,7 +1118,8 @@
      "unitCost": 48.99,
      "total": 48.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqd4i7d"
     },
     {
      "name": "Laptop Bag",
@@ -1009,7 +1131,8 @@
      "unitCost": 53.98,
      "total": 53.98,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqcy4x5"
     },
     {
      "name": "27\" Monitor",
@@ -1021,7 +1144,8 @@
      "unitCost": 179.99,
      "total": 179.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqjtb7k"
     },
     {
      "name": "27\" Monitor",
@@ -1033,7 +1157,8 @@
      "unitCost": 179.99,
      "total": 179.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqa2i4c"
     },
     {
      "name": "Laptop Bag",
@@ -1045,7 +1170,8 @@
      "unitCost": 42.99,
      "total": 42.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq9rhqo"
     },
     {
      "name": "Laptop Stand",
@@ -1056,7 +1182,8 @@
      "qty": 1,
      "unitCost": 25.98,
      "total": 25.98,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqoeily"
     },
     {
      "name": "Dell Laptop Charger",
@@ -1069,7 +1196,8 @@
      "total": 42,
      "warranty": "No",
      "status": "Assigned",
-     "notes": "stopped working, new one purchased on 12/30/2024"
+     "notes": "stopped working, new one purchased on 12/30/2024",
+     "id": "imvgx0wsqumkll"
     },
     {
      "name": "Floor Lamp",
@@ -1081,94 +1209,108 @@
      "qty": 1,
      "unitCost": 29.99,
      "total": 29.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqd94hv"
     },
     {
      "name": "L-Shaped Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "L shaped desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq33314"
     },
     {
      "name": "File Rolling Cart",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "File rolling cart",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqfz0xv"
     },
     {
      "name": "Filing Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Filing cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqkn5vm"
     },
     {
      "name": "Bookcase",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Bookcase",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqn2y1d"
     },
     {
      "name": "Two Monitors (Dell)",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Dell monitors",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqheng0"
     },
     {
      "name": "Office Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Black rolling chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq2mk4f"
     },
     {
      "name": "Pink Guest Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Stationary chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqg0o17"
     },
     {
      "name": "Lamp (Remote Black)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Remote black lamp",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqhxdrj"
     },
     {
      "name": "Lamp (Upright LED)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Upright LED lamp",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqnp0jg"
     },
     {
      "name": "Desk Lamp",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "LED desk lamp",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqyt1u6"
     },
     {
      "name": "Area Rug",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Area rug",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqfh95u"
     },
     {
      "name": "Dell Laptop",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Dell laptop",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqrrix2"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "LFC-04",
@@ -1177,7 +1319,8 @@
    "office": "LFC",
    "reviewed": "2026-09-24",
    "items": [],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "LFC-05",
@@ -1196,59 +1339,68 @@
      "unitCost": 78.99,
      "total": 78.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqujtps"
     },
     {
      "name": "Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq91s00"
     },
     {
      "name": "Desk Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Desk Chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq4qk8h"
     },
     {
      "name": "Shelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Shelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq1cjyt"
     },
     {
      "name": "Locking File Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Locking File Cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqzosh2"
     },
     {
      "name": "Two Drawer Filing Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Two drawer filing cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqppzfn"
     },
     {
      "name": "Rug",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Rug",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqz0itk"
     },
     {
      "name": "LG Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "LG Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqp9n9v"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "LFC-06",
@@ -1268,7 +1420,8 @@
      "unitCost": 79.98,
      "total": 79.98,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqrfwdj"
     },
     {
      "name": "Printer",
@@ -1280,7 +1433,8 @@
      "qty": 1,
      "unitCost": 124,
      "total": 124,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqxfeww"
     },
     {
      "name": "Portable Screen",
@@ -1291,7 +1445,8 @@
      "qty": 1,
      "unitCost": 68.13,
      "total": 68.13,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqpggqp"
     },
     {
      "name": "22\" Monitor",
@@ -1303,7 +1458,8 @@
      "qty": 1,
      "unitCost": 69.97,
      "total": 69.97,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqyu3k4"
     },
     {
      "name": "Wired Headset",
@@ -1315,66 +1471,76 @@
      "qty": 1,
      "unitCost": 19.5,
      "total": 19.5,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqn8977"
     },
     {
      "name": "Sceptre Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "22\" Monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqk826q"
     },
     {
      "name": "Portable Projector",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Portable Projector",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq1idie"
     },
     {
      "name": "Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq1lsoa"
     },
     {
      "name": "Shelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Shelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqnenf3"
     },
     {
      "name": "Side Table Drawer",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Side table drawer",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqpp4b2"
     },
     {
      "name": "Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqw3cra"
     },
     {
      "name": "Canon Printer",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Canon Printer",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqamxg9"
     },
     {
      "name": "Rolling Briefcase",
      "category": "Storage & Organization",
      "location": "Portable",
      "desc": "Rolling Briefcase",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqxrnbd"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "LFC-07",
@@ -1383,7 +1549,8 @@
    "office": "LFC",
    "reviewed": "2026-09-24",
    "items": [],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "RAP-00",
@@ -1398,14 +1565,16 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Front Area"
+     "notes": "Front Area",
+     "id": "imvgx0wsqbn7om"
     },
     {
      "name": "Green Area Rug",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Decoration",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqjabtg"
     },
     {
      "name": "Keurig K-Elite Coffee Maker",
@@ -1418,7 +1587,8 @@
      "unitCost": 159,
      "total": 159,
      "link": "https://amazon.com/order/111-8920784-0599445",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqdssr7"
     },
     {
      "name": "Coffee Cart",
@@ -1431,35 +1601,40 @@
      "unitCost": 167.98,
      "total": 167.98,
      "link": "https://amazon.com/order/114-2756626-5606619",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqh3l5c"
     },
     {
      "name": "Accent Chairs (2)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Furniture",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq7qzql"
     },
     {
      "name": "2 Drawer Filing Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Furniture",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqdtf8f"
     },
     {
      "name": "L-Shaped Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Furniture",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq5lew8"
     },
     {
      "name": "Copy Machine",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Electronics",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqedbn2"
     },
     {
      "name": "Buffet Sidebar Cabinet",
@@ -1471,7 +1646,8 @@
      "unitCost": 169.99,
      "total": 169.99,
      "link": "https://amazon.com/order/111-7081864-9769010",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq7j94z"
     },
     {
      "name": "Ring Video Doorbell",
@@ -1484,7 +1660,8 @@
      "unitCost": 69.99,
      "total": 69.99,
      "link": "https://amazon.com/order/114-7945545-9021065",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqiavoo"
     },
     {
      "name": "Ring Chime Pro",
@@ -1497,7 +1674,8 @@
      "unitCost": 59.99,
      "total": 59.99,
      "link": "https://amazon.com/order/114-7945545-9021065",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqv4orp"
     },
     {
      "name": "Rolling Tables (10)",
@@ -1505,7 +1683,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsq95j67"
     },
     {
      "name": "Rolling Chairs w/ Arms (10)",
@@ -1513,7 +1692,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqimj0n"
     },
     {
      "name": "Rolling Chairs w/o Arms (10)",
@@ -1521,7 +1701,8 @@
      "location": "On-Site Office",
      "desc": "Furniture",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqmtthi"
     },
     {
      "name": "Presentation Cart & Stand",
@@ -1535,7 +1716,8 @@
      "total": 184.72,
      "link": "https://amazon.com/order/111-9423098-4500268",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsqfsql0"
     },
     {
      "name": "Large Magnetic Whiteboard",
@@ -1549,21 +1731,24 @@
      "total": 132.99,
      "link": "https://amazon.com/order/111-9423098-4500268",
      "status": "Assigned",
-     "notes": "Conference Room"
+     "notes": "Conference Room",
+     "id": "imvgx0wsq1patr"
     },
     {
      "name": "Owl Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Electronics",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqfnfo7"
     },
     {
      "name": "TCL 75\" Roku SmartTV",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Electronics",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqp40i5"
     },
     {
      "name": "HOSACK Barn Door TV Cart",
@@ -1576,7 +1761,8 @@
      "unitCost": 136.99,
      "total": 136.99,
      "link": "https://amazon.com/order/111-7081864-9769010",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqar1iu"
     },
     {
      "name": "Bathroom Storage Cabinet",
@@ -1590,7 +1776,8 @@
      "total": 74,
      "link": "https://amazon.com/order/111-3536018-5450628",
      "status": "Assigned",
-     "notes": "Bathroom"
+     "notes": "Bathroom",
+     "id": "imvgx0wsq04pde"
     },
     {
      "name": "6 Tier Industrial Bookshelf",
@@ -1603,7 +1790,8 @@
      "unitCost": 164.89,
      "total": 164.89,
      "link": "https://amazon.com/order/114-6068754-2509850",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqajqky"
     },
     {
      "name": "Bush Furniture Key West Shelf",
@@ -1616,17 +1804,20 @@
      "unitCost": 175.23,
      "total": 175.23,
      "link": "https://amazon.com/order/111-2232342-6997862",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqu6cww"
     },
     {
      "name": "Refrigerator",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Appliance",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqu70qj"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "RAP-01",
@@ -1645,37 +1836,43 @@
      "total": 1717.6,
      "warranty": "Yes",
      "warrantyExp": "2027-10-01",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq0kou5"
     },
     {
      "name": "L-shaped desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq73qrk"
     },
     {
      "name": "5 shelf bookcase",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqgprmo"
     },
     {
      "name": "Small rolling filing cart",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqi0pdm"
     },
     {
      "name": "Small rolling filing cart",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqrhzxz"
     },
     {
      "name": "2 drawer filing cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq9qmlr"
     },
     {
      "name": "Accent chair",
@@ -1686,13 +1883,15 @@
      "unitCost": 95.66,
      "total": 95.66,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq5utkn"
     },
     {
      "name": "Office Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqmpi78"
     },
     {
      "name": "Ladder Shelf",
@@ -1703,19 +1902,22 @@
      "unitCost": 69.99,
      "total": 69.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqyzoza"
     },
     {
      "name": "Sansui Desktop Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq2xjz2"
     },
     {
      "name": "Sceptre Desktop Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqw65bs"
     },
     {
      "name": "4 piece Nautical Wall Art",
@@ -1726,7 +1928,8 @@
      "unitCost": 59.99,
      "total": 59.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqobvbi"
     },
     {
      "name": "Monitor mount",
@@ -1737,7 +1940,8 @@
      "unitCost": 35.99,
      "total": 35.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq8x2dx"
     },
     {
      "name": "Standing desk",
@@ -1748,30 +1952,35 @@
      "unitCost": 159.99,
      "total": 159.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqgcwzx"
     },
     {
      "name": "Dell Monitor",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "purchased": "2023-05-01",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq3bfae"
     },
     {
      "name": "KYY Portable Monitor",
      "category": "Technology & Electronics",
      "location": "Portable",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq2iqcq"
     },
     {
      "name": "HP Laptop",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "Intel CORE i7 laptop",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq7d2mb"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "RAP-02",
@@ -1790,7 +1999,8 @@
      "total": 1717.6,
      "warranty": "Yes",
      "warrantyExp": "2027-10-01",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqg6ljo"
     },
     {
      "name": "L-shaped desk",
@@ -1798,7 +2008,8 @@
      "location": "On-Site Office",
      "purchased": "2023-05-01",
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqzizt9"
     },
     {
      "name": "5 shelf bookcase",
@@ -1806,7 +2017,8 @@
      "location": "On-Site Office",
      "purchased": "2023-05-01",
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq7mc2b"
     },
     {
      "name": "Small rolling filing cart",
@@ -1814,7 +2026,8 @@
      "location": "On-Site Office",
      "purchased": "2023-05-01",
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqd95wr"
     },
     {
      "name": "2 drawer filing cabinet",
@@ -1822,7 +2035,8 @@
      "location": "On-Site Office",
      "purchased": "2023-05-01",
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqq2x01"
     },
     {
      "name": "Accent chair",
@@ -1833,7 +2047,8 @@
      "unitCost": 136.8,
      "total": 136.8,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqu7pe7"
     },
     {
      "name": "Office Chair",
@@ -1841,19 +2056,22 @@
      "location": "On-Site Office",
      "purchased": "2023-05-01",
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq4cb2t"
     },
     {
      "name": "Desktop Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqtnpy2"
     },
     {
      "name": "Desktop Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqjti08"
     },
     {
      "name": "Dell Docking Station",
@@ -1863,20 +2081,23 @@
      "qty": 1,
      "unitCost": 80.85,
      "total": 80.85,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqythm0"
     },
     {
      "name": "Dell Monitor",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "purchased": "2023-05-01",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsquzjob"
     },
     {
      "name": "KYY Portable Monitor",
      "category": "Technology & Electronics",
      "location": "Portable",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqt6ak7"
     },
     {
      "name": "Standing desk",
@@ -1886,7 +2107,8 @@
      "qty": 1,
      "unitCost": 161.49,
      "total": 161.49,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqe93l6"
     },
     {
      "name": "Desktop Monitor",
@@ -1896,10 +2118,12 @@
      "qty": 1,
      "unitCost": 159,
      "total": 159,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqgckt8"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "RAP-03",
@@ -1918,61 +2142,71 @@
      "total": 1717.6,
      "warranty": "Yes",
      "warrantyExp": "2027-10-01",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq15v1m"
     },
     {
      "name": "KYY Portable Monitor",
      "category": "Technology & Electronics",
      "location": "Portable",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq3owei"
     },
     {
      "name": "Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqrvvl7"
     },
     {
      "name": "5 shelf bookcase",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqxinrq"
     },
     {
      "name": "Small rolling filing cart",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq6l500"
     },
     {
      "name": "2 drawer filing cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqvb4eb"
     },
     {
      "name": "Office Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqqv5fh"
     },
     {
      "name": "Desktop Monitor",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqjx987"
     },
     {
      "name": "Desktop Monitor",
      "category": "Office Furniture",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqxtq3z"
     },
     {
      "name": "Dell Docking Station",
      "category": "Technology Accessories",
      "location": "On-Site Office",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqq9chk"
     },
     {
      "name": "Monitor mount",
@@ -1983,7 +2217,8 @@
      "unitCost": 35.99,
      "total": 35.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqsncg3"
     },
     {
      "name": "Standing desk",
@@ -1994,10 +2229,12 @@
      "unitCost": 159.99,
      "total": 159.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqoa05i"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "RAP-04",
@@ -2015,7 +2252,8 @@
      "unitCost": 89.95,
      "total": 89.95,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqjc23b"
     },
     {
      "name": "Remarkable Case Book folio",
@@ -2026,7 +2264,8 @@
      "unitCost": 14.99,
      "total": 14.99,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqkxeds"
     },
     {
      "name": "Remarkable Stylus",
@@ -2037,7 +2276,8 @@
      "qty": 1,
      "unitCost": 42.95,
      "total": 42.95,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqen8pz"
     },
     {
      "name": "External CD/DVD Drive",
@@ -2048,7 +2288,8 @@
      "qty": 1,
      "unitCost": 19.89,
      "total": 19.89,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqw0kof"
     },
     {
      "name": "Remarkable Stand",
@@ -2059,7 +2300,8 @@
      "qty": 1,
      "unitCost": 20.99,
      "total": 20.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq07ffg"
     },
     {
      "name": "Keyboard",
@@ -2070,7 +2312,8 @@
      "qty": 1,
      "unitCost": 27.99,
      "total": 27.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqp9oa1"
     },
     {
      "name": "Tablet Stand",
@@ -2081,7 +2324,8 @@
      "qty": 1,
      "unitCost": 16.99,
      "total": 16.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqpmg6s"
     },
     {
      "name": "Webcam",
@@ -2092,7 +2336,8 @@
      "qty": 1,
      "unitCost": 24.99,
      "total": 24.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqa06wi"
     },
     {
      "name": "Docking Station",
@@ -2103,7 +2348,8 @@
      "qty": 1,
      "unitCost": 99.99,
      "total": 99.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqxkkoq"
     },
     {
      "name": "24\" Monitor",
@@ -2114,73 +2360,84 @@
      "qty": 1,
      "unitCost": 99,
      "total": 99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqqkpti"
     },
     {
      "name": "Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq7rtmg"
     },
     {
      "name": "Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqqitif"
     },
     {
      "name": "Bookshelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Bookshelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqmnd1r"
     },
     {
      "name": "Big Filing Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Big Filing Cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqnqsj6"
     },
     {
      "name": "Side Table",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Side table",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqlhjuz"
     },
     {
      "name": "Projector (CDR)",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "CDR item",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqehegm"
     },
     {
      "name": "Laptop (CDR)",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "CDR item",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq854l3"
     },
     {
      "name": "Printer (CDR)",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "CDR item",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqft34f"
     },
     {
      "name": "Filing Cabinet (CDR)",
      "category": "Office Furniture",
      "location": "Home Office",
      "desc": "CDR item",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq1uq4i"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "RAP-05",
@@ -2198,7 +2455,8 @@
      "unitCost": 89.95,
      "total": 89.95,
      "warranty": "No",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqkfmsr"
     },
     {
      "name": "Keyboard",
@@ -2209,7 +2467,8 @@
      "qty": 1,
      "unitCost": 26.79,
      "total": 26.79,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqtacbp"
     },
     {
      "name": "Remarkable Stand",
@@ -2219,7 +2478,8 @@
      "qty": 1,
      "unitCost": 19.99,
      "total": 19.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqim6pa"
     },
     {
      "name": "21.5\" Monitor",
@@ -2230,7 +2490,8 @@
      "qty": 1,
      "unitCost": 89.99,
      "total": 89.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqw7kbr"
     },
     {
      "name": "Circle Rug",
@@ -2241,7 +2502,8 @@
      "qty": 1,
      "unitCost": 51.86,
      "total": 51.86,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqvwmy8"
     },
     {
      "name": "Docking Station",
@@ -2252,14 +2514,16 @@
      "qty": 1,
      "unitCost": 150.99,
      "total": 150.99,
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqxgvmx"
     },
     {
      "name": "Acer Computer Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Acer monitor",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqw8zj9"
     },
     {
      "name": "Surface Expansion Dock",
@@ -2267,52 +2531,60 @@
      "location": "On-Site Office",
      "desc": "Surface dock",
      "purchased": "2023-07-01",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqdwadj"
     },
     {
      "name": "Bookshelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Bookshelf",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqgfufi"
     },
     {
      "name": "Desk",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqwatrb"
     },
     {
      "name": "Desk Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Desk chair",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqf3b7h"
     },
     {
      "name": "Rolling File Box",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Rolling file box",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqij08i"
     },
     {
      "name": "2 Drawer Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "2 drawer cabinet",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqmmnqy"
     },
     {
      "name": "Multi-Colored Rug",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Multi colored rug",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqqth1b"
     }
    ],
-   "history": []
+   "history": [],
+   "requests": []
   },
   {
    "pos": "RAP-06",
@@ -2326,70 +2598,80 @@
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Desk",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqxqg2w"
     },
     {
      "name": "Sound Bar",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "Sound bar",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsql73e2"
     },
     {
      "name": "Desk Chair",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Furniture",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq59za9"
     },
     {
      "name": "2 Drawer Rolling Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Furniture",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqwy3y1"
     },
     {
      "name": "2 Drawer Filing Cabinet",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Furniture",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsq1n521"
     },
     {
      "name": "Bookshelf",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Furniture",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqua1p1"
     },
     {
      "name": "Dell Monitor",
      "category": "Technology & Electronics",
      "location": "On-Site Office",
      "desc": "24 inch",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqoynf9"
     },
     {
      "name": "Chair (Brown Faux Leather)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Brown faux leather",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqic5j4"
     },
     {
      "name": "Lamp (LED)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "LED lamp",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqeruw9"
     },
     {
      "name": "Lamp (Bulb)",
      "category": "Office Furniture",
      "location": "On-Site Office",
      "desc": "Bulb lamp",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqnaehi"
     },
     {
      "name": "Standing Desk",
@@ -2400,18 +2682,21 @@
      "unitCost": 179.99,
      "total": 179.99,
      "status": "Assigned",
-     "notes": "2025.05.12-Amazon $179.99"
+     "notes": "2025.05.12-Amazon $179.99",
+     "id": "imvgx0wsqcxkyr"
     },
     {
      "name": "Canon Printer/Scanner",
      "category": "Technology & Electronics",
      "location": "Home Office",
      "desc": "TR8620",
-     "status": "Assigned"
+     "status": "Assigned",
+     "id": "imvgx0wsqr0kba"
     }
    ],
    "history": [],
-   "sheetLabel": "RAP Office"
+   "sheetLabel": "RAP Office",
+   "requests": []
   },
   {
    "pos": "RAP-07",
@@ -2420,7 +2705,12 @@
    "office": "RAP",
    "reviewed": "2026-09-24",
    "items": [],
-   "history": []
+   "history": [],
+   "requests": []
   }
- ]
+ ],
+ "settings": {
+  "requestEmail": "dawn@foundationfirstva.org",
+  "approver": "Dawn Chapman"
+ }
 }
