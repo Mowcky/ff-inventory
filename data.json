@@ -1,0 +1,2426 @@
+{
+ "generated": "2026-10-19 15:32",
+ "people": [
+  {
+   "pos": "GPW-00",
+   "name": "GPW Office Inventory",
+   "title": "Shared Office Items",
+   "office": "GPW",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Couch",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Blue couch",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Side Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Side table",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Chairs (16)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Conference room chairs",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Side Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Side shelf for toy storage",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Tables (9)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Conference room tables",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Blue Chairs (2)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Conference room blue chairs",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Television",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Roku Television",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Kitchen Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Kitchen table",
+     "status": "Assigned"
+    },
+    {
+     "name": "High Top Chairs (4)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "High top chairs",
+     "status": "Assigned"
+    },
+    {
+     "name": "Coffee Bar Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Coffee bar table",
+     "status": "Assigned"
+    },
+    {
+     "name": "Metal Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Metal shelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "Microwave",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Microwave",
+     "status": "Assigned"
+    },
+    {
+     "name": "Printer",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Lexmark Printer",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bathroom Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bathroom shelf",
+     "status": "Assigned",
+     "notes": "Bathroom"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "GPW-01",
+   "name": "Megan Miloser",
+   "title": null,
+   "office": "GPW",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Webcam",
+     "category": "Technology Accessories",
+     "desc": "NexiGo StreamCam N930E with Software, 1080P Webcam with Ring Light and Privacy Cover, Auto-Focus",
+     "vendor": "Amazon Order #113-4970501-7401841",
+     "status": "Assigned"
+    },
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "L shaped desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Computer chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bookshelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "Rolling Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Rolling cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "File Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "File cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Dell Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "LG Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Laptop",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Laptop",
+     "status": "Assigned"
+    },
+    {
+     "name": "Portable Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "desc": "Monitor",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "GPW-02",
+   "name": "Britt Scott",
+   "title": "Program Support Specialist – Greater Prince William",
+   "office": "GPW",
+   "reviewed": "2026-09-24",
+   "items": [],
+   "history": []
+  },
+  {
+   "pos": "GPW-03",
+   "name": "Pua Yule",
+   "title": "Mixed Delivery Specialist",
+   "office": "GPW",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "L shaped desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Computer Chairs (2)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "2 Computer chairs",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bookshelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "Rolling Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Rolling cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Dell Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Standing Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Standing Desk",
+     "purchased": "2025-05-08",
+     "qty": 1,
+     "unitCost": 139.99,
+     "total": 139.99,
+     "status": "Assigned",
+     "notes": "2025.05.08-Amazon $139.99"
+    },
+    {
+     "name": "Dell Laptop",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Dell Laptop",
+     "status": "Assigned"
+    },
+    {
+     "name": "LG Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "LG Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "MNN Tech Portable Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "desc": "Portable Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Canon Printer",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Canon Printer",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "GPW-04",
+   "name": "Michelle Davis",
+   "title": "Infant Toddler Specialist – GPW Area",
+   "office": "GPW",
+   "reviewed": "2026-09-24",
+   "items": [],
+   "history": []
+  },
+  {
+   "pos": "GPW-05",
+   "name": "Emily Gatsby",
+   "title": null,
+   "office": "GPW",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Rolling chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Docking station",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bluetooth Mouse",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bluetooth Keyboard",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "DELL Desktop Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "DELL Desktop Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Toshiba 4TB External Harddrive",
+     "category": "Technology Accessories",
+     "location": "Portable",
+     "desc": "Toshiba Canvio Flex 4TB Portable External Hard Drive USB-C USB 3.0, Silver",
+     "vendor": "Amazon Order #114-7596131-5712239",
+     "purchased": "2024-10-11",
+     "qty": 1,
+     "unitCost": 119.99,
+     "total": 119.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "27\" Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Sceptre Curved 27\" FHD 1080p 75Hz LED Monitor HDMI VGA Build-In Speakers",
+     "vendor": "Amazon Order #111-8365895-5476238",
+     "purchased": "2024-03-20",
+     "qty": 1,
+     "unitCost": 109.97,
+     "total": 109.97,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk Mount",
+     "category": "Technology Accessories",
+     "location": "Home Office",
+     "desc": "VIVO Extra Tall Single Monitor Desk Mount Stand 39 inch Pole",
+     "vendor": "Amazon Order #111-7552093-0477857",
+     "qty": 1,
+     "unitCost": 35.99,
+     "total": 35.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Canon All-in-One Printer",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Canon PIXMA TR4720 All-in-One Wireless Printer",
+     "vendor": "Amazon Order #112-3422457-9993824",
+     "purchased": "2025-12-11",
+     "qty": 1,
+     "unitCost": 69,
+     "total": 69,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Sceptre Curved 27\" Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Sceptre Curved 27\" FHD 1080p 75Hz LED Monitor HDMI VGA Build-In Speakers",
+     "vendor": "Amazon Order #111-8365895-5476238",
+     "purchased": "2024-03-20",
+     "qty": 1,
+     "unitCost": 109.97,
+     "total": 109.97,
+     "status": "Assigned"
+    },
+    {
+     "name": "Vivo Extra Tall Monitor Desk Stand",
+     "category": "Technology Accessories",
+     "desc": "VIVO Extra Tall Single Monitor Desk Mount Stand 39 inch Pole",
+     "vendor": "Amazon Order #111-7552093-0477857",
+     "purchased": "2024-03-20",
+     "qty": 1,
+     "unitCost": 35.99,
+     "total": 35.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Trashcan",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Trashcan",
+     "status": "Assigned"
+    },
+    {
+     "name": "Mousepad",
+     "category": "Miscellaneous",
+     "location": "On-Site Office",
+     "desc": "Mousepad",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "GPW-06",
+   "name": "Mary Braxton",
+   "title": null,
+   "office": "GPW",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bookshelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "Rolling Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Rolling Cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "File Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "File Cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "L Shaped Desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Computer Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Computer Chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk & Chair (conf. room)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk & Chair from conference room",
+     "status": "Assigned"
+    },
+    {
+     "name": "Standing Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Standing Desk",
+     "purchased": "2025-05-13",
+     "qty": 1,
+     "unitCost": 199.99,
+     "total": 199.99,
+     "status": "Assigned",
+     "notes": "2025.05.13-Amazon $199.99"
+    },
+    {
+     "name": "Dell Laptop",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Laptop Computer",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Monitor for computer",
+     "status": "Assigned"
+    },
+    {
+     "name": "Portable Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "desc": "Portable Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Canon Printer",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Canon Printer",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "GPW-07",
+   "name": "Gina Davis",
+   "title": "CEO",
+   "office": "GPW",
+   "reviewed": "2026-09-24",
+   "items": [],
+   "history": [],
+   "sheetLabel": "GPW Office"
+  },
+  {
+   "pos": "LFC-00",
+   "name": "LFC Office Inventory",
+   "title": "Shared Office Items",
+   "office": "LFC",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Grey Couch",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Small Black Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Brown Coffee Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Small Brown End Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "3 Tier Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Copy Machine",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Copier",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Brown Desk Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Hallway Console Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Partitions",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Console Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Area Rug",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Chairs (2)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Decorative Chairs",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Circular Coffee Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Couch",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "TV Stand",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "3 Tiered Stand (OWL)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "On wheels for OWL",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Computer Cart",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "TV",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Tables (10)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Chairs (20)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Book Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Extra office space",
+     "status": "Assigned",
+     "notes": "Extra Office"
+    },
+    {
+     "name": "Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Extra office space",
+     "status": "Assigned",
+     "notes": "Extra Office"
+    },
+    {
+     "name": "Black Storage Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Extra office space",
+     "status": "Assigned",
+     "notes": "Extra Office"
+    },
+    {
+     "name": "Small 2-Shelf Rolling Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Extra office space",
+     "status": "Assigned",
+     "notes": "Extra Office"
+    },
+    {
+     "name": "Sound Bar",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Extra office space",
+     "status": "Assigned",
+     "notes": "Extra Office"
+    },
+    {
+     "name": "Desk Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Extra office space",
+     "status": "Assigned",
+     "notes": "Extra Office"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "LFC-01",
+   "name": "Gina Davis",
+   "title": "CEO",
+   "office": "LFC",
+   "reviewed": "2026-09-24",
+   "items": [],
+   "history": [],
+   "sheetLabel": "LFC Office"
+  },
+  {
+   "pos": "LFC-02",
+   "name": "Pam Heppard",
+   "title": null,
+   "office": "LFC",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Docking Station",
+     "category": "Technology Accessories",
+     "desc": "Dell 7-in-1 USB-C Multiport Adapter - DA310",
+     "vendor": "Amazon Order #113-1663118-1834638",
+     "purchased": "2024-04-30",
+     "qty": 1,
+     "unitCost": 80.85,
+     "total": 80.85,
+     "status": "Assigned"
+    },
+    {
+     "name": "27\" Monitor",
+     "category": "Technology & Electronics",
+     "desc": "Dell S2725HS 27 Inch Monitor, FHD (1920x1080) 100Hz, Integrated 2x5W Speaker",
+     "vendor": "Amazon Order #113-3116260-8932225",
+     "purchased": "2025-06-18",
+     "qty": 1,
+     "unitCost": 159.99,
+     "total": 159.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Epson EcoTank Printer",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Epson EcoTank ET-2400 Wireless Color All-in-One Cartridge-Free Supertank Printer",
+     "vendor": "Amazon Order #114-5448483-6194661",
+     "purchased": "2025-03-21",
+     "qty": 1,
+     "unitCost": 159,
+     "total": 159,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Keyboard",
+     "category": "Technology Accessories",
+     "desc": "Ergonomic Wireless Keyboard and Mouse, 2.4G Rechargeable Full Size",
+     "vendor": "Amazon Order #114-6623573-0940217",
+     "purchased": "2024-12-18",
+     "qty": 1,
+     "unitCost": 36.99,
+     "total": 36.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Monitor Mount",
+     "category": "Technology & Electronics",
+     "desc": "NB North Bayou Dual Monitor Desk Mount Stand Full Motion Swivel",
+     "vendor": "Amazon Order #111-4543820-9905818",
+     "purchased": "2025-07-03",
+     "qty": 1,
+     "unitCost": 34.32,
+     "total": 34.32,
+     "status": "Assigned"
+    },
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "L-shaped desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Rolling desk chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Office Chair (Guest)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Guest chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bookshelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 Drawer Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Small 2-drawer cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 Drawer Filing Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Rolling 2-drawer filing cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Laptop",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "desc": "Laptop for office and home use",
+     "status": "Assigned"
+    },
+    {
+     "name": "Portable Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "desc": "MNN Portable Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "HP Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Desktop Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Desktop Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Canon Printer",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Color inkjet printer",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "LFC-03",
+   "name": "Amudha Mahendiran",
+   "title": null,
+   "office": "LFC",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Dell Docking Station",
+     "category": "Technology Accessories",
+     "desc": "Dell 6-in-1 Multiport Adapter DA305 - Dockingstation",
+     "vendor": "Amazon Order #113-8549008-4951405",
+     "purchased": "2024-08-20",
+     "qty": 1,
+     "unitCost": 79.98,
+     "total": 79.98,
+     "status": "Assigned"
+    },
+    {
+     "name": "Monitor Mount",
+     "category": "Technology Accessories",
+     "desc": "Dual Monitor Desk Mount - Adjustable Monitor Arm for 2 Monitors up to 32 inches",
+     "vendor": "Amazon Order #113-0635477-166746",
+     "purchased": "2025-05-12",
+     "qty": 1,
+     "unitCost": 35.99,
+     "total": 35.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Standing Desk",
+     "category": "Technology Accessories",
+     "desc": "VIVO Extra Wide 38 inch Corner Desk Converter, Height Adjustable Sit to Stand Riser",
+     "vendor": "Amazon Order #113-1619048-5853845",
+     "purchased": "2025-05-12",
+     "qty": 1,
+     "unitCost": 159.99,
+     "total": 159.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Laptop Charger",
+     "category": "Technology & Electronics",
+     "desc": "Dell Laptop Charger 100W Watt USB Type C",
+     "vendor": "Amazon Order #114-8181685-2426602",
+     "purchased": "2025-06-27",
+     "qty": 1,
+     "unitCost": 53.49,
+     "total": 53.49,
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Laptop Charger",
+     "category": "Technology & Electronics",
+     "desc": "Dell Laptop Charger 100W Watt USB Type C",
+     "purchased": "2024-12-13",
+     "qty": 1,
+     "unitCost": 48.99,
+     "total": 48.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Laptop Bag",
+     "category": "Technology Accessories",
+     "desc": "LOVEVOOK 17.3-inch Laptop Bag for Women, Large Capacity Travel Tote Bag",
+     "vendor": "Amazon Order #112-6788984-2748266",
+     "purchased": "2024-03-11",
+     "qty": 1,
+     "unitCost": 53.98,
+     "total": 53.98,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "27\" Monitor",
+     "category": "Technology & Electronics",
+     "desc": "Dell S2721HS Full HD 1920 x 1080p, 75Hz IPS LED LCD Thin Bezel Adjustable Gaming Monitor",
+     "vendor": "Amazon Order #112-4524432-1012233",
+     "purchased": "2024-02-05",
+     "qty": 1,
+     "unitCost": 179.99,
+     "total": 179.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "27\" Monitor",
+     "category": "Technology & Electronics",
+     "desc": "Dell S2721HS Full HD 1920 x 1080p, 75Hz IPS LED LCD Thin Bezel Adjustable Gaming Monitor",
+     "vendor": "Amazon Order #112-4524432-1012233",
+     "purchased": "2024-02-05",
+     "qty": 1,
+     "unitCost": 179.99,
+     "total": 179.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Laptop Bag",
+     "category": "Technology Accessories",
+     "desc": "LOVEVOOK Laptop Bag for Women 15.6 Inch Tote Bags Waterproof Leather Briefcase",
+     "vendor": "Amazon Order #112-3137014-5449015",
+     "purchased": "2025-03-04",
+     "qty": 1,
+     "unitCost": 42.99,
+     "total": 42.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Laptop Stand",
+     "category": "Technology Accessories",
+     "desc": "HYZUO 15-16 Inch Laptop Sleeve with Stand Feature",
+     "vendor": "Amazon Order #114-3632503-5772261",
+     "purchased": "2024-01-30",
+     "qty": 1,
+     "unitCost": 25.98,
+     "total": 25.98,
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Laptop Charger",
+     "category": "Technology & Electronics",
+     "desc": "Dell Laptop Charger 100W Watt USB Type C",
+     "vendor": "Amazon Order #114-3632503-5772262",
+     "purchased": "2024-01-30",
+     "qty": 1,
+     "unitCost": 42,
+     "total": 42,
+     "warranty": "No",
+     "status": "Assigned",
+     "notes": "stopped working, new one purchased on 12/30/2024"
+    },
+    {
+     "name": "Floor Lamp",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "EDISHINE LED Corner Floor Lamp for Living Room, 65\" Tall Standing Reading Lamp",
+     "vendor": "Amazon Order #112-3965577-8978623",
+     "purchased": "2024-01-03",
+     "qty": 1,
+     "unitCost": 29.99,
+     "total": 29.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "L shaped desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "File Rolling Cart",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "File rolling cart",
+     "status": "Assigned"
+    },
+    {
+     "name": "Filing Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Filing cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bookcase",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bookcase",
+     "status": "Assigned"
+    },
+    {
+     "name": "Two Monitors (Dell)",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Dell monitors",
+     "status": "Assigned"
+    },
+    {
+     "name": "Office Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Black rolling chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Pink Guest Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Stationary chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Lamp (Remote Black)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Remote black lamp",
+     "status": "Assigned"
+    },
+    {
+     "name": "Lamp (Upright LED)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Upright LED lamp",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk Lamp",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "LED desk lamp",
+     "status": "Assigned"
+    },
+    {
+     "name": "Area Rug",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Area rug",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Laptop",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Dell laptop",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "LFC-04",
+   "name": "Jen Douglas",
+   "title": null,
+   "office": "LFC",
+   "reviewed": "2026-09-24",
+   "items": [],
+   "history": []
+  },
+  {
+   "pos": "LFC-05",
+   "name": "Amaia Hedd-Williams",
+   "title": "Infant Toddler Specialist – LFC Area",
+   "office": "LFC",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "BAGSMART Rolling Laptop Bag",
+     "category": "Storage & Organization",
+     "location": "Portable",
+     "desc": "BAGSMART Rolling Laptop Bag Women, Briefcase for 17.3 Inch with Wheels Computer Case Work Travel Business",
+     "purchased": "2024-11-21",
+     "qty": 1,
+     "unitCost": 78.99,
+     "total": 78.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk Chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Shelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "Locking File Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Locking File Cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "Two Drawer Filing Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Two drawer filing cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "Rug",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Rug",
+     "status": "Assigned"
+    },
+    {
+     "name": "LG Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "LG Monitor",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "LFC-06",
+   "name": "Catherine Grimes",
+   "title": "Infant Toddler Behavior Consultant",
+   "office": "LFC",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "BAGSMART Rolling Laptop Bag",
+     "category": "Storage & Organization",
+     "location": "Portable",
+     "desc": "BAGSMART Rolling Laptop Bag Women, Briefcase for 17.3 Inch with Wheels Computer Case Work Travel Business",
+     "vendor": "Amazon Order #114-0031656-1045044",
+     "purchased": "2023-12-15",
+     "qty": 1,
+     "unitCost": 79.98,
+     "total": 79.98,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Printer",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Canon MegaTank G3270 All-in-One Wireless Inkjet Printer",
+     "vendor": "Amazon Order #114-5431023-0409841",
+     "purchased": "2023-11-30",
+     "qty": 1,
+     "unitCost": 124,
+     "total": 124,
+     "status": "Assigned"
+    },
+    {
+     "name": "Portable Screen",
+     "category": "Technology Accessories",
+     "desc": "Portable Projector Screen with Stand, 50 Inch 4:3, Outdoor Projector Screen, Lightweight and Retractable",
+     "vendor": "Amazon Order #114-3857562-5805066",
+     "purchased": "2023-10-31",
+     "qty": 1,
+     "unitCost": 68.13,
+     "total": 68.13,
+     "status": "Assigned"
+    },
+    {
+     "name": "22\" Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Sceptre 22 inch 75Hz 1080P LED Monitor 99% sRGB HDMI X2 VGA Build-In Speakers, Machine Black",
+     "vendor": "Amazon Order #114-3736760-7351454",
+     "purchased": "2023-10-23",
+     "qty": 1,
+     "unitCost": 69.97,
+     "total": 69.97,
+     "status": "Assigned"
+    },
+    {
+     "name": "Wired Headset",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "desc": "Logitech H391 Wired Headset for PC/Laptop, Stereo Headphones with Noise Canceling Microphone, USB-C",
+     "vendor": "Amazon Order #113-0309416-6291467",
+     "purchased": "2025-11-03",
+     "qty": 1,
+     "unitCost": 19.5,
+     "total": 19.5,
+     "status": "Assigned"
+    },
+    {
+     "name": "Sceptre Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "22\" Monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Portable Projector",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Portable Projector",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Shelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "Side Table Drawer",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Side table drawer",
+     "status": "Assigned"
+    },
+    {
+     "name": "Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Canon Printer",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Canon Printer",
+     "status": "Assigned"
+    },
+    {
+     "name": "Rolling Briefcase",
+     "category": "Storage & Organization",
+     "location": "Portable",
+     "desc": "Rolling Briefcase",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "LFC-07",
+   "name": "Elisabeth",
+   "title": "Program Success Specialist – LFC Area",
+   "office": "LFC",
+   "reviewed": "2026-09-24",
+   "items": [],
+   "history": []
+  },
+  {
+   "pos": "RAP-00",
+   "name": "RAP Office Inventory",
+   "title": "Shared Office Items",
+   "office": "RAP",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Brown Couch",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Front Area"
+    },
+    {
+     "name": "Green Area Rug",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Decoration",
+     "status": "Assigned"
+    },
+    {
+     "name": "Keurig K-Elite Coffee Maker",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Electronics",
+     "vendor": "Amazon",
+     "purchased": "2023-04-05",
+     "qty": 1,
+     "unitCost": 159,
+     "total": 159,
+     "link": "https://amazon.com/order/111-8920784-0599445",
+     "status": "Assigned"
+    },
+    {
+     "name": "Coffee Cart",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "vendor": "Amazon",
+     "purchased": "2023-05-16",
+     "qty": 1,
+     "unitCost": 167.98,
+     "total": 167.98,
+     "link": "https://amazon.com/order/114-2756626-5606619",
+     "status": "Assigned"
+    },
+    {
+     "name": "Accent Chairs (2)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 Drawer Filing Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned"
+    },
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned"
+    },
+    {
+     "name": "Copy Machine",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Electronics",
+     "status": "Assigned"
+    },
+    {
+     "name": "Buffet Sidebar Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "vendor": "Amazon",
+     "qty": 1,
+     "unitCost": 169.99,
+     "total": 169.99,
+     "link": "https://amazon.com/order/111-7081864-9769010",
+     "status": "Assigned"
+    },
+    {
+     "name": "Ring Video Doorbell",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Electronics",
+     "vendor": "Amazon",
+     "purchased": "2023-05-16",
+     "qty": 1,
+     "unitCost": 69.99,
+     "total": 69.99,
+     "link": "https://amazon.com/order/114-7945545-9021065",
+     "status": "Assigned"
+    },
+    {
+     "name": "Ring Chime Pro",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Electronics",
+     "vendor": "Amazon",
+     "purchased": "2023-05-16",
+     "qty": 1,
+     "unitCost": 59.99,
+     "total": 59.99,
+     "link": "https://amazon.com/order/114-7945545-9021065",
+     "status": "Assigned"
+    },
+    {
+     "name": "Rolling Tables (10)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Rolling Chairs w/ Arms (10)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Rolling Chairs w/o Arms (10)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Presentation Cart & Stand",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "vendor": "Amazon",
+     "purchased": "2023-08-03",
+     "qty": 1,
+     "unitCost": 184.72,
+     "total": 184.72,
+     "link": "https://amazon.com/order/111-9423098-4500268",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Large Magnetic Whiteboard",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "vendor": "Amazon",
+     "purchased": "2023-08-03",
+     "qty": 1,
+     "unitCost": 132.99,
+     "total": 132.99,
+     "link": "https://amazon.com/order/111-9423098-4500268",
+     "status": "Assigned",
+     "notes": "Conference Room"
+    },
+    {
+     "name": "Owl Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Electronics",
+     "status": "Assigned"
+    },
+    {
+     "name": "TCL 75\" Roku SmartTV",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Electronics",
+     "status": "Assigned"
+    },
+    {
+     "name": "HOSACK Barn Door TV Cart",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "vendor": "Amazon",
+     "purchased": "2023-10-03",
+     "qty": 1,
+     "unitCost": 136.99,
+     "total": 136.99,
+     "link": "https://amazon.com/order/111-7081864-9769010",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bathroom Storage Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "vendor": "Amazon",
+     "purchased": "2023-05-05",
+     "qty": 1,
+     "unitCost": 74,
+     "total": 74,
+     "link": "https://amazon.com/order/111-3536018-5450628",
+     "status": "Assigned",
+     "notes": "Bathroom"
+    },
+    {
+     "name": "6 Tier Industrial Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "vendor": "Amazon",
+     "purchased": "2023-10-04",
+     "qty": 1,
+     "unitCost": 164.89,
+     "total": 164.89,
+     "link": "https://amazon.com/order/114-6068754-2509850",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bush Furniture Key West Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "vendor": "Amazon",
+     "purchased": "2023-07-31",
+     "qty": 1,
+     "unitCost": 175.23,
+     "total": 175.23,
+     "link": "https://amazon.com/order/111-2232342-6997862",
+     "status": "Assigned"
+    },
+    {
+     "name": "Refrigerator",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Appliance",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "RAP-01",
+   "name": "Heather Gudowicz",
+   "title": "Program Support Specialist – Rappahannock Area",
+   "office": "RAP",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Dell XPS 9530 Laptop",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "purchased": "2024-10-01",
+     "qty": 1,
+     "unitCost": 1717.6,
+     "total": 1717.6,
+     "warranty": "Yes",
+     "warrantyExp": "2027-10-01",
+     "status": "Assigned"
+    },
+    {
+     "name": "L-shaped desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "5 shelf bookcase",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Small rolling filing cart",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Small rolling filing cart",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 drawer filing cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Accent chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "purchased": "2023-07-15",
+     "qty": 1,
+     "unitCost": 95.66,
+     "total": 95.66,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Office Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Ladder Shelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "purchased": "2023-07-01",
+     "qty": 1,
+     "unitCost": 69.99,
+     "total": 69.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Sansui Desktop Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Sceptre Desktop Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "4 piece Nautical Wall Art",
+     "category": "Technology Accessories",
+     "location": "On-Site Office",
+     "purchased": "2023-08-23",
+     "qty": 1,
+     "unitCost": 59.99,
+     "total": 59.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Monitor mount",
+     "category": "Technology Accessories",
+     "location": "On-Site Office",
+     "purchased": "2025-05-12",
+     "qty": 1,
+     "unitCost": 35.99,
+     "total": 35.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Standing desk",
+     "category": "Technology Accessories",
+     "location": "On-Site Office",
+     "purchased": "2025-05-12",
+     "qty": 1,
+     "unitCost": 159.99,
+     "total": 159.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "purchased": "2023-05-01",
+     "status": "Assigned"
+    },
+    {
+     "name": "KYY Portable Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "status": "Assigned"
+    },
+    {
+     "name": "HP Laptop",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "Intel CORE i7 laptop",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "RAP-02",
+   "name": "Dawn Chapman",
+   "title": "Operations & Procurement Coordinator",
+   "office": "RAP",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Dell XPS 9530 Laptop",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "purchased": "2024-10-01",
+     "qty": 1,
+     "unitCost": 1717.6,
+     "total": 1717.6,
+     "warranty": "Yes",
+     "warrantyExp": "2027-10-01",
+     "status": "Assigned"
+    },
+    {
+     "name": "L-shaped desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "purchased": "2023-05-01",
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "5 shelf bookcase",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "purchased": "2023-05-01",
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Small rolling filing cart",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "purchased": "2023-05-01",
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 drawer filing cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "purchased": "2023-05-01",
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Accent chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "purchased": "2023-06-01",
+     "qty": 1,
+     "unitCost": 136.8,
+     "total": 136.8,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Office Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "purchased": "2023-05-01",
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desktop Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desktop Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Docking Station",
+     "category": "Technology Accessories",
+     "location": "On-Site Office",
+     "purchased": "2023-04-01",
+     "qty": 1,
+     "unitCost": 80.85,
+     "total": 80.85,
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Monitor",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "purchased": "2023-05-01",
+     "status": "Assigned"
+    },
+    {
+     "name": "KYY Portable Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "status": "Assigned"
+    },
+    {
+     "name": "Standing desk",
+     "category": "Technology Accessories",
+     "location": "On-Site Office",
+     "purchased": "2025-05-13",
+     "qty": 1,
+     "unitCost": 161.49,
+     "total": 161.49,
+     "status": "Assigned"
+    },
+    {
+     "name": "Desktop Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "purchased": "2025-06-18",
+     "qty": 1,
+     "unitCost": 159,
+     "total": 159,
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "RAP-03",
+   "name": "Ashley Terry",
+   "title": null,
+   "office": "RAP",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Dell Laptop",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "purchased": "2024-10-01",
+     "qty": 1,
+     "unitCost": 1717.6,
+     "total": 1717.6,
+     "warranty": "Yes",
+     "warrantyExp": "2027-10-01",
+     "status": "Assigned"
+    },
+    {
+     "name": "KYY Portable Monitor",
+     "category": "Technology & Electronics",
+     "location": "Portable",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "5 shelf bookcase",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Small rolling filing cart",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 drawer filing cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Office Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desktop Monitor",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desktop Monitor",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Docking Station",
+     "category": "Technology Accessories",
+     "location": "On-Site Office",
+     "status": "Assigned"
+    },
+    {
+     "name": "Monitor mount",
+     "category": "Technology Accessories",
+     "location": "On-Site Office",
+     "purchased": "2025-05-12",
+     "qty": 1,
+     "unitCost": 35.99,
+     "total": 35.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Standing desk",
+     "category": "Technology Accessories",
+     "location": "On-Site Office",
+     "purchased": "2025-05-12",
+     "qty": 1,
+     "unitCost": 159.99,
+     "total": 159.99,
+     "warranty": "No",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "RAP-04",
+   "name": "Tina Castro",
+   "title": "Infant Toddler Behavior Consultant",
+   "office": "RAP",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Lenovo Docking Station",
+     "category": "Technology & Electronics",
+     "desc": "Lenovo Docking Station USB-C Universal Business Dock – Dual Display",
+     "purchased": "2024-11-21",
+     "qty": 1,
+     "unitCost": 89.95,
+     "total": 89.95,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Remarkable Case Book folio",
+     "category": "Technology Accessories",
+     "desc": "ENET-CASE Case for Remarkable 2 Paper Tablet",
+     "purchased": "2024-05-01",
+     "qty": 1,
+     "unitCost": 14.99,
+     "total": 14.99,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Remarkable Stylus",
+     "category": "Technology & Electronics",
+     "desc": "EMR Stylus for Remarkable 2 Pen with Eraser",
+     "vendor": "Amazon Order #113-9427621-0984223",
+     "purchased": "2024-01-31",
+     "qty": 1,
+     "unitCost": 42.95,
+     "total": 42.95,
+     "status": "Assigned"
+    },
+    {
+     "name": "External CD/DVD Drive",
+     "category": "Technology & Electronics",
+     "desc": "ROOFULL External CD DVD Drive USB 3.0 Portable",
+     "vendor": "Amazon Order #113-9427621-0984223",
+     "purchased": "2024-01-31",
+     "qty": 1,
+     "unitCost": 19.89,
+     "total": 19.89,
+     "status": "Assigned"
+    },
+    {
+     "name": "Remarkable Stand",
+     "category": "Technology Accessories",
+     "desc": "BOZHUORUI Stand Case for Remarkable 2 Digital Paper Tablet",
+     "vendor": "Amazon Order #113-1999317-1529827",
+     "purchased": "2023-11-16",
+     "qty": 1,
+     "unitCost": 20.99,
+     "total": 20.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Keyboard",
+     "category": "Technology Accessories",
+     "desc": "Wireless Keyboard and Mouse, J JOYACCESS 2.4G Ergonomic",
+     "vendor": "Amazon Order #113-8273667-0438624",
+     "purchased": "2023-08-16",
+     "qty": 1,
+     "unitCost": 27.99,
+     "total": 27.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Tablet Stand",
+     "category": "Technology Accessories",
+     "desc": "Lamicall Tablet Stand Adjustable Desktop Stand Holder Dock",
+     "vendor": "Amazon Order #113-8273667-0438624",
+     "purchased": "2023-08-16",
+     "qty": 1,
+     "unitCost": 16.99,
+     "total": 16.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Webcam",
+     "category": "Technology Accessories",
+     "desc": "NexiGo N930AF 1080p Webcam with Microphone and Privacy Cover",
+     "vendor": "Amazon Order #113-4481574-8918656",
+     "purchased": "2023-08-09",
+     "qty": 1,
+     "unitCost": 24.99,
+     "total": 24.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Docking Station",
+     "category": "Technology & Electronics",
+     "desc": "Microsoft Surface Dock (Pd9-00003), Black",
+     "vendor": "Amazon Order #113-7064124-2306600",
+     "purchased": "2023-08-03",
+     "qty": 1,
+     "unitCost": 99.99,
+     "total": 99.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "24\" Monitor",
+     "category": "Technology & Electronics",
+     "desc": "Sceptre E249W-19203R 24-inch FHD LED Gaming Monitor",
+     "vendor": "Amazon Order #113-7064124-2306600",
+     "purchased": "2023-08-03",
+     "qty": 1,
+     "unitCost": 99,
+     "total": 99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bookshelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "Big Filing Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Big Filing Cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "Side Table",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Side table",
+     "status": "Assigned"
+    },
+    {
+     "name": "Projector (CDR)",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "CDR item",
+     "status": "Assigned"
+    },
+    {
+     "name": "Laptop (CDR)",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "CDR item",
+     "status": "Assigned"
+    },
+    {
+     "name": "Printer (CDR)",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "CDR item",
+     "status": "Assigned"
+    },
+    {
+     "name": "Filing Cabinet (CDR)",
+     "category": "Office Furniture",
+     "location": "Home Office",
+     "desc": "CDR item",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "RAP-05",
+   "name": "Paula Bellville",
+   "title": "Infant Toddler Specialist – RAP Area",
+   "office": "RAP",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "Lenovo Docking Station",
+     "category": "Technology & Electronics",
+     "desc": "Lenovo Docking Station USB-C Universal Business Dock – Dual Display",
+     "purchased": "2024-11-21",
+     "qty": 1,
+     "unitCost": 89.95,
+     "total": 89.95,
+     "warranty": "No",
+     "status": "Assigned"
+    },
+    {
+     "name": "Keyboard",
+     "category": "Technology Accessories",
+     "desc": "ESC Flip PRO Computer Keyboard Stand",
+     "vendor": "Amazon Order #112-2313570-7417055",
+     "purchased": "2023-12-13",
+     "qty": 1,
+     "unitCost": 26.79,
+     "total": 26.79,
+     "status": "Assigned"
+    },
+    {
+     "name": "Remarkable Stand",
+     "category": "Technology Accessories",
+     "desc": "Remarkable 2 10.3 inch Digital Paper Case",
+     "vendor": "Amazon Order #112-9817412-1792263",
+     "qty": 1,
+     "unitCost": 19.99,
+     "total": 19.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "21.5\" Monitor",
+     "category": "Technology & Electronics",
+     "desc": "Acer 21.5 Inch Full HD IPS Ultra-Thin Zero Frame Computer Monitor",
+     "vendor": "Amazon Order #113-4823050-9329852",
+     "purchased": "2023-08-17",
+     "qty": 1,
+     "unitCost": 89.99,
+     "total": 89.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Circle Rug",
+     "category": "Office Furniture",
+     "desc": "SAFAVIEH Madison Collection Area Rug 5'3\" Round, Grey & Gold",
+     "vendor": "Amazon Order #113-4823050-9329853",
+     "purchased": "2025-08-17",
+     "qty": 1,
+     "unitCost": 51.86,
+     "total": 51.86,
+     "status": "Assigned"
+    },
+    {
+     "name": "Docking Station",
+     "category": "Technology & Electronics",
+     "desc": "12 in 1 Surface Dock, Microsoft Surface Pro Docking Station Triple Display",
+     "vendor": "Amazon Order #113-5442973-9424249",
+     "purchased": "2023-08-11",
+     "qty": 1,
+     "unitCost": 150.99,
+     "total": 150.99,
+     "status": "Assigned"
+    },
+    {
+     "name": "Acer Computer Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Acer monitor",
+     "status": "Assigned"
+    },
+    {
+     "name": "Surface Expansion Dock",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Surface dock",
+     "purchased": "2023-07-01",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bookshelf",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk chair",
+     "status": "Assigned"
+    },
+    {
+     "name": "Rolling File Box",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Rolling file box",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 Drawer Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "2 drawer cabinet",
+     "status": "Assigned"
+    },
+    {
+     "name": "Multi-Colored Rug",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Multi colored rug",
+     "status": "Assigned"
+    }
+   ],
+   "history": []
+  },
+  {
+   "pos": "RAP-06",
+   "name": "Gina Davis",
+   "title": "CEO",
+   "office": "RAP",
+   "reviewed": "2026-09-24",
+   "items": [
+    {
+     "name": "L-Shaped Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Desk",
+     "status": "Assigned"
+    },
+    {
+     "name": "Sound Bar",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "Sound bar",
+     "status": "Assigned"
+    },
+    {
+     "name": "Desk Chair",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 Drawer Rolling Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned"
+    },
+    {
+     "name": "2 Drawer Filing Cabinet",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned"
+    },
+    {
+     "name": "Bookshelf",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Furniture",
+     "status": "Assigned"
+    },
+    {
+     "name": "Dell Monitor",
+     "category": "Technology & Electronics",
+     "location": "On-Site Office",
+     "desc": "24 inch",
+     "status": "Assigned"
+    },
+    {
+     "name": "Chair (Brown Faux Leather)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Brown faux leather",
+     "status": "Assigned"
+    },
+    {
+     "name": "Lamp (LED)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "LED lamp",
+     "status": "Assigned"
+    },
+    {
+     "name": "Lamp (Bulb)",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Bulb lamp",
+     "status": "Assigned"
+    },
+    {
+     "name": "Standing Desk",
+     "category": "Office Furniture",
+     "location": "On-Site Office",
+     "desc": "Standing desk",
+     "qty": 1,
+     "unitCost": 179.99,
+     "total": 179.99,
+     "status": "Assigned",
+     "notes": "2025.05.12-Amazon $179.99"
+    },
+    {
+     "name": "Canon Printer/Scanner",
+     "category": "Technology & Electronics",
+     "location": "Home Office",
+     "desc": "TR8620",
+     "status": "Assigned"
+    }
+   ],
+   "history": [],
+   "sheetLabel": "RAP Office"
+  },
+  {
+   "pos": "RAP-07",
+   "name": "Extra Desk-RAP Office",
+   "title": "VACANT",
+   "office": "RAP",
+   "reviewed": "2026-09-24",
+   "items": [],
+   "history": []
+  }
+ ]
+}

@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Foundation First Inventory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js" defer></script>
+<style>
+:root{
+  --navy:#0D1B2A; --navy2:#1A2D40; --gold:#C9A84C; --gold2:#E8C76A;
+  --paper:#F0EDE8; --card:#FFFFFF; --ink:#0D1B2A; --muted:#6B7280; --line:#E5E7EB;
+  --rap:#0F8A5F; --gpw:#1B6CA8; --lfc:#D9731A;
+  --ok:#065F46; --okbg:#D1FAE5; --warn:#B45309; --warnbg:#FEF3C7; --bad:#B91C1C; --badbg:#FCEBEB;
+  --font:"Figtree", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:70px}
+body{font-family:var(--font);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.45;min-height:100vh;
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit}
+button,input{font-family:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:env(safe-area-inset-top,0px) 0 0}
+.bar-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px 18px}
+.mark{width:34px;height:34px;border-radius:8px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:13px;flex:none;text-decoration:none}
+.crumbs{display:flex;gap:6px;align-items:center;font-size:14px;min-width:0;flex-wrap:wrap}
+.crumbs a{color:#C9D3DE;text-decoration:none}
+.crumbs a:hover{color:#fff;text-decoration:underline}
+.crumbs span.sep{color:#56677A}
+.crumbs b{color:#fff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .sp{flex:1}
+.btn{border:1px solid transparent;border-radius:8px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold2)}
+.btn-ghost{background:transparent;color:#fff;border-color:#3A4D62}
+.btn-ghost:hover{border-color:#8FA3B8}
+.btn-line{background:#fff;color:var(--navy);border-color:#D1D5DB}
+.btn-line:hover{border-color:var(--navy)}
+
+main{max-width:1200px;margin:0 auto;padding:22px 18px 60px}
+
+/* hero band */
+.hero{background:var(--navy);color:#fff;border-radius:14px;padding:26px 28px;margin-bottom:22px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:100%;background:var(--accent,var(--gold))}
+.hero h1{font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.01em}
+.hero .sub{color:#A9B7C6;margin-top:6px;font-size:15px}
+.stats{display:flex;flex-wrap:wrap;gap:10px 34px;margin-top:20px}
+.stat b{display:block;font-size:26px;font-weight:800;color:var(--gold2);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{font-size:13px;color:#A9B7C6}
+.stat.alert b{color:#FCA5A5}
+
+/* office tiles (home) */
+.offices{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.office{background:var(--card);border-radius:14px;padding:20px 22px 18px;text-decoration:none;border-left:8px solid var(--oc);display:block}
+.office:hover{box-shadow:0 0 0 2px var(--oc) inset}
+.office h2{font-size:22px;font-weight:800}
+.office .who{color:var(--muted);font-size:14px;margin-top:2px}
+.office .nums{display:flex;gap:22px;margin-top:14px;font-variant-numeric:tabular-nums}
+.office .nums b{font-size:20px;display:block}
+.office .nums span{font-size:12.5px;color:var(--muted)}
+.office .go{margin-top:14px;font-weight:700;color:var(--oc);font-size:14px}
+
+.section{margin-top:28px}
+.section h3{font-size:17px;font-weight:800;margin-bottom:10px}
+.panel{background:var(--card);border-radius:12px;padding:6px 0}
+.alert-row{display:grid;grid-template-columns:90px 1fr auto;gap:12px;padding:10px 18px;border-top:1px solid var(--line);align-items:center;text-decoration:none}
+.alert-row:first-child{border-top:none}
+.alert-row:hover{background:#FAFAF8}
+.empty{padding:16px 18px;color:var(--muted)}
+
+/* search */
+.search{display:flex;gap:10px;margin-bottom:18px}
+.search input{flex:1;max-width:460px;padding:11px 14px;border-radius:10px;border:1px solid #D1D5DB;font-size:15px;background:#fff}
+
+/* asset-tag cards (office view) */
+.tags{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.tag{background:var(--card);border-radius:12px;text-decoration:none;display:grid;grid-template-columns:1fr 92px;gap:6px 12px;padding:16px 16px 14px;position:relative;border:1px solid #E7E2D8}
+.tag::before{content:"";position:absolute;top:14px;left:-1px;width:5px;height:34px;border-radius:0 4px 4px 0;background:var(--oc)}
+.tag:hover{border-color:var(--navy)}
+.tag .pos{font-weight:800;font-size:18px;color:var(--oc);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.tag .nm{font-weight:700;font-size:16px;line-height:1.25;margin-top:2px}
+.tag .tt{font-size:13px;color:var(--muted);margin-top:2px;line-height:1.3}
+.tag .qr{grid-row:1 / span 2;grid-column:2;align-self:start;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px}
+.tag .qr canvas{display:block;width:80px;height:80px}
+.tag .meta{grid-column:1 / -1;display:flex;gap:16px;font-size:13px;color:var(--muted);border-top:1px dashed #E2DCCF;padding-top:10px;margin-top:6px;font-variant-numeric:tabular-nums}
+.tag .meta b{color:var(--ink)}
+.tag .flag{color:var(--warn);font-weight:700}
+.tag.vacant .nm{color:var(--muted);font-style:italic}
+
+/* person view */
+.person-head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start}
+.person-head .pos{color:var(--gold2);font-weight:800;font-size:15px;letter-spacing:.03em}
+.person-head h1{margin-top:2px}
+.bigqr{background:#fff;border-radius:10px;padding:8px;text-align:center}
+.bigqr canvas{display:block;width:120px;height:120px}
+.bigqr small{display:block;color:var(--navy);font-weight:700;font-size:12px;margin-top:4px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.tools input{flex:1;min-width:200px;max-width:360px;padding:10px 13px;border-radius:10px;border:1px solid #D1D5DB;font-size:15px;background:#fff}
+.chipset{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid #D1D5DB;background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--navy)}
+.chip{text-decoration:none}
+.chip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.items{background:var(--card);border-radius:12px;overflow:hidden}
+.ihead,.irow{display:grid;grid-template-columns:minmax(180px,2.2fr) 1.4fr 1fr 1fr .9fr 1.1fr;gap:12px;align-items:center;padding:11px 16px}
+.ihead{background:var(--navy2);color:#fff;font-size:12.5px;font-weight:700}
+.irow{border-top:1px solid var(--line);cursor:pointer}
+.irow:nth-child(even){background:#FAFAF8}
+.irow:hover{background:#F3F1EC}
+.iname{font-weight:700;line-height:1.25}
+.iname small{display:block;font-weight:400;color:var(--muted);font-size:12.5px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:340px}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+.badge{display:inline-block;padding:3px 9px;border-radius:6px;font-size:12px;font-weight:700;line-height:1.3}
+.c-elec{background:#DBEAFE;color:#1E40AF}.c-acc{background:#D1FAE5;color:#065F46}.c-furn{background:#FEF3C7;color:#78350F}
+.c-stor{background:#EDE9FE;color:#4C1D95}.c-sup{background:#FCE7F3;color:#9D174D}.c-prog{background:#E0F2FE;color:#075985}.c-misc{background:#F3F4F6;color:#4B5563}
+.w-ok{background:var(--okbg);color:var(--ok)}.w-soon{background:var(--warnbg);color:var(--warn)}.w-exp{background:var(--badbg);color:var(--bad)}.w-none{color:var(--muted);background:transparent;padding-left:0}
+.detail{grid-column:1 / -1;display:none;background:#F7F5F0;border-radius:10px;padding:12px 14px;margin-top:4px;font-size:13.5px}
+.irow.open .detail{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px 18px}
+.detail div span{display:block;color:var(--muted);font-size:12px}
+.detail a{color:var(--rap)}
+.lbl-m{display:none}
+
+details.hist{margin-top:22px;background:var(--card);border-radius:12px;padding:14px 18px}
+details.hist summary{cursor:pointer;font-weight:700}
+.hrow{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+
+.note{font-size:13px;color:var(--muted);margin-top:14px}
+.banner-warn{background:var(--warnbg);color:#7C4A03;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:14px}
+
+/* stickers */
+.sheet{display:grid;grid-template-columns:repeat(auto-fill,2in);gap:.18in;justify-content:start}
+.sticker{width:2in;height:2in;border:1px dashed #BFB8A8;border-radius:.12in;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.08in;text-align:center}
+.sticker canvas{width:1.25in;height:1.25in;display:block}
+.sticker .sp1{font-weight:800;font-size:13pt;color:var(--navy);margin-top:3px;line-height:1}
+.sticker .sp2{font-size:7.5pt;color:#333;margin-top:2px;line-height:1.15;max-width:1.8in;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sticker .sp3{font-size:6pt;color:#555;margin-top:1px}
+
+/* mobile */
+@media (max-width:760px){
+  .hero{padding:20px}
+  .hero h1{font-size:24px}
+  .person-head{grid-template-columns:1fr}
+  .bigqr{display:none}
+  .ihead{display:none}
+  .irow{grid-template-columns:1fr auto;gap:6px 10px;padding:12px 14px}
+  .irow .c-loc,.irow .c-date{display:none}
+  .irow .c-cat{grid-column:1}
+  .irow .c-war{grid-column:2;justify-self:end}
+  .irow .c-cost{grid-column:2;grid-row:1}
+  .iname small{max-width:220px}
+  .bar .hide-m{display:none}
+}
+@media print{
+  .bar,.tools,.noprint,details.hist summary::marker{display:none!important}
+  body{background:#fff}
+  main{padding:0;max-width:none}
+  .hero{border-radius:0;padding:10px 0;background:#fff;color:#000}
+  .hero::after{display:none}
+  .hero .sub,.stat span{color:#444}.stat b{color:#000}
+  .irow .detail{display:none!important}
+  .sticker{page-break-inside:avoid}
+  .sheet{gap:.12in}
+  @page{margin:.4in}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---- editing ---- */
+.btn-sm{padding:6px 11px;font-size:13px}
+.btn-danger{background:#fff;color:var(--bad);border-color:#F3C4C4}.btn-danger:hover{border-color:var(--bad)}
+.acts{grid-column:1 / -1;display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.hero .acts{margin-top:16px}
+.hero .btn-line{background:transparent;color:#fff;border-color:#3A4D62}.hero .btn-line:hover{border-color:#8FA3B8}
+.savebar{position:sticky;top:54px;z-index:19;background:var(--warnbg);color:#7C4A03;border-bottom:1px solid #F1D48A}
+.savebar .in{max-width:1200px;margin:0 auto;padding:9px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:14px}
+.savebar .sp{flex:1}
+.ov{position:fixed;inset:0;background:rgba(13,27,42,.55);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:30px 14px}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:640px;padding:22px 22px 18px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.modal .lede{color:var(--muted);font-size:14px;margin-bottom:14px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+.fgrid .full{grid-column:1 / -1}
+.fld label{display:block;font-size:12.5px;font-weight:700;color:#374151;margin-bottom:4px}
+.fld input,.fld select,.fld textarea{width:100%;padding:9px 11px;border:1px solid #D1D5DB;border-radius:8px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink)}
+.fld textarea{min-height:64px;resize:vertical}
+.fld .hint{font-size:12px;color:var(--muted);margin-top:3px}
+.fsec{grid-column:1 / -1;font-size:13px;font-weight:800;color:var(--navy);border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
+.mfoot{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+.err{color:var(--bad);font-size:13.5px;margin-top:10px;min-height:1em}
+.choice{display:block;border:1px solid #D1D5DB;border-radius:10px;padding:12px 14px;margin-bottom:10px;cursor:pointer}
+.choice:has(input:checked){border-color:var(--navy);box-shadow:0 0 0 1px var(--navy) inset}
+.choice b{display:block}.choice span{font-size:13.5px;color:var(--muted)}
+.choice input{margin-right:8px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:10px;font-size:14px;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.hrow .hact{justify-self:end}
+.hrow{grid-template-columns:2fr 1fr 1fr 1.4fr auto;align-items:center}
+.arch-row{display:grid;grid-template-columns:90px 1fr auto auto;gap:12px;padding:12px 18px;border-top:1px solid var(--line);align-items:center}
+.arch-row:first-child{border-top:none}
+@media (max-width:760px){.fgrid{grid-template-columns:1fr}.hrow{grid-template-columns:1fr auto}.arch-row{grid-template-columns:1fr auto}}
+@media print{.savebar,.acts,.ov,.toast{display:none!important}}
+
+/* ---- requests ---- */
+.reqs{background:var(--card);border-radius:12px;padding:14px 18px;margin-top:4px}
+.reqs-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px}
+.reqs-head h3{font-size:17px;font-weight:800;display:flex;gap:8px;align-items:center}
+.rq{display:grid;grid-template-columns:1fr auto;gap:8px 16px;border-top:1px solid var(--line);padding:12px 0;align-items:start}
+.rq-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rq-meta{font-size:13.5px;color:var(--muted);margin-top:3px}
+.rq-meta a{color:var(--gpw);font-weight:600}
+.rq-dec{font-size:13.5px;margin-top:6px;background:#F7F5F0;border-radius:8px;padding:6px 10px;display:inline-block}
+.rq .acts{grid-column:auto;margin-top:0;justify-content:flex-end}
+.rq-closed{margin-top:6px}.rq-closed summary{cursor:pointer;font-weight:700;font-size:14px;padding:8px 0;color:var(--muted)}
+@media (max-width:760px){.rq{grid-template-columns:1fr}.rq .acts{justify-content:flex-start}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="mark" href="#" aria-label="All offices">FF</a>
+  <nav class="crumbs" id="crumbs"></nav>
+  <div class="sp"></div>
+  <span id="barBtns"></span>
+</div></header>
+<div class="savebar" id="savebar" style="display:none"></div>
+<main id="app"><p class="empty">Loading inventory…</p></main>
+<script>
+var DB=null, PEOPLE=[], BYPOS={}, DIRTY=false, SERVER_SHA=null;
+var PREVIEW = !!window.__DATA__;
+var OFFICES=[{k:"RAP",name:"RAP Office",region:"Rappahannock Area",c:"var(--rap)"},
+             {k:"GPW",name:"GPW Office",region:"Greater Prince William",c:"var(--gpw)"},
+             {k:"LFC",name:"LFC Office",region:"LFC Area",c:"var(--lfc)"}];
+var OFF={}; OFFICES.forEach(function(o){OFF[o.k]=o;});
+var CATS=["Technology & Electronics","Technology Accessories","Office Furniture","Storage & Organization","Office Supplies","Program / Classroom Materials","Miscellaneous"];
+var CONDS=["New","Good","Damaged","Needs Repair","Lost","Retired"];
+var LOCS=["On-Site Office","Home Office","Portable"];
+var FUNDS=["Mixed Delivery","Business Academy","ITSN","General Operating","Other Grant"];
+var STATUSES=["Assigned","In Repair","Loaned Out"];
+var REASONS=["Returned to Office","Disposed","Lost / Stolen","Employee Departed","Other"];
+var K_DRAFT='ffinv_draft', K_GH='ffinv_github';
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function money(n){return n==null||n===''?'':'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function money0(n){return '$'+Math.round(n||0).toLocaleString('en-US');}
+function fdate(s){if(!s)return '';var p=String(s).slice(0,10).split('-');return p.length===3?p[1]+'/'+p[2]+'/'+p[0]:s;}
+function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function stamp(){var d=new Date();return today()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+function uid(){return 'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function baseURL(){return location.href.split('#')[0].split('?')[0].replace(/index\.html$/i,'');}
+function linkFor(h){return baseURL()+'#'+h;}
+function store(k,v){try{if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
+function load(k){try{var v=localStorage.getItem(k);return v?JSON.parse(v):null;}catch(e){return null;}}
+function toast(msg){document.querySelectorAll('.toast').forEach(function(x){x.remove();});var t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},3200);}
+
+function total(it){if(it.qty&&it.unitCost)return it.qty*it.unitCost;if(it.total!=null&&it.total!=='')return Number(it.total);return null;}
+function wStatus(it){
+  if(it.warranty!=='Yes')return it.warranty==='No'?'none':'unknown';
+  if(!it.warrantyExp)return 'nodate';
+  var d=new Date(it.warrantyExp+'T00:00:00'),now=new Date();now.setHours(0,0,0,0);
+  var days=Math.round((d-now)/86400000);
+  if(days<0)return 'expired'; if(days<=90)return 'soon'; return 'active';
+}
+function wBadge(it){
+  var s=wStatus(it);
+  if(s==='active')return '<span class="badge w-ok">Until '+fdate(it.warrantyExp)+'</span>';
+  if(s==='soon')return '<span class="badge w-soon">Ends '+fdate(it.warrantyExp)+'</span>';
+  if(s==='expired')return '<span class="badge w-exp">Expired '+fdate(it.warrantyExp)+'</span>';
+  if(s==='nodate')return '<span class="badge w-soon">Yes, date missing</span>';
+  if(s==='none')return '<span class="badge w-none">None</span>';
+  return '<span class="badge w-none">Unknown</span>';
+}
+function catClass(c){c=(c||'').toLowerCase();
+  if(c.indexOf('electron')>-1)return'c-elec';if(c.indexOf('accessor')>-1)return'c-acc';if(c.indexOf('furniture')>-1)return'c-furn';
+  if(c.indexOf('storage')>-1)return'c-stor';if(c.indexOf('suppl')>-1)return'c-sup';if(c.indexOf('program')>-1)return'c-prog';return'c-misc';}
+function stickerNeeded(it){var t=total(it);return t!=null&&t>50&&it.stickerApplied!=='Yes';}
+function summary(p){
+  var s={items:p.items.length,value:0,war:0,soon:0,exp:0,stick:0};
+  p.items.forEach(function(it){var t=total(it);if(t)s.value+=t;if(it.warranty==='Yes')s.war++;var w=wStatus(it);if(w==='soon')s.soon++;if(w==='expired')s.exp++;if(stickerNeeded(it))s.stick++;});
+  return s;
+}
+function displayName(p){return p.name+(p.sheetLabel?' ('+p.sheetLabel+')':'');}
+function isVacant(p){return /^vacant$/i.test(p.name||'')||/vacant/i.test(p.title||'')||/extra desk/i.test(p.name||'');}
+function active(){return PEOPLE.filter(function(p){return !p.archived;});}
+function posLabel(p){return p.pos+' – '+displayName(p);}
+
+function drawQR(canvas,text,px){
+  var ctx=canvas.getContext('2d');
+  try{
+    var qr=qrcode(0,'M');qr.addData(text);qr.make();
+    var n=qr.getModuleCount(),quiet=2,cell=Math.max(1,Math.floor(px/(n+quiet*2)));
+    var size=cell*(n+quiet*2);canvas.width=canvas.height=size;
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,size,size);ctx.fillStyle='#0D1B2A';
+    for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(qr.isDark(r,c))ctx.fillRect((c+quiet)*cell,(r+quiet)*cell,cell,cell);
+  }catch(e){canvas.width=canvas.height=px;ctx.fillStyle='#eee';ctx.fillRect(0,0,px,px);}
+}
+function paintQRs(){document.querySelectorAll('canvas[data-qr]').forEach(function(c){drawQR(c,c.getAttribute('data-qr'),+c.getAttribute('data-px')||240);});}
+
+/* ---------- saving ---------- */
+function index(){BYPOS={};PEOPLE.forEach(function(p){BYPOS[p.pos]=p;});}
+function changed(msg){
+  DIRTY=true;DB.people=PEOPLE;DB.generated=stamp();
+  store(K_DRAFT,{savedAt:stamp(),db:DB});
+  index();renderSaveBar();route(true);
+  if(msg)toast(msg);
+}
+function gh(){var g=load(K_GH);if(g&&g.token&&g.owner&&g.repo)return g;return null;}
+function ghGuess(){var m=location.hostname.match(/^([^.]+)\.github\.io$/i);var seg=location.pathname.split('/').filter(Boolean)[0]||'';
+  return {owner:m?m[1]:'',repo:m&&seg&&!/\.html$/.test(seg)?seg:'',branch:'main'};}
+function b64enc(str){return btoa(unescape(encodeURIComponent(str)));}
+function b64dec(b){return decodeURIComponent(escape(atob(b.replace(/\s/g,''))));}
+function ghURL(g){return 'https://api.github.com/repos/'+encodeURIComponent(g.owner)+'/'+encodeURIComponent(g.repo)+'/contents/data.json';}
+function ghFetch(g){
+  return fetch(ghURL(g)+'?ref='+encodeURIComponent(g.branch||'main')+'&t='+Date.now(),{headers:{Authorization:'Bearer '+g.token,Accept:'application/vnd.github+json'},cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('GitHub said '+r.status+(r.status===401?' (the token was not accepted)':r.status===404?' (repository or data.json not found)':''));return r.json();})
+    .then(function(j){SERVER_SHA=j.sha;return JSON.parse(b64dec(j.content));});
+}
+function saveToGitHub(){
+  var g=gh();if(!g){openGitHub();return;}
+  var btn=document.getElementById('saveBtn');if(btn){btn.disabled=true;btn.textContent='Saving…';}
+  var body=JSON.stringify(DB,null,1);
+  var go=function(){
+    return fetch(ghURL(g),{method:'PUT',headers:{Authorization:'Bearer '+g.token,Accept:'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:'Inventory update '+stamp(),content:b64enc(body),sha:SERVER_SHA||undefined,branch:g.branch||'main'})})
+      .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.message||('GitHub said '+r.status));return j;});});
+  };
+  var p=SERVER_SHA?go():ghFetch(g).then(go,go);
+  p.then(function(j){SERVER_SHA=j.content&&j.content.sha;DIRTY=false;store(K_DRAFT,null);renderSaveBar();toast('Saved to GitHub. The public site updates in a minute or two.');})
+   .catch(function(e){renderSaveBar();toast('Not saved: '+e.message);});
+}
+function downloadJSON(){
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(DB,null,1)],{type:'application/json'}));
+  a.download='data.json';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},300);
+}
+function discardDraft(){if(!confirm('Discard your unsaved changes and reload the published data?'))return;store(K_DRAFT,null);location.reload();}
+function renderSaveBar(){
+  var el=document.getElementById('savebar');
+  if(!DIRTY){el.innerHTML='';el.style.display='none';return;}
+  el.style.display='block';
+  var g=gh();
+  el.innerHTML='<div class="in"><span><b>Unsaved changes.</b> '+(PREVIEW?'This preview keeps them on this device only.':(g?'Save to publish them to the website.':'They are kept on this device until you save.'))+'</span><span class="sp"></span>'+
+   (PREVIEW?'':'<button class="btn btn-gold btn-sm" id="saveBtn">'+(g?'Save to GitHub':'Connect GitHub to save')+'</button>')+
+   '<button class="btn btn-line btn-sm" id="dlBtn">Download data.json</button><button class="btn btn-line btn-sm" id="discBtn">Discard</button></div>';
+  var sb=document.getElementById('saveBtn');if(sb)sb.onclick=saveToGitHub;
+  document.getElementById('dlBtn').onclick=downloadJSON;document.getElementById('discBtn').onclick=discardDraft;
+}
+window.addEventListener('beforeunload',function(e){if(DIRTY&&!gh()){e.preventDefault();e.returnValue='';}});
+
+/* ---------- modal ---------- */
+function modal(title,lede,body,submitLabel,onSubmit,danger){
+  closeModal();
+  var ov=document.createElement('div');ov.className='ov';ov.id='ov';
+  ov.innerHTML='<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt"><h2 id="mt">'+esc(title)+'</h2>'+(lede?'<p class="lede">'+lede+'</p>':'')+
+    '<form id="mf" novalidate>'+body+'<div class="err" id="merr"></div><div class="mfoot"><button type="button" class="btn btn-line" id="mcancel">Cancel</button>'+
+    '<button type="submit" class="btn '+(danger?'btn-danger':'btn-gold')+'">'+esc(submitLabel)+'</button></div></form></div>';
+  document.body.appendChild(ov);
+  document.getElementById('mcancel').onclick=closeModal;
+  ov.addEventListener('mousedown',function(e){if(e.target===ov)closeModal();});
+  document.addEventListener('keydown',escClose);
+  document.getElementById('mf').onsubmit=function(e){e.preventDefault();var err=onSubmit(new FormData(e.target));if(err){document.getElementById('merr').textContent=err;}else closeModal();};
+  var f=ov.querySelector('input,select,textarea');if(f)setTimeout(function(){f.focus();},30);
+}
+function escClose(e){if(e.key==='Escape')closeModal();}
+function closeModal(){var o=document.getElementById('ov');if(o)o.remove();document.removeEventListener('keydown',escClose);}
+function fld(label,name,val,type,opts,cls,hint){
+  var v=val==null?'':val,h='<div class="fld '+(cls||'')+'"><label for="f_'+name+'">'+label+'</label>';
+  if(type==='select'){h+='<select id="f_'+name+'" name="'+name+'"><option value=""></option>'+opts.map(function(o){var ov=typeof o==='object'?o[0]:o,ol=typeof o==='object'?o[1]:o;return '<option value="'+esc(ov)+'"'+(String(ov)===String(v)?' selected':'')+'>'+esc(ol)+'</option>';}).join('')+'</select>';}
+  else if(type==='textarea')h+='<textarea id="f_'+name+'" name="'+name+'">'+esc(v)+'</textarea>';
+  else h+='<input id="f_'+name+'" name="'+name+'" type="'+(type||'text')+'" value="'+esc(v)+'"'+(type==='number'?' step="any" min="0"':'')+'>';
+  return h+(hint?'<div class="hint">'+hint+'</div>':'')+'</div>';
+}
+function g(fd,k){var v=fd.get(k);v=v==null?'':String(v).trim();return v;}
+
+/* ---------- item actions ---------- */
+function itemForm(it){
+  it=it||{qty:1,status:'Assigned'};
+  return '<div class="fgrid">'+fld('Item name *','name',it.name,'text',null,'full')+
+   fld('Category','category',it.category,'select',CATS)+fld('Condition','condition',it.condition,'select',CONDS)+
+   fld('Location','location',it.location,'select',LOCS)+fld('Status','status',it.status,'select',STATUSES)+
+   fld('Description / model','desc',it.desc,'text',null,'full')+
+   '<div class="fsec">Purchase</div>'+
+   fld('Date purchased','purchased',it.purchased,'date')+fld('Date assigned','assigned',it.assigned,'date')+
+   fld('Quantity','qty',it.qty,'number')+fld('Unit cost ($)','unitCost',it.unitCost,'number',null,'','Total is calculated for you')+
+   fld('Vendor / order #','vendor',it.vendor)+fld('Funding source','funding',it.funding,'select',FUNDS)+
+   fld('Receipt or order link','link',it.link,'url',null,'full')+
+   '<div class="fsec">Identification</div>'+
+   fld('Asset tag','assetTag',it.assetTag)+fld('Serial #','serial',it.serial)+
+   fld('QR sticker on item?','stickerApplied',it.stickerApplied,'select',['Yes','No'])+fld('Employee confirmed (date)','ack',it.ack,'date')+
+   '<div class="fsec">Warranty</div>'+
+   fld('Warranty?','warranty',it.warranty,'select',['Yes','No'])+fld('Warranty expires','warrantyExp',it.warrantyExp,'date')+
+   fld('Warranty #','warrantyNo',it.warrantyNo)+fld('Warranty contact','warrantyProvider',it.warrantyProvider)+
+   fld('Notes','notes',it.notes,'textarea',null,'full')+'</div>';
+}
+function readItem(fd,base){
+  var it=Object.assign({},base||{});
+  ['name','category','condition','location','status','desc','purchased','assigned','vendor','funding','link','assetTag','serial','stickerApplied','ack','warranty','warrantyExp','warrantyNo','warrantyProvider','notes'].forEach(function(k){var v=g(fd,k);if(v)it[k]=v;else delete it[k];});
+  ['qty','unitCost'].forEach(function(k){var v=g(fd,k);if(v!==''&&!isNaN(+v))it[k]=+v;else delete it[k];});
+  var t=it.qty&&it.unitCost?Math.round(it.qty*it.unitCost*100)/100:null;if(t!=null)it.total=t;else if(it.unitCost==null)delete it.total;
+  if(!it.id)it.id=uid();
+  return it;
+}
+function addItem(pos){
+  var p=BYPOS[pos];
+  modal('Add item to '+pos,esc(displayName(p)),itemForm(null),'Add item',function(fd){
+    if(!g(fd,'name'))return 'Enter an item name.';
+    var it=readItem(fd);if(!it.assigned)it.assigned=today();
+    p.items.push(it);changed('Added '+it.name+'.');
+  });
+}
+function editItem(pos,id){
+  var p=BYPOS[pos],it=p.items.find(function(x){return x.id===id;});
+  modal('Edit item',esc(pos+', '+displayName(p)),itemForm(it),'Save item',function(fd){
+    if(!g(fd,'name'))return 'Enter an item name.';
+    var n=readItem(fd,it);p.items[p.items.indexOf(it)]=n;changed('Updated '+n.name+'.');
+  });
+}
+function archiveItem(pos,id){
+  var p=BYPOS[pos],it=p.items.find(function(x){return x.id===id;});
+  modal('Archive '+it.name,'It moves to '+esc(pos)+'’s history, so there is still a record of it.',
+   '<div class="fgrid">'+fld('Reason','reason','Disposed','select',REASONS)+fld('Date','removed',today(),'date')+fld('Notes','removalNotes','','textarea',null,'full')+'</div>',
+   'Archive item',function(fd){
+    var h=Object.assign({},it,{reason:g(fd,'reason')||'Other',removed:g(fd,'removed')||today()});var n=g(fd,'removalNotes');if(n)h.removalNotes=n;
+    p.items.splice(p.items.indexOf(it),1);p.history=p.history||[];p.history.push(h);changed(it.name+' archived.');
+   },true);
+}
+function transferItem(pos,id){
+  var p=BYPOS[pos],it=p.items.find(function(x){return x.id===id;});
+  var opts=OFFICES.map(function(o){return active().filter(function(q){return q.office===o.k&&q.pos!==pos;}).sort(function(a,b){return a.pos<b.pos?-1:1;}).map(function(q){return [q.pos,posLabel(q)];});}).reduce(function(a,b){return a.concat(b);},[]);
+  modal('Transfer '+it.name,'From '+esc(posLabel(p))+'. Remember to swap the QR sticker on the item.',
+   '<div class="fgrid">'+fld('Transfer to *','to',null,'select',opts,'full')+fld('Date','date',today(),'date')+fld('Note','note','','text',null,'full')+'</div>',
+   'Transfer item',function(fd){
+    var to=g(fd,'to');if(!to)return 'Choose who the item is going to.';
+    var q=BYPOS[to],d=g(fd,'date')||today(),note=g(fd,'note');
+    var h=Object.assign({},it,{reason:'Transferred',removed:d,to:posLabel(q)});if(note)h.removalNotes=note;
+    var n=Object.assign({},it,{id:uid(),assigned:d,notes:[it.notes,'From '+pos+' on '+fdate(d)+(note?': '+note:'')].filter(Boolean).join(' | ')});delete n.ack;
+    if(n.stickerApplied==='Yes')n.stickerApplied='No';
+    p.items.splice(p.items.indexOf(it),1);p.history=p.history||[];p.history.push(h);q.items.push(n);
+    changed(it.name+' moved to '+to+'. Put a '+to+' sticker on it.');
+   });
+}
+function restoreItem(pos,idx){
+  var p=BYPOS[pos],h=p.history[idx];
+  if(!confirm('Put '+h.name+' back on '+pos+'’s current list?'))return;
+  var it=Object.assign({},h);['reason','removed','to','removalNotes'].forEach(function(k){delete it[k];});it.id=uid();
+  p.history.splice(idx,1);p.items.push(it);changed(h.name+' restored.');
+}
+
+/* ---------- people actions ---------- */
+function nextPos(off){var n=0;PEOPLE.forEach(function(p){if(p.pos.indexOf(off+'-')===0){var x=+p.pos.slice(4);if(x>=n)n=x+1;}});return off+'-'+String(n).padStart(2,'0');}
+function addPerson(off){
+  off=off||'RAP';
+  modal('Add a person or position','Each position gets its own QR code. The number stays with the position if the person changes.',
+   '<div class="fgrid">'+fld('Office','office',off,'select',OFFICES.map(function(o){return [o.k,o.name];}))+fld('Position number','pos',nextPos(off),'text',null,'','Format: '+off+'-08')+
+   fld('Name *','name','','text',null,'full','Use VACANT for an open position')+fld('Title','title','','text',null,'full')+'</div>',
+   'Add position',function(fd){
+    var o=g(fd,'office'),pos=g(fd,'pos').toUpperCase(),name=g(fd,'name');
+    if(!name)return 'Enter a name, or VACANT.';
+    if(!/^(RAP|GPW|LFC)-\d{2}$/.test(pos))return 'Use the format '+o+'-08: office letters, a dash, and two digits.';
+    if(pos.slice(0,3)!==o)return 'The number should start with '+o+' for this office.';
+    if(BYPOS[pos])return pos+' is already used by '+displayName(BYPOS[pos])+'.';
+    PEOPLE.push({pos:pos,name:name,title:g(fd,'title')||null,office:o,reviewed:today(),items:[],history:[]});
+    changed(pos+' added.');location.hash=pos;
+   });
+  var sel=document.getElementById('f_office'),pi=document.getElementById('f_pos');
+  sel.onchange=function(){pi.value=nextPos(sel.value);};
+}
+function editPerson(pos){
+  var p=BYPOS[pos];
+  modal('Edit '+pos,'Changing the name or title does not change the QR code.',
+   '<div class="fgrid">'+fld('Name *','name',p.name,'text',null,'full')+fld('Title','title',p.title,'text',null,'full')+
+   fld('Sheet label','sheetLabel',p.sheetLabel,'text',null,'','Optional, e.g. RAP Office')+fld('Last reviewed','reviewed',p.reviewed,'date')+'</div>',
+   'Save',function(fd){
+    if(!g(fd,'name'))return 'Enter a name, or VACANT.';
+    p.name=g(fd,'name');p.title=g(fd,'title')||null;p.reviewed=g(fd,'reviewed')||null;var sl=g(fd,'sheetLabel');if(sl)p.sheetLabel=sl;else delete p.sheetLabel;
+    changed(pos+' updated.');
+   });
+}
+function departPerson(pos){
+  var p=BYPOS[pos];
+  modal(displayName(p)+' is leaving','Choose what happens to '+esc(pos)+'.',
+   '<label class="choice"><input type="radio" name="how" value="vacant" checked><b>Keep the position and its items (recommended)</b><span>'+esc(pos)+' becomes VACANT. Everything stays assigned for the next hire, and the stickers keep working.</span></label>'+
+   '<label class="choice"><input type="radio" name="how" value="archive"><b>Archive the whole position</b><span>'+esc(pos)+' disappears from the office dashboard. Its items stay attached in the Archived list, and you can restore it later.</span></label>'+
+   '<div class="fgrid">'+fld('Date','date',today(),'date')+fld('Note','note','','text')+'</div>',
+   'Confirm',function(fd){
+    var how=fd.get('how'),d=g(fd,'date')||today(),note=g(fd,'note');
+    p.former=p.former||[];p.former.push({name:p.name,left:d,note:note||undefined});
+    if(how==='vacant'){var old=p.name;p.name='VACANT';changed(old+' removed. '+pos+' is now vacant.');}
+    else{p.archived={date:d,note:note||undefined};changed(pos+' archived.');location.hash=p.office;}
+   },true);
+}
+function fillPosition(pos){
+  var p=BYPOS[pos];
+  modal('Fill '+pos,'The new person takes over everything assigned to this position.',
+   '<div class="fgrid">'+fld('Name *','name','','text',null,'full')+fld('Title','title',p.title,'text',null,'full')+fld('Start date','date',today(),'date')+'</div>',
+   'Assign',function(fd){
+    if(!g(fd,'name'))return 'Enter the new person’s name.';
+    p.name=g(fd,'name');p.title=g(fd,'title')||p.title;p.started=g(fd,'date')||today();
+    p.items.forEach(function(it){delete it.ack;});
+    changed(p.name+' now holds '+pos+'. Have them confirm each item.');
+   });
+}
+function restorePerson(pos){var p=BYPOS[pos];if(!confirm('Restore '+pos+' to the '+p.office+' dashboard?'))return;delete p.archived;changed(pos+' restored.');}
+
+/* ---------- top bar ---------- */
+function setBar(crumbs,btns){
+  document.getElementById('crumbs').innerHTML=crumbs.map(function(c,i){
+    var last=i===crumbs.length-1;
+    return (i?'<span class="sep">/</span>':'')+(last?'<b>'+esc(c[0])+'</b>':'<a href="'+c[1]+'">'+esc(c[0])+'</a>');
+  }).join('');
+  document.getElementById('barBtns').innerHTML=btns||'';
+}
+function localWarn(){
+  if(PREVIEW)return '<div class="banner-warn">Preview only. Changes you make here stay on this device, and the QR codes open this preview. Print stickers from your GitHub address once it is live.</div>';
+  return location.protocol==='file:'?'<div class="banner-warn">You’re viewing this file from your computer. QR codes made here point to your computer, not the website, so print stickers from the GitHub Pages address instead.</div>':'';
+}
+
+/* ---------- views ---------- */
+function viewHome(){
+  setBar([['All offices','#']],'<a class="btn btn-ghost hide-m" href="#print">Print all stickers</a> <a class="btn btn-gold" href="#settings">Settings &amp; backup</a>');
+  var A=active(),all={items:0,value:0,soon:0,stick:0};A.forEach(function(p){var s=summary(p);all.items+=s.items;all.value+=s.value;all.soon+=s.soon;all.stick+=s.stick;});
+  var arch=PEOPLE.filter(function(p){return p.archived;}).length,rcH=reqCounts(A);
+  var h=localWarn()+'<section class="hero"><h1>Foundation First inventory</h1><div class="sub">Equipment assigned to each person and office. Last change '+esc(DB.generated||'')+'.</div>'+
+  '<div class="stats"><div class="stat"><b>'+A.length+'</b><span>sheets</span></div><div class="stat"><b>'+all.items+'</b><span>items</span></div>'+
+  '<div class="stat'+(all.soon?' alert':'')+'"><b>'+all.soon+'</b><span>warranties ending in 90 days</span></div><div class="stat"><b>'+all.stick+'</b><span>stickers still needed</span></div>'+
+  '<div class="stat'+(rcH.pending?' alert':'')+'"><b>'+rcH.pending+'</b><span>requests waiting for approval</span></div></div></section>';
+  h+='<div class="search noprint"><input id="q" type="search" placeholder="Search every sheet: item, serial, person…" aria-label="Search all items"></div><div id="results"></div>';
+  h+='<div class="offices">'+OFFICES.map(function(o){
+    var ps=A.filter(function(p){return p.office===o.k;}),it=0,v=0;ps.forEach(function(p){var s=summary(p);it+=s.items;v+=s.value;});
+    var staff=ps.filter(function(p){return !/-00$/.test(p.pos)&&!isVacant(p);}).length;
+    return '<a class="office" style="--oc:'+o.c+'" href="#'+o.k+'"><h2>'+o.name+'</h2><div class="who">'+o.region+'</div>'+
+      '<div class="nums"><div><b>'+staff+'</b><span>people</span></div><div><b>'+it+'</b><span>items</span></div></div>'+
+      '<div class="go">Open '+o.k+' dashboard</div></a>';
+  }).join('')+'</div>';
+  var alerts=[];A.forEach(function(p){p.items.forEach(function(it){var w=wStatus(it);if(w==='soon'||w==='expired'||w==='nodate')alerts.push({p:p,it:it});});});
+  alerts.sort(function(a,b){return (a.it.warrantyExp||'9')<(b.it.warrantyExp||'9')?-1:1;});
+  h+=homeRequestsPanel();
+  h+='<div class="section"><h3>Warranties needing attention</h3><div class="panel">'+(alerts.length?alerts.map(function(a){
+    return '<a class="alert-row" href="#'+a.p.pos+'"><b style="color:'+OFF[a.p.office].c+'">'+esc(a.p.pos)+'</b><span><b>'+esc(a.it.name)+'</b> <span style="color:var(--muted)">with '+esc(displayName(a.p))+'</span></span>'+wBadge(a.it)+'</a>';
+  }).join(''):'<div class="empty">No warranties end in the next 90 days.</div>')+'</div></div>';
+  h+='<div class="section noprint"><a class="btn btn-line" href="#archived">Archived positions ('+arch+')</a></div>';
+  document.getElementById('app').innerHTML=h;
+  var q=document.getElementById('q');q.addEventListener('input',function(){searchAll(q.value);});
+}
+function searchAll(v){
+  var box=document.getElementById('results');v=v.trim().toLowerCase();
+  if(!v){box.innerHTML='';return;}
+  var rows=[];active().forEach(function(p){p.items.forEach(function(it){
+    var hay=[p.pos,p.name,p.title,it.name,it.desc,it.category,it.serial,it.assetTag,it.vendor,it.notes,it.location].join(' ').toLowerCase();
+    if(hay.indexOf(v)>-1)rows.push({p:p,it:it});});});
+  box.innerHTML='<div class="panel" style="margin-bottom:22px">'+(rows.length?rows.slice(0,80).map(function(r){
+    return '<a class="alert-row" href="#'+r.p.pos+'"><b style="color:'+OFF[r.p.office].c+'">'+esc(r.p.pos)+'</b><span><b>'+esc(r.it.name)+'</b> <span style="color:var(--muted)">with '+esc(displayName(r.p))+'</span></span><span class="badge '+catClass(r.it.category)+'">'+esc(r.it.category||'')+'</span></a>';
+  }).join('')+(rows.length>80?'<div class="empty">Showing the first 80 of '+rows.length+' matches. Add another word to narrow it down.</div>':''):'<div class="empty">Nothing matches “'+esc(v)+'”.</div>')+'</div>';
+}
+function viewOffice(k){
+  var o=OFF[k];var ps=active().filter(function(p){return p.office===k;}).sort(function(a,b){return a.pos<b.pos?-1:1;});
+  setBar([['All offices','#'],[o.name,'#'+k]],'<a class="btn btn-ghost hide-m" href="#print-'+k+'">Print '+k+' stickers</a>'+(isAdmin()?' <button class="btn btn-gold" id="addP">Add person</button>':''));
+  var it=0,v=0,st=0,sn=0;ps.forEach(function(p){var s=summary(p);it+=s.items;v+=s.value;st+=s.stick;sn+=s.soon;});var rcO=reqCounts(ps);
+  var h=localWarn()+'<section class="hero" style="--accent:'+o.c+'"><h1>'+o.name+'</h1><div class="sub">'+o.region+'. Scan a card’s code, or tap the card, to open that person’s full list.</div>'+
+  '<div class="stats"><div class="stat"><b>'+ps.length+'</b><span>sheets</span></div><div class="stat"><b>'+it+'</b><span>items</span></div>'+
+  '<div class="stat'+(sn?' alert':'')+'"><b>'+sn+'</b><span>warranties ending in 90 days</span></div><div class="stat"><b>'+st+'</b><span>stickers still needed</span></div>'+
+  '<div class="stat'+(rcO.pending?' alert':'')+'"><b>'+rcO.pending+'</b><span>requests waiting</span></div></div></section>';
+  h+='<div class="tags">'+ps.map(function(p){
+    var s=summary(p);
+    return '<a class="tag'+(isVacant(p)?' vacant':'')+'" style="--oc:'+o.c+'" href="#'+p.pos+'"><div><div class="pos">'+esc(p.pos)+'</div><div class="nm">'+esc(displayName(p))+'</div><div class="tt">'+esc(p.title||'')+'</div></div>'+
+      '<div class="qr"><canvas data-qr="'+esc(linkFor(p.pos))+'" data-px="240" aria-label="QR code for '+esc(p.pos)+'"></canvas></div>'+
+      '<div class="meta"><span><b>'+s.items+'</b> items</span>'+(s.stick?'<span class="flag">'+s.stick+' need stickers</span>':'')+(openReqs(p).length?'<span class="flag" style="color:var(--gpw)">'+openReqs(p).length+' request'+(openReqs(p).length>1?'s':'')+'</span>':'')+'</div></a>';
+  }).join('')+'</div>';
+  document.getElementById('app').innerHTML=h;paintQRs();
+  var ap=document.getElementById('addP');if(ap)ap.onclick=function(){addPerson(k);};
+}
+var FILTER='all';
+function viewPerson(pos){
+  var p=BYPOS[pos];var o=OFF[p.office]||{name:p.office,c:'var(--gold)',k:p.office};
+  setBar([['All offices','#'],[o.name,'#'+o.k],[pos,'#'+pos]],'<button class="btn btn-ghost hide-m" onclick="window.print()">Print or save PDF</button> '+(p.archived||!isAdmin()?'':'<button class="btn btn-gold" id="addI">Add item</button>'));
+  var s=summary(p),vac=/^vacant$/i.test(p.name);
+  var h=(p.archived?'<div class="banner-warn">'+esc(pos)+' was archived on '+fdate(p.archived.date)+'. It does not appear on the '+esc(o.name)+' dashboard. <button class="btn btn-line btn-sm" id="restP">Restore position</button></div>':'')+
+    '<section class="hero" style="--accent:'+o.c+'"><div class="person-head"><div><div class="pos">'+esc(pos)+'</div><h1>'+esc(displayName(p))+'</h1>'+
+    '<div class="sub">'+esc([p.title,o.name].filter(Boolean).join(', '))+(p.reviewed?'. Last reviewed '+fdate(p.reviewed):'')+'</div>'+
+    '<div class="stats"><div class="stat"><b>'+s.items+'</b><span>items</span></div><div class="stat"><b>'+s.war+'</b><span>under warranty</span></div>'+
+    '<div class="stat'+(s.soon||s.exp?' alert':'')+'"><b>'+(s.soon+s.exp)+'</b><span>warranties ending or expired</span></div><div class="stat"><b>'+s.stick+'</b><span>stickers needed</span></div></div>'+
+    (p.archived||!isAdmin()?'':'<div class="acts noprint"><button class="btn btn-line btn-sm" id="edP">Edit name or title</button>'+
+      (vac?'<button class="btn btn-line btn-sm" id="fillP">Assign new person</button>':(/-00$/.test(pos)?'':'<button class="btn btn-line btn-sm" id="depP">Person leaving</button>'))+
+      (vac?'<button class="btn btn-line btn-sm" id="archP">Archive position</button>':'')+
+      '<button class="btn btn-line btn-sm" id="revP">Mark reviewed today</button></div>')+
+    (p.former&&p.former.length?'<div class="sub" style="margin-top:10px">Previously: '+p.former.map(function(f){return esc(f.name)+' (left '+fdate(f.left)+')';}).join(', ')+'</div>':'')+
+    '</div><div class="bigqr"><canvas data-qr="'+esc(linkFor(pos))+'" data-px="360"></canvas><small>'+esc(pos)+'</small></div></div></section>';
+  h+=requestsSection(p);
+  var cats=[];p.items.forEach(function(it){if(it.category&&cats.indexOf(it.category)<0)cats.push(it.category);});
+  h+='<h3 class="noprint" style="font-size:17px;font-weight:800;margin:22px 0 10px">Assigned items</h3><div class="tools"><input id="pq" type="search" placeholder="Search this list" aria-label="Search this list"><div class="chipset" role="group" aria-label="Filter">'+
+     '<button class="chip" data-f="all">All</button><button class="chip" data-f="war">Warranty issues</button><button class="chip" data-f="stick">Needs sticker</button>'+
+     cats.map(function(c){return '<button class="chip" data-f="cat:'+esc(c)+'">'+esc(c)+'</button>';}).join('')+'</div></div>';
+  h+='<div class="items" id="items"></div>';
+  if(p.history&&p.history.length){
+    h+='<details class="hist"><summary>History: '+p.history.length+' item'+(p.history.length>1?'s':'')+' transferred, returned or retired</summary>'+p.history.map(function(x,i){
+      return '<div class="hrow"><b>'+esc(x.name)+'</b><span>'+esc(x.reason||'')+'</span><span>'+fdate(x.removed)+'</span><span>'+esc(x.to||x.removalNotes||'')+'</span>'+
+        (p.archived||!isAdmin()?'':'<button class="btn btn-line btn-sm hact noprint" data-restore="'+i+'">Restore</button>')+'</div>';}).join('')+'</details>';
+  }
+  h+='<p class="note noprint">'+(isAdmin()?'Tap an item for its details and to edit, transfer or archive it.':'Tap an item to see its details. Something wrong or missing? Use Request an item or contact the operations team.')+'</p>';
+  document.getElementById('app').innerHTML=h;paintQRs();
+  var on=function(id,fn){var e=document.getElementById(id);if(e)e.onclick=fn;};
+  on('addI',function(){addItem(pos);});on('edP',function(){editPerson(pos);});on('depP',function(){departPerson(pos);});
+  on('fillP',function(){fillPosition(pos);});on('restP',function(){restorePerson(pos);});
+  on('archP',function(){if(confirm('Archive '+pos+'? It will leave the dashboard, and you can restore it later.')){p.archived={date:today()};changed(pos+' archived.');location.hash=p.office;}});
+  on('revP',function(){p.reviewed=today();changed(pos+' marked reviewed.');});
+  wireRequests(p);
+  document.querySelectorAll('[data-restore]').forEach(function(b){b.onclick=function(){restoreItem(pos,+b.getAttribute('data-restore'));};});
+  FILTER=window.__keepFilter||'all';window.__keepFilter=null;
+  var pq=document.getElementById('pq');pq.addEventListener('input',function(){renderItems(p,pq.value);});
+  document.querySelectorAll('.chip').forEach(function(b){b.addEventListener('click',function(){FILTER=b.getAttribute('data-f');renderItems(p,pq.value);});});
+  renderItems(p,'');
+}
+function renderItems(p,q){
+  q=(q||'').trim().toLowerCase();
+  document.querySelectorAll('.chip').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-f')===FILTER?'true':'false');});
+  var list=p.items.filter(function(it){
+    if(FILTER==='war'){var w=wStatus(it);if(['soon','expired','nodate'].indexOf(w)<0)return false;}
+    if(FILTER==='stick'&&!stickerNeeded(it))return false;
+    if(FILTER.indexOf('cat:')===0&&it.category!==FILTER.slice(4))return false;
+    if(q){var hay=[it.name,it.desc,it.category,it.serial,it.assetTag,it.vendor,it.notes,it.location].join(' ').toLowerCase();if(hay.indexOf(q)<0)return false;}
+    return true;});
+  var h='<div class="ihead"><span>Item</span><span>Category</span><span>Location</span><span>Purchased</span><span class="num">Cost</span><span>Warranty</span></div>';
+  if(!p.items.length)h+='<div class="empty">Nothing is assigned to '+esc(p.pos)+' yet. Use Add item to record the first one.</div>';
+  else if(!list.length)h+='<div class="empty">No items match. Clear the search or choose All.</div>';
+  h+=list.map(function(it){
+    var t=total(it);
+    var det=[['Asset tag',it.assetTag],['Serial #',it.serial],['Condition',it.condition],['Status',it.status],['Vendor / order',it.vendor],['Quantity',it.qty],['Unit cost',money(it.unitCost)],['Funding',it.funding],
+      ['Date assigned',fdate(it.assigned)],['Warranty #',it.warrantyNo],['Warranty contact',it.warrantyProvider],['Sticker on item',it.stickerApplied||(total(it)>50?'Not yet':'')],['Employee confirmed',fdate(it.ack)],['Notes',it.notes]]
+      .filter(function(d){return d[1]!=null&&d[1]!=='';}).map(function(d){return '<div><span>'+d[0]+'</span>'+esc(d[1])+'</div>';}).join('');
+    if(it.link)det+='<div><span>Receipt</span><a href="'+esc(it.link)+'" target="_blank" rel="noopener">Open order</a></div>';
+    if(!det)det='<div>No extra details recorded.</div>';
+    var acts=p.archived||!isAdmin()?'':'<div class="acts noprint"><button class="btn btn-line btn-sm" data-a="edit" data-id="'+it.id+'">Edit</button><button class="btn btn-line btn-sm" data-a="xfr" data-id="'+it.id+'">Transfer</button>'+
+      (it.stickerApplied!=='Yes'&&t>50?'<button class="btn btn-line btn-sm" data-a="stk" data-id="'+it.id+'">Sticker is on</button>':'')+
+      '<button class="btn btn-danger btn-sm" data-a="arch" data-id="'+it.id+'">Archive</button></div>';
+    return '<div class="irow" tabindex="0" data-id="'+it.id+'"><div class="iname">'+esc(it.name)+(it.desc&&it.desc!==it.name?'<small>'+esc(it.desc)+'</small>':'')+'</div>'+
+      '<div class="c-cat">'+(it.category?'<span class="badge '+catClass(it.category)+'">'+esc(it.category)+'</span>':'')+'</div><div class="c-loc">'+esc(it.location||'')+'</div><div class="c-date">'+fdate(it.purchased)+'</div>'+
+      '<div class="num c-cost">'+(t!=null?money(t):'')+'</div><div class="c-war">'+wBadge(it)+'</div><div class="detail">'+det+acts+'</div></div>';
+  }).join('');
+  var box=document.getElementById('items');box.innerHTML=h;
+  box.querySelectorAll('.irow').forEach(function(r){
+    function tog(){r.classList.toggle('open');}
+    r.addEventListener('click',function(e){if(e.target.closest('a,button'))return;tog();});
+    r.addEventListener('keydown',function(e){if(e.target!==r)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});
+  });
+  box.querySelectorAll('[data-a]').forEach(function(b){b.onclick=function(e){e.stopPropagation();var id=b.getAttribute('data-id'),a=b.getAttribute('data-a');
+    if(a==='edit')editItem(p.pos,id);else if(a==='xfr')transferItem(p.pos,id);else if(a==='arch')archiveItem(p.pos,id);
+    else if(a==='stk'){var it=p.items.find(function(x){return x.id===id;});it.stickerApplied='Yes';window.__keepFilter=FILTER;changed('Sticker marked as on '+it.name+'.');}};});
+}
+function viewArchived(){
+  setBar([['All offices','#'],['Archived','#archived']],'');
+  var ps=PEOPLE.filter(function(p){return p.archived;}).sort(function(a,b){return a.pos<b.pos?-1:1;});
+  var h='<section class="hero"><h1>Archived positions</h1><div class="sub">Positions no longer on an office dashboard. Their items and history are kept here.</div></section><div class="panel">'+
+   (ps.length?ps.map(function(p){var s=summary(p);return '<div class="arch-row"><b>'+esc(p.pos)+'</b><a href="#'+p.pos+'"><b>'+esc(displayName(p))+'</b> <span style="color:var(--muted)">archived '+fdate(p.archived.date)+', '+s.items+' items</span></a>'+
+     '<a class="btn btn-line btn-sm" href="#'+p.pos+'">Open</a><button class="btn btn-line btn-sm" data-r="'+p.pos+'">Restore</button></div>';}).join(''):'<div class="empty">Nothing is archived. When someone leaves, open their page and choose Person leaving.</div>')+'</div>';
+  document.getElementById('app').innerHTML=h;
+  document.querySelectorAll('[data-r]').forEach(function(b){b.onclick=function(){restorePerson(b.getAttribute('data-r'));};});
+}
+function viewSettings(){
+  setBar([['All offices','#'],['Settings & backup','#settings']],'');
+  var g0=load(K_GH)||ghGuess();
+  var h='<section class="hero"><h1>Settings and backup</h1><div class="sub">Connect GitHub once on each computer or phone you edit from. Viewing and scanning never need this.</div></section>'+
+  (PREVIEW?'<div class="banner-warn">Saving to GitHub works once the site is on GitHub. In this preview you can still try backup and Excel export.</div>':'')+
+  '<div class="panel" style="padding:18px 20px"><h3 style="font-size:17px;margin-bottom:6px">Save changes to GitHub</h3>'+
+  '<p class="note" style="margin:0 0 12px">'+(gh()?'Connected to <b>'+esc(g0.owner+'/'+g0.repo)+'</b> on this device.':'Not connected on this device yet.')+'</p>'+
+  '<button class="btn btn-gold" id="ghBtn">'+(gh()?'Change connection':'Connect GitHub')+'</button> '+(gh()?'<button class="btn btn-line" id="ghOff">Disconnect this device</button>':'')+'</div>'+settingsRequestsPanel()+
+  '<div class="panel" style="padding:18px 20px;margin-top:16px"><h3 style="font-size:17px;margin-bottom:6px">Backup and export</h3>'+
+  '<p class="note" style="margin:0 0 12px">Download a backup at each quarterly check. Restoring replaces everything on this device; save afterwards to publish it.</p>'+
+  '<button class="btn btn-line" id="bk">Download backup (data.json)</button> <button class="btn btn-line" id="rs">Restore from backup</button> <button class="btn btn-line" id="xl">Export to Excel</button><p class="note" style="margin:10px 0 0">The Excel file mirrors the website: a Home tab, RAP, GPW and LFC dashboards, a tab for every position, All Items and Item History.</p>'+
+  '<input type="file" id="rsf" accept=".json,application/json" hidden></div>'+
+  (PREVIEW?'':'<div class="panel" style="padding:18px 20px;margin-top:16px"><h3 style="font-size:17px;margin-bottom:6px">Import from Excel</h3><p class="note" style="margin:0 0 12px">Only needed if you go back to editing in Excel. Importing replaces everything on the website.</p><a class="btn btn-line" href="publish.html">Import Excel files</a></div>');
+  document.getElementById('app').innerHTML=h;
+  document.getElementById('ghBtn').onclick=openGitHub;wireSettingsRequests();
+  var off=document.getElementById('ghOff');if(off)off.onclick=function(){store(K_GH,null);toast('This device is disconnected from GitHub.');route();renderSaveBar();};
+  document.getElementById('bk').onclick=function(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(DB,null,1)],{type:'application/json'}));a.download='FF_Inventory_Backup_'+today()+'.json';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},300);};
+  var rsf=document.getElementById('rsf');document.getElementById('rs').onclick=function(){rsf.click();};
+  rsf.onchange=function(){var f=rsf.files[0];if(!f)return;f.text().then(function(t){try{var d=JSON.parse(t);if(!d.people)throw 0;
+    if(!confirm('Replace all current data with this backup ('+d.people.length+' sheets, saved '+(d.generated||'unknown')+')?'))return;
+    DB=d;PEOPLE=d.people;normalize();changed('Backup restored. Save to publish it.');}catch(e){toast('That file is not an inventory backup.');}});};
+  document.getElementById('xl').onclick=exportExcel;
+}
+function openGitHub(){
+  var g0=load(K_GH)||ghGuess();
+  modal('Connect GitHub','Saving needs a GitHub token that can update this one repository. It is stored only on this device. <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create a token</a>: choose Only select repositories, pick this repository, and under Repository permissions set Contents to Read and write.',
+   '<div class="fgrid">'+fld('Your GitHub username','owner',g0.owner)+fld('Repository name','repo',g0.repo)+fld('Branch','branch',g0.branch||'main')+
+   fld('Token *','token',g0.token,'password',null,'full','Starts with github_pat_')+'</div>',
+   'Connect',function(fd){
+    var c={owner:g(fd,'owner'),repo:g(fd,'repo'),branch:g(fd,'branch')||'main',token:g(fd,'token')};
+    if(!c.owner||!c.repo||!c.token)return 'Fill in username, repository and token.';
+    store(K_GH,c);
+    ghFetch(c).then(function(){toast('Connected to '+c.owner+'/'+c.repo+'.');renderSaveBar();if(location.hash==='#settings')route();})
+      .catch(function(e){toast('Saved the connection, but GitHub did not answer: '+e.message);});
+   });
+}
+function viewPrint(k){
+  var ps=active().filter(function(p){return !k||p.office===k;}).sort(function(a,b){return a.pos<b.pos?-1:1;});
+  setBar([['All offices','#'],[k?k+' stickers':'All stickers','#print'+(k?'-'+k:'')]],'<button class="btn btn-gold" onclick="window.print()">Print stickers</button>');
+  var h=localWarn()+'<div class="noprint" style="margin-bottom:16px"><h1 style="font-size:24px;font-weight:800">'+(k?OFF[k].name+' stickers':'All stickers')+'</h1>'+
+    '<p class="note" style="max-width:640px">Each sticker prints 2 inches square. The simplest option is full-sheet sticker paper: print, then cut along the dashed lines. If you use pre-cut square labels, print one page on plain paper first and hold it against a label sheet to check the line-up. Set printer scaling to 100% (Actual size), and scan one sticker with your phone before printing the rest.</p>'+
+    '<div class="chipset" style="margin-top:12px"><a class="chip" href="#print">All</a>'+OFFICES.map(function(o){return '<a class="chip" href="#print-'+o.k+'">'+o.k+'</a>';}).join('')+'</div></div>';
+  h+='<div class="sheet">'+ps.map(function(p){
+    return '<div class="sticker"><canvas data-qr="'+esc(linkFor(p.pos))+'" data-px="400"></canvas><div class="sp1">'+esc(p.pos)+'</div><div class="sp2">'+esc(displayName(p))+'</div><div class="sp3">Foundation First inventory</div></div>';
+  }).join('')+'</div>';
+  document.getElementById('app').innerHTML=h;paintQRs();
+}
+function viewMissing(h){
+  setBar([['All offices','#'],['Not found','#']],'');
+  document.getElementById('app').innerHTML='<section class="hero"><h1>No sheet called '+esc(h)+'</h1><div class="sub">This code may belong to a position that was renumbered. Choose an office below.</div></section><div class="offices">'+
+    OFFICES.map(function(o){return '<a class="office" style="--oc:'+o.c+'" href="#'+o.k+'"><h2>'+o.name+'</h2><div class="go">Open '+o.k+' dashboard</div></a>';}).join('')+'</div>';
+}
+function route(keep){
+  var raw=location.hash.replace(/^#/,''),m=raw.match(/^([A-Za-z]{3}-\d{2})\/request\/([A-Za-z0-9_-]+)$/);
+  if(m)return importRequestLink(m[1].toUpperCase(),m[2]);
+  var h=decodeURIComponent(raw).trim().toUpperCase();
+  var y=window.scrollY;
+  if(!h)viewHome();
+  else if(h==='PRINT')viewPrint('');
+  else if(/^PRINT-(RAP|GPW|LFC)$/.test(h))viewPrint(h.slice(6));
+  else if(h==='ARCHIVED')viewArchived();
+  else if(h==='SETTINGS')viewSettings();
+  else if(OFF[h])viewOffice(h);
+  else if(BYPOS[h])viewPerson(h);
+  else viewMissing(h);
+  window.scrollTo(0,keep===true?y:0);
+}
+function normalize(){
+  PEOPLE=(DB.people||[]).filter(function(p){return p.pos;});DB.people=PEOPLE;
+  PEOPLE.forEach(function(p){p.pos=String(p.pos).toUpperCase();p.items=p.items||[];p.history=p.history||[];p.requests=p.requests||[];p.items.forEach(function(it){if(!it.id)it.id=uid();});});
+  index();
+}
+function start(db,dirty){
+  DB=db;normalize();DIRTY=!!dirty;renderSaveBar();
+  window.addEventListener('hashchange',function(){route();});route();
+}
+(function boot(){
+  var draft=load(K_DRAFT);
+  var useDraft=function(base){
+    if(draft&&draft.db&&draft.db.people){
+      if(PREVIEW||confirm('You have changes from '+draft.savedAt+' that were not saved to GitHub. Keep working with them?\n\nOK keeps them. Cancel discards them.'))return start(draft.db,true);
+      store(K_DRAFT,null);
+    }
+    start(base,false);
+  };
+  if(PREVIEW)return useDraft(window.__DATA__);
+  var g0=gh();
+  var pub=function(){return fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();});};
+  (g0?ghFetch(g0).catch(pub):pub()).then(useDraft).catch(function(){
+    if(draft&&draft.db)return start(draft.db,true);
+    setBar([['Inventory','#']],'');
+    document.getElementById('app').innerHTML='<section class="hero"><h1>The inventory data didn’t load</h1><div class="sub">'+
+      (location.protocol==='file:'?'Browsers block data files opened straight from your computer. Upload the files to GitHub and open the GitHub Pages address.':'Check that data.json is in the same folder as index.html in your GitHub repository, then refresh.')+'</div></section>';
+  });
+})();
+
+/* ---------- item requests ---------- */
+var RSTAT={Pending:'w-soon',Approved:'w-ok','Not approved':'w-exp',Ordered:'c-elec',Received:'c-misc'};
+function isAdmin(){return PREVIEW||!!gh();}
+function settings(){DB.settings=DB.settings||{};return DB.settings;}
+function reqBadge(r){return '<span class="badge '+(RSTAT[r.status]||'c-misc')+'">'+esc(r.status)+'</span>';}
+function openReqs(p){return (p.requests||[]).filter(function(r){return r.status==='Pending'||r.status==='Approved'||r.status==='Ordered';});}
+function reqCounts(list){var c={pending:0,approved:0,ordered:0};list.forEach(function(p){(p.requests||[]).forEach(function(r){if(r.status==='Pending')c.pending++;if(r.status==='Approved')c.approved++;if(r.status==='Ordered')c.ordered++;});});return c;}
+function b64url(s){return b64enc(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function unb64url(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return b64dec(s);}
+
+function requestForm(p,r){
+  r=r||{by:/^vacant$/i.test(p.name)?'':p.name,qty:1};
+  return '<div class="fgrid">'+fld('Your name *','by',r.by,'text',null,'full')+
+    fld('What do you need? *','item',r.item,'text',null,'full','For example: Logitech wireless mouse')+
+    fld('Link to the item *','link',r.link,'url',null,'full','Paste the Amazon or store page')+
+    fld('Quantity','qty',r.qty,'number')+fld('Price each ($)','cost',r.cost,'number',null,'','From the link, if you know it')+
+    fld('Needed by','needed',r.needed,'date')+fld('Funding source','funding',r.funding,'select',FUNDS,'','Leave blank if unsure')+
+    fld('Why do you need it?','reason',r.reason,'textarea',null,'full')+'</div>';
+}
+function readReq(fd,base){
+  var r=Object.assign({},base||{});
+  ['by','item','link','needed','funding','reason'].forEach(function(k){var v=g(fd,k);if(v)r[k]=v;else delete r[k];});
+  ['qty','cost'].forEach(function(k){var v=g(fd,k);if(v!==''&&!isNaN(+v))r[k]=+v;else delete r[k];});
+  if(!r.id)r.id='r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  if(!r.submitted)r.submitted=today();
+  if(!r.status)r.status='Pending';
+  return r;
+}
+function reqCheck(fd){if(!g(fd,'by'))return 'Enter your name.';if(!g(fd,'item'))return 'Say what you need.';if(!g(fd,'link'))return 'Paste a link to the item so it can be ordered.';return null;}
+function newRequest(pos){
+  var p=BYPOS[pos];
+  if(isAdmin()){
+    modal('Log a request for '+pos,esc(displayName(p))+'. It starts as Pending until you approve it or not.'+(PREVIEW?' To see what staff see, use <b>Try the staff version</b>.':''),requestForm(p),'Add request',function(fd){
+      var e=reqCheck(fd);if(e)return e;var r=readReq(fd);p.requests=p.requests||[];p.requests.push(r);changed('Request added to '+pos+'.');
+    });
+    if(PREVIEW){var f=document.querySelector('#mf .mfoot');var b=document.createElement('button');b.type='button';b.className='btn btn-line';b.textContent='Try the staff version';
+      b.onclick=function(){closeModal();staffRequest(pos);};f.insertBefore(b,f.firstChild);}
+  } else staffRequest(pos);
+}
+function staffRequest(pos){
+  var p=BYPOS[pos],to=settings().requestEmail;
+  if(!to&&!PREVIEW){modal('Requests aren’t set up yet','Ask the operations team to turn on item requests in Settings.','', 'OK',function(){});return;}
+  modal('Request an item for '+pos,'Fill this in and choose Send. Your email app opens with everything filled in; just press Send there.',requestForm(p),'Send request',function(fd){
+    var e=reqCheck(fd);if(e)return e;
+    var r=readReq(fd);var code=b64url(JSON.stringify(r));
+    var addLink=baseURL()+'#'+pos+'/request/'+code;
+    var lines=['New inventory request','','Position: '+pos+' ('+displayName(p)+')','Requested by: '+r.by,'Item: '+r.item,'Link: '+r.link,'Quantity: '+(r.qty||1)];
+    if(r.cost)lines.push('Price each: '+money(r.cost));if(r.needed)lines.push('Needed by: '+fdate(r.needed));if(r.funding)lines.push('Funding: '+r.funding);if(r.reason)lines.push('Why: '+r.reason);
+    lines.push('','To add this to the inventory tracker, open:',addLink);
+    var href='mailto:'+encodeURIComponent(to||'operations@example.org')+'?subject='+encodeURIComponent('Inventory request – '+pos+' – '+r.item)+'&body='+encodeURIComponent(lines.join('\n'));
+    window.__lastMailto=href;
+    if(PREVIEW){toast('In the live site, your email app opens now. Here is the link it would include.');setTimeout(function(){location.hash=pos+'/request/'+code;},600);return;}
+    var ml=document.createElement('a');ml.href=href;ml.style.display='none';document.body.appendChild(ml);ml.click();setTimeout(function(){ml.remove();},1000);
+    toast('Your email app should open with the request filled in. Press Send there to submit it.');
+  });
+}
+function importRequestLink(pos,code){
+  var p=BYPOS[pos];var r;
+  try{r=JSON.parse(unb64url(code));}catch(e){toast('That request link is damaged. Ask for it to be sent again.');location.hash=pos;return;}
+  if(!p){viewMissing(pos);return;}
+  history.replaceState(null,'','#'+pos);viewPerson(pos);
+  if(!isAdmin()){toast('Request links are for the operations team. Open it on a device connected to GitHub.');return;}
+  if((p.requests||[]).some(function(x){return x.id===r.id;})){toast('This request is already in '+pos+'’s list.');return;}
+  modal('Add this request to '+pos+'?',esc(r.by||'')+' asked for this on '+fdate(r.submitted)+'.',
+    '<div class="detail" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">'+
+    [['Item',r.item],['Quantity',r.qty||1],['Price each',money(r.cost)],['Needed by',fdate(r.needed)],['Funding',r.funding],['Why',r.reason]].filter(function(x){return x[1];}).map(function(x){return '<div><span>'+x[0]+'</span>'+esc(x[1])+'</div>';}).join('')+
+    (r.link?'<div style="grid-column:1/-1"><span>Link</span><a href="'+esc(r.link)+'" target="_blank" rel="noopener">'+esc(r.link)+'</a></div>':'')+'</div>',
+    'Add as Pending',function(){r.status='Pending';p.requests=p.requests||[];p.requests.push(r);changed('Request added to '+pos+'. Approve it or not from their page.');});
+}
+function decideReq(pos,id,ok){
+  var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});
+  modal((ok?'Approve ':'Don’t approve ')+r.item,ok?'Next you’ll order it and mark it Ordered.':'The note is shown on '+esc(pos)+'’s page, so keep it short and clear.',
+   '<div class="fgrid">'+fld('Decided by','decidedBy',settings().approver||'','text')+fld('Date','decided',today(),'date')+fld(ok?'Note (optional)':'Reason *','decisionNote','','textarea',null,'full')+'</div>',
+   ok?'Approve':'Not approved',function(fd){
+    if(!ok&&!g(fd,'decisionNote'))return 'Add a short reason.';
+    r.status=ok?'Approved':'Not approved';r.decided=g(fd,'decided')||today();r.decidedBy=g(fd,'decidedBy')||null;r.decisionNote=g(fd,'decisionNote')||null;
+    if(r.decidedBy)settings().approver=r.decidedBy;
+    changed(r.item+(ok?' approved.':' marked not approved.'));
+   },!ok);
+}
+function orderReq(pos,id){
+  var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});
+  modal('Mark '+r.item+' as ordered','',
+   '<div class="fgrid">'+fld('Date ordered','ordered',today(),'date')+fld('Vendor / order #','orderNo',r.orderNo,'text')+
+   fld('Actual price each ($)','actualCost',r.actualCost||r.cost,'number')+fld('Funding source','funding',r.funding,'select',FUNDS)+'</div>',
+   'Mark ordered',function(fd){
+    r.status='Ordered';r.ordered=g(fd,'ordered')||today();r.orderNo=g(fd,'orderNo')||null;var c=g(fd,'actualCost');r.actualCost=c!==''&&!isNaN(+c)?+c:null;r.funding=g(fd,'funding')||r.funding||null;
+    changed(r.item+' marked ordered.');
+   });
+}
+function receiveReq(pos,id){
+  var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});
+  var draft={name:r.item,link:r.link,qty:r.qty||1,unitCost:r.actualCost!=null?r.actualCost:r.cost,vendor:r.orderNo,purchased:r.ordered,assigned:today(),funding:r.funding,status:'Assigned',condition:'New',notes:'Requested by '+(r.by||'')+' on '+fdate(r.submitted)};
+  modal('Received: add '+r.item+' to '+pos,'Check the details, add the serial number if it has one, then save. The request closes as Received.',itemForm(draft),'Add to inventory',function(fd){
+    if(!g(fd,'name'))return 'Enter an item name.';
+    var it=readItem(fd);p.items.push(it);r.status='Received';r.received=today();r.itemId=it.id;
+    changed(it.name+' added to '+pos+'.'+(total(it)>50?' It needs a '+pos+' sticker.':''));
+  });
+}
+function reopenReq(pos,id){var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});r.status='Pending';delete r.decided;delete r.decisionNote;changed(r.item+' set back to Pending.');}
+function deleteReq(pos,id){var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});if(!confirm('Delete the request for '+r.item+'? This can’t be undone.'))return;p.requests.splice(p.requests.indexOf(r),1);changed('Request deleted.');}
+function editReq(pos,id){
+  var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});
+  modal('Edit request','',requestForm(p,r),'Save',function(fd){var e=reqCheck(fd);if(e)return e;p.requests[p.requests.indexOf(r)]=readReq(fd,r);changed('Request updated.');});
+}
+function reqRow(p,r){
+  var adm=isAdmin()&&!p.archived,acts='';
+  if(adm){
+    if(r.status==='Pending')acts='<button class="btn btn-gold btn-sm" data-q="ok" data-id="'+r.id+'">Approve</button><button class="btn btn-danger btn-sm" data-q="no" data-id="'+r.id+'">Not approved</button><button class="btn btn-line btn-sm" data-q="edit" data-id="'+r.id+'">Edit</button>';
+    else if(r.status==='Approved')acts='<button class="btn btn-gold btn-sm" data-q="order" data-id="'+r.id+'">Mark ordered</button><button class="btn btn-line btn-sm" data-q="reopen" data-id="'+r.id+'">Back to pending</button>';
+    else if(r.status==='Ordered')acts='<button class="btn btn-gold btn-sm" data-q="recv" data-id="'+r.id+'">Received: add to inventory</button>';
+    else acts='<button class="btn btn-line btn-sm" data-q="reopen" data-id="'+r.id+'">Reopen</button>';
+    acts+='<button class="btn btn-line btn-sm" data-q="del" data-id="'+r.id+'">Delete</button>';
+  }
+  var meta=['Asked by '+(r.by||'unknown')+' on '+fdate(r.submitted)];
+  if(r.qty&&r.qty!==1)meta.push('Qty '+r.qty);if(r.cost)meta.push(money(r.cost)+' each');if(r.needed)meta.push('needed by '+fdate(r.needed));
+  var dec='';
+  if(r.status==='Approved'||r.status==='Not approved')dec=(r.status==='Approved'?'Approved':'Not approved')+(r.decidedBy?' by '+esc(r.decidedBy):'')+' on '+fdate(r.decided)+(r.decisionNote?': '+esc(r.decisionNote):'');
+  if(r.status==='Ordered')dec='Ordered '+fdate(r.ordered)+(r.orderNo?' ('+esc(r.orderNo)+')':'');
+  if(r.status==='Received')dec='Received '+fdate(r.received)+' and added to the list';
+  return '<div class="rq"><div class="rq-main"><div class="rq-top"><b>'+esc(r.item)+'</b> '+reqBadge(r)+'</div>'+
+    '<div class="rq-meta">'+esc(meta.join(', '))+'</div>'+
+    (r.link?'<div class="rq-meta"><a href="'+esc(r.link)+'" target="_blank" rel="noopener">Open item link</a></div>':'')+
+    (r.reason?'<div class="rq-meta">Why: '+esc(r.reason)+'</div>':'')+(dec?'<div class="rq-dec">'+dec+'</div>':'')+'</div>'+
+    (acts?'<div class="acts noprint">'+acts+'</div>':'')+'</div>';
+}
+function requestsSection(p){
+  var rq=(p.requests||[]).slice().reverse(),open=rq.filter(function(r){return ['Pending','Approved','Ordered'].indexOf(r.status)>-1;}),closed=rq.filter(function(r){return open.indexOf(r)<0;});
+  var h='<div class="reqs"><div class="reqs-head"><h3>Item requests'+(open.length?' <span class="badge w-soon">'+open.length+' open</span>':'')+'</h3>'+
+    (p.archived?'':'<button class="btn btn-gold btn-sm noprint" id="reqBtn">Request an item</button>')+'</div>';
+  if(!rq.length)h+='<div class="empty" style="padding:6px 0 4px">No requests yet. Need something for your work? Choose Request an item and paste a link.</div>';
+  h+=open.map(function(r){return reqRow(p,r);}).join('');
+  if(closed.length)h+='<details class="rq-closed"><summary>Closed requests ('+closed.length+')</summary>'+closed.map(function(r){return reqRow(p,r);}).join('')+'</details>';
+  return h+'</div>';
+}
+function wireRequests(p){
+  var b=document.getElementById('reqBtn');if(b)b.onclick=function(){newRequest(p.pos);};
+  document.querySelectorAll('[data-q]').forEach(function(x){x.onclick=function(){var id=x.getAttribute('data-id'),a=x.getAttribute('data-q');
+    ({ok:function(){decideReq(p.pos,id,true);},no:function(){decideReq(p.pos,id,false);},edit:function(){editReq(p.pos,id);},order:function(){orderReq(p.pos,id);},
+      recv:function(){receiveReq(p.pos,id);},reopen:function(){reopenReq(p.pos,id);},del:function(){deleteReq(p.pos,id);}})[a]();};});
+}
+function homeRequestsPanel(){
+  var rows=[];active().forEach(function(p){(p.requests||[]).forEach(function(r){if(['Pending','Approved','Ordered'].indexOf(r.status)>-1)rows.push({p:p,r:r});});});
+  var rank={Pending:0,Approved:1,Ordered:2};rows.sort(function(a,b){return rank[a.r.status]-rank[b.r.status]||((a.r.submitted||'')<(b.r.submitted||'')?-1:1);});
+  return '<div class="section"><h3>Open item requests</h3><div class="panel">'+(rows.length?rows.map(function(x){
+    return '<a class="alert-row" href="#'+x.p.pos+'"><b style="color:'+OFF[x.p.office].c+'">'+esc(x.p.pos)+'</b><span><b>'+esc(x.r.item)+'</b> <span style="color:var(--muted)">for '+esc(displayName(x.p))+', asked '+fdate(x.r.submitted)+'</span></span>'+reqBadge(x.r)+'</a>';
+  }).join(''):'<div class="empty">No open requests.</div>')+'</div></div>';
+}
+function settingsRequestsPanel(){
+  var s=settings();
+  return '<div class="panel" style="padding:18px 20px;margin-top:16px"><h3 style="font-size:17px;margin-bottom:6px">Item requests</h3>'+
+   '<p class="note" style="margin:0 0 12px">Staff choose Request an item on their page. Their email app opens a message to this address with the details and a link that adds the request to the tracker in one click.</p>'+
+   '<div class="fgrid" style="max-width:560px"><div class="fld"><label for="reqEmail">Send requests to</label><input id="reqEmail" type="email" value="'+esc(s.requestEmail||'')+'" placeholder="you@foundationfirst.org"></div>'+
+   '<div class="fld"><label for="reqAppr">Default approver name</label><input id="reqAppr" type="text" value="'+esc(s.approver||'')+'"></div></div>'+
+   '<div style="margin-top:12px"><button class="btn btn-line" id="reqSave">Save request settings</button></div></div>';
+}
+function wireSettingsRequests(){
+  var b=document.getElementById('reqSave');if(!b)return;
+  b.onclick=function(){var e=document.getElementById('reqEmail').value.trim(),a=document.getElementById('reqAppr').value.trim();
+    if(e&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){toast('That email address doesn’t look right.');return;}
+    var s=settings();s.requestEmail=e||undefined;s.approver=a||undefined;changed('Request settings saved.'+(PREVIEW?'':' Save to GitHub to turn them on for staff.'));};
+}
+
+/* ---------- Excel export (mirrors the website) ---------- */
+function exportExcel(){
+  if(!window.ExcelJS){toast('The Excel exporter is still loading. Try again in a moment.');return;}
+  toast('Building the Excel file…');
+  var NAVY='FF0D1B2A',NAVY2='FF1A2D40',GOLD='FFC9A84C',GOLD2='FFE8C76A',PAPER='FFF0EDE8',GRAYTX='FF8FA3B8',LINE='FFE5E7EB',ALT='FFF9FAFB',AUTO='FFF3F4F6';
+  var OC={RAP:'FF0F8A5F',GPW:'FF1B6CA8',LFC:'FFD9731A'};
+  var CATF={'c-elec':['FFDBEAFE','FF1E40AF'],'c-acc':['FFD1FAE5','FF065F46'],'c-furn':['FFFEF3C7','FF78350F'],'c-stor':['FFEDE9FE','FF4C1D95'],'c-sup':['FFFCE7F3','FF9D174D'],'c-prog':['FFE0F2FE','FF075985'],'c-misc':['FFF3F4F6','FF4B5563']};
+  var wb=new ExcelJS.Workbook();wb.creator='Foundation First Inventory';wb.created=new Date();
+  var F=function(o){return Object.assign({name:'Arial',size:10},o||{});};
+  var fill=function(c){return {type:'pattern',pattern:'solid',fgColor:{argb:c}};};
+  var thin={style:'thin',color:{argb:LINE}},box={top:thin,left:thin,bottom:thin,right:thin};
+  var d=function(s){if(!s)return null;var p=String(s).slice(0,10).split('-');return p.length===3?new Date(Date.UTC(+p[0],+p[1]-1,+p[2])):null;};
+  var band=function(ws,r1,r2,c1,c2,color){for(var r=r1;r<=r2;r++)for(var c=c1;c<=c2;c++)ws.getCell(r,c).fill=fill(color);};
+  var ORD={RAP:1,GPW:2,LFC:3};var sorted=PEOPLE.slice().sort(function(a,b){var x=(ORD[a.office]||9)-(ORD[b.office]||9);return x||(a.pos<b.pos?-1:1);});
+  var act=sorted.filter(function(p){return !p.archived;}),arch=sorted.filter(function(p){return p.archived;});
+  var wsName=function(p){return p.pos+(p.archived?' (arch)':'');};
+  var wsLink=function(p){return "#'"+wsName(p)+"'!A1";};
+  var expDate=new Date();
+
+  /* columns for person tabs and All Items */
+  var COLS=[['Asset Tag','assetTag',12],['Item','name',28],['Category','category',22],['Condition','condition',12],['Location','location',14],['Description / Model','desc',32],
+    ['Serial #','serial',14],['Vendor / Order #','vendor',22],['Purchased','purchased',12,'date'],['Assigned','assigned',12,'date'],['Qty','qty',6],['Unit Cost','unitCost',11,'money'],
+    ['Total',null,11,'total'],['Funding','funding',16],['Receipt Link','link',14,'link'],['Warranty?','warranty',10],['Warranty #','warrantyNo',14],['Warranty Contact','warrantyProvider',20],
+    ['Warranty Exp.','warrantyExp',12,'date'],['Warranty Status',null,14,'wstat'],['Sticker Needed',null,10,'stick'],['Sticker On?','stickerApplied',10],['Status','status',11],['Employee Confirmed','ack',13,'date'],['Notes','notes',30]];
+  var L=function(n){var s='';while(n>0){var m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26);}return s;};
+  var ci=function(key){for(var i=0;i<COLS.length;i++)if(COLS[i][3]===key||COLS[i][1]===key)return i;};
+  function writeItemRow(ws,r,c0,it,alt){
+    var cl=function(k){return L(c0+ci(k));};
+    COLS.forEach(function(col,i){
+      var cell=ws.getCell(r,c0+i),t=col[3],v=col[1]?it[col[1]]:null;
+      if(t==='date')v=d(v);
+      if(t==='total'){var tv=total(it);cell.value={formula:'IF(AND(ISNUMBER('+cl('qty')+r+'),ISNUMBER('+cl('unitCost')+r+')),'+cl('qty')+r+'*'+cl('unitCost')+r+',"")',result:tv==null?'':tv};}
+      else if(t==='wstat'){var W=cl('warranty')+r,X=cl('warrantyExp')+r;var ws_={active:'Active',soon:'Expiring soon',expired:'Expired',nodate:'Missing date',none:'No warranty',unknown:'Unknown'}[wStatus(it)];
+        cell.value={formula:'IF('+W+'="Yes",IF('+X+'="","Missing date",IF('+X+'<TODAY(),"Expired",IF('+X+'-TODAY()<=90,"Expiring soon","Active"))),IF('+W+'="No","No warranty","Unknown"))',result:ws_};}
+      else if(t==='stick'){var T=cl('total')+r,S=cl('stickerApplied')+r;cell.value={formula:'IF(AND(ISNUMBER('+T+'),'+T+'>50),IF('+S+'="Yes","On","Needed"),"")',result:total(it)>50?(it.stickerApplied==='Yes'?'On':'Needed'):''};}
+      else if(t==='link'&&v){cell.value={text:'Open order',hyperlink:v};cell.font=F({color:{argb:'FF1B6CA8'},underline:true});}
+      else if(v!=null&&v!=='')cell.value=v;
+      if(t==='date')cell.numFmt='mm/dd/yyyy';
+      if(t==='money'||t==='total')cell.numFmt='$#,##0.00';
+      if(!(t==='link'&&v))cell.font=F(col[1]==='name'?{bold:true,color:{argb:NAVY}}:{});
+      cell.border=box;cell.alignment={vertical:'middle',wrapText:col[1]==='notes'||col[1]==='desc'};
+      cell.fill=fill(['total','wstat','stick'].indexOf(t)>-1?AUTO:(alt?ALT:'FFFFFFFF'));
+      if(col[1]==='category'&&v){var cc=CATF[catClass(v)];cell.fill=fill(cc[0]);cell.font=F({bold:true,size:9,color:{argb:cc[1]}});cell.alignment={horizontal:'center',vertical:'middle'};}
+    });
+  }
+  function statusRules(ws,ref){
+    var first=ref.split(':')[0];
+    [['Expired','FFFCEBEB','FFB91C1C'],['Expiring soon','FFFEF3C7','FFB45309'],['Active','FFD1FAE5','FF065F46'],['Missing date','FFFEF3C7','FFB45309']].forEach(function(x){
+      ws.addConditionalFormatting({ref:ref,rules:[{type:'expression',formulae:[first+'="'+x[0]+'"'],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:x[1]}},font:{bold:true,color:{argb:x[2]}}}}]});
+    });
+  }
+  function stickRules(ws,ref){
+    var first=ref.split(':')[0];
+    ws.addConditionalFormatting({ref:ref,rules:[{type:'expression',formulae:[first+'="Needed"'],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:'FFFEF3C7'}},font:{bold:true,color:{argb:'FFB45309'}}}},
+      {type:'expression',formulae:[first+'="On"'],style:{font:{bold:true,color:{argb:'FF065F46'}}}}]});
+  }
+  function header(ws,r,c0,labels,color){
+    labels.forEach(function(h,i){var c=ws.getCell(r,c0+i);c.value=h;c.font=F({bold:true,size:9,color:{argb:'FFFFFFFF'}});c.fill=fill(color||NAVY2);
+      c.alignment={horizontal:'center',vertical:'middle',wrapText:true};c.border={bottom:{style:'medium',color:{argb:GOLD}}};});
+    ws.getRow(r).height=30;
+  }
+  function stat(ws,r,c,label,formula,result,colorOverride){
+    ws.mergeCells(r,c,r,c+1);ws.mergeCells(r+1,c,r+1,c+1);
+    var v=ws.getCell(r,c);v.value={formula:formula,result:result};v.font=F({bold:true,size:18,color:{argb:colorOverride||GOLD2}});v.alignment={horizontal:'left'};
+    var l=ws.getCell(r+1,c);l.value=label;l.font=F({size:9,color:{argb:GRAYTX}});
+  }
+
+  var nAct=act.reduce(function(n,p){return n+p.items.length;},0);
+  var allLast=Math.max(3+nAct,4);
+  var AI=function(k){return "'All Items'!$"+L(5+ci(k))+"$4:$"+L(5+ci(k))+"$"+allLast;};
+  var AIpos="'All Items'!$A$4:$A$"+allLast,AIoff="'All Items'!$D$4:$D$"+allLast;
+
+  /* ---- Home ---- */
+  var home=wb.addWorksheet('Home',{properties:{tabColor:{argb:NAVY}},views:[{showGridLines:false}]});
+  [3,24,26,12,14,18,18,14,14,3].forEach(function(w,i){home.getColumn(i+1).width=w;});
+  home.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0};
+  band(home,1,6,1,10,NAVY);
+  home.getCell('B2').value='Foundation First inventory';home.getCell('B2').font=F({bold:true,size:22,color:{argb:'FFFFFFFF'}});
+  home.getCell('B3').value='Exported from the inventory website on '+fdate(today())+'. The website is the master copy; this file is a snapshot.';home.getCell('B3').font=F({size:10,color:{argb:GRAYTX}});
+  var homeSum=act.reduce(function(a,p){var s=summary(p);a.items+=s.items;a.soon+=s.soon+s.exp;a.stick+=s.stick;return a;},{items:0,soon:0,stick:0});
+  stat(home,4,2,'sheets','COUNTA(\'RAP\'!B6:B200)+COUNTA(\'GPW\'!B6:B200)+COUNTA(\'LFC\'!B6:B200)',act.length);
+  stat(home,4,4,'items','COUNTA('+AIpos+')',homeSum.items);
+  var rLast=3+Math.max(1,sorted.reduce(function(n,p){return n+(p.requests||[]).length;},0));
+  stat(home,4,8,'requests waiting for approval','COUNTIF(\'Requests\'!$K$4:$K$'+rLast+',"Pending")',reqCounts(act).pending,reqCounts(act).pending?'FFFCA5A5':null);
+  stat(home,4,6,'warranties ending or expired','COUNTIF('+AI('wstat')+',"Expiring soon")+COUNTIF('+AI('wstat')+',"Expired")',homeSum.soon,homeSum.soon?'FFFCA5A5':null);
+  home.mergeCells('B8:G8');home.getCell('B8').value='Offices';home.getCell('B8').font=F({bold:true,size:13,color:{argb:NAVY}});
+  header(home,9,2,['Office','Region','People','Items','Warranty issues','Stickers needed']);
+  OFFICES.forEach(function(o,i){
+    var r=10+i,ps=act.filter(function(p){return p.office===o.k;}),it=0,wi=0,st=0;ps.forEach(function(p){var s=summary(p);it+=s.items;wi+=s.soon+s.exp;st+=s.stick;});
+    var staff=ps.filter(function(p){return !/-00$/.test(p.pos)&&!isVacant(p);}).length;
+    var vals=[{text:o.name,hyperlink:"#'"+o.k+"'!A1"},o.region,staff,
+      {formula:'COUNTIF('+AIoff+',"'+o.k+'")',result:it},
+      {formula:'COUNTIFS('+AIoff+',"'+o.k+'",'+AI('wstat')+',"Expiring soon")+COUNTIFS('+AIoff+',"'+o.k+'",'+AI('wstat')+',"Expired")',result:wi},
+      {formula:'COUNTIFS('+AIoff+',"'+o.k+'",'+AI('stick')+',"Needed")',result:st}];
+    vals.forEach(function(v,j){var c=home.getCell(r,2+j);c.value=v;c.border=box;c.font=F(j===0?{bold:true,color:{argb:OC[o.k]},underline:true}:{});c.alignment={vertical:'middle',horizontal:j>1?'center':'left'};});
+    home.getCell(r,2).border={left:{style:'thick',color:{argb:OC[o.k]}},top:thin,bottom:thin,right:thin};
+    home.getRow(r).height=22;
+  });
+  var hr=15;
+  home.mergeCells('B'+hr+':G'+hr);home.getCell('B'+hr).value='Warranties needing attention (at export)';home.getCell('B'+hr).font=F({bold:true,size:13,color:{argb:NAVY}});
+  header(home,hr+1,2,['Position','Item','With','','Warranty ends','Status']);
+  var al=[];act.forEach(function(p){p.items.forEach(function(it){var w=wStatus(it);if(w==='soon'||w==='expired'||w==='nodate')al.push([p,it,w]);});});
+  al.sort(function(a,b){return (a[1].warrantyExp||'9')<(b[1].warrantyExp||'9')?-1:1;});
+  if(!al.length){home.mergeCells('B'+(hr+2)+':G'+(hr+2));home.getCell('B'+(hr+2)).value='No warranties end in the next 90 days.';home.getCell('B'+(hr+2)).font=F({italic:true,color:{argb:'FF6B7280'}});}
+  al.forEach(function(a,i){var r=hr+2+i;home.mergeCells(r,4,r,5);
+    [{text:a[0].pos,hyperlink:wsLink(a[0])},a[1].name,displayName(a[0]),null,d(a[1].warrantyExp),{soon:'Expiring soon',expired:'Expired',nodate:'Missing date'}[a[2]]].forEach(function(v,j){if(j===3)return;var c=home.getCell(r,2+j);c.value=v;c.border=box;c.font=F(j===0?{bold:true,color:{argb:OC[a[0].office]}}:{});if(j===4)c.numFmt='mm/dd/yyyy';});});
+  var nr=hr+3+Math.max(al.length,1);
+  home.mergeCells('B'+nr+':G'+nr);
+  home.getCell('B'+nr).value='Tabs: Home · RAP / GPW / LFC office dashboards · one tab per position (click a position to jump to it) · All Items · Item History · Requests'+(arch.length?' · Archived':'')+'.';
+  home.getCell('B'+nr).font=F({size:9,italic:true,color:{argb:'FF6B7280'}});
+
+  /* ---- Office dashboards ---- */
+  OFFICES.forEach(function(o){
+    var ws=wb.addWorksheet(o.k,{properties:{tabColor:{argb:OC[o.k]}},views:[{state:'frozen',ySplit:5,showGridLines:false}]});
+    [3,10,30,40,9,15,15,14,44].forEach(function(w,i){ws.getColumn(i+1).width=w;});
+    band(ws,1,3,1,9,NAVY);
+    for(var c=1;c<=9;c++)ws.getCell(3,c).border={bottom:{style:'thick',color:{argb:OC[o.k]}}};
+    ws.getCell('B1').value=o.name;ws.getCell('B1').font=F({bold:true,size:20,color:{argb:'FFFFFFFF'}});
+    ws.getCell('B2').value=o.region+'. Click a position to open its tab. The QR link column is what each sticker opens.';ws.getCell('B2').font=F({size:10,color:{argb:GRAYTX}});
+    header(ws,5,2,['Position','Name','Title','Items','Warranty issues','Stickers needed','Last reviewed','QR / website link']);
+    act.filter(function(p){return p.office===o.k;}).forEach(function(p,i){
+      var r=6+i,s=summary(p),alt=i%2===1;
+      var vals=[{text:p.pos,hyperlink:wsLink(p)},displayName(p),p.title||'',
+        {formula:'COUNTIF('+AIpos+',B'+r+')',result:s.items},
+        {formula:'COUNTIFS('+AIpos+',B'+r+','+AI('wstat')+',"Expiring soon")+COUNTIFS('+AIpos+',B'+r+','+AI('wstat')+',"Expired")',result:s.soon+s.exp},
+        {formula:'COUNTIFS('+AIpos+',B'+r+','+AI('stick')+',"Needed")',result:s.stick},
+        d(p.reviewed),PREVIEW?'':{text:linkFor(p.pos),hyperlink:linkFor(p.pos)}];
+      vals.forEach(function(v,j){var c=ws.getCell(r,2+j);c.value=v;c.border=box;c.fill=fill(alt?ALT:'FFFFFFFF');
+        c.font=F(j===0?{bold:true,color:{argb:OC[o.k]},underline:true}:j===1?{bold:true,color:{argb:NAVY},italic:isVacant(p)}:j===7?{size:9,color:{argb:'FF1B6CA8'}}:{});
+        c.alignment={vertical:'middle',horizontal:(j>=3&&j<=5)?'center':'left'};if(j===6)c.numFmt='mm/dd/yyyy';});
+      ws.getRow(r).height=20;
+    });
+    var last=5+act.filter(function(p){return p.office===o.k;}).length;
+    ws.addConditionalFormatting({ref:'G6:G'+Math.max(last,6),rules:[{type:'cellIs',operator:'greaterThan',formulae:['0'],style:{font:{bold:true,color:{argb:'FFB45309'}},fill:{type:'pattern',pattern:'solid',bgColor:{argb:'FFFEF3C7'}}}}]});
+    ws.addConditionalFormatting({ref:'F6:F'+Math.max(last,6),rules:[{type:'cellIs',operator:'greaterThan',formulae:['0'],style:{font:{bold:true,color:{argb:'FFB91C1C'}}}}]});
+    ws.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0};
+  });
+
+  /* ---- One tab per position ---- */
+  function personTab(p){
+    var ws=wb.addWorksheet(wsName(p),{properties:{tabColor:{argb:p.archived?'FF9CA3AF':(OC[p.office]||NAVY)}},views:[{state:'frozen',xSplit:2,ySplit:6,showGridLines:false}]});
+    var n=COLS.length;COLS.forEach(function(c,i){ws.getColumn(i+1).width=c[2];});
+    band(ws,1,4,1,n,NAVY);for(var c=1;c<=n;c++)ws.getCell(4,c).border={bottom:{style:'thick',color:{argb:OC[p.office]||GOLD}}};
+    ws.getCell('A1').value={text:'← '+(OFF[p.office]?OFF[p.office].name:'Home'),hyperlink:"#'"+(OFF[p.office]?p.office:'Home')+"'!A1"};ws.getCell('A1').font=F({size:9,color:{argb:GOLD2},underline:true});
+    ws.getCell('B1').value=p.pos+(p.archived?' (archived '+fdate(p.archived.date)+')':'');ws.getCell('B1').font=F({bold:true,size:11,color:{argb:GOLD2}});
+    ws.getCell('B2').value=displayName(p);ws.getCell('B2').font=F({bold:true,size:20,color:{argb:'FFFFFFFF'}});
+    ws.getCell('B3').value=[p.title,OFF[p.office]?OFF[p.office].name:p.office].filter(Boolean).join(', ')+(p.reviewed?'. Last reviewed '+fdate(p.reviewed):'')+(p.former&&p.former.length?'. Previously: '+p.former.map(function(f){return f.name;}).join(', '):'');
+    ws.getCell('B3').font=F({size:10,color:{argb:GRAYTX}});
+    var first=7,last=Math.max(first+p.items.length-1,first),s=summary(p);
+    var colL=function(k){return L(1+ci(k));};
+    var sc=6;
+    [['items','COUNTA('+colL('name')+first+':'+colL('name')+last+')',s.items],
+     ['under warranty','COUNTIF('+colL('warranty')+first+':'+colL('warranty')+last+',"Yes")',s.war],
+     ['warranties ending or expired','COUNTIF('+colL('wstat')+first+':'+colL('wstat')+last+',"Expiring soon")+COUNTIF('+colL('wstat')+first+':'+colL('wstat')+last+',"Expired")',s.soon+s.exp],
+     ['stickers needed','COUNTIF('+colL('stick')+first+':'+colL('stick')+last+',"Needed")',s.stick]].forEach(function(x){stat(ws,2,sc,x[0],x[1],x[2]);sc+=3;});
+    header(ws,6,1,COLS.map(function(c){return c[0];}));
+    if(!p.items.length){ws.mergeCells(7,1,7,6);ws.getCell(7,1).value='Nothing is assigned to '+p.pos+' yet.';ws.getCell(7,1).font=F({italic:true,color:{argb:'FF6B7280'}});}
+    p.items.forEach(function(it,i){writeItemRow(ws,first+i,1,it,i%2===1);});
+    statusRules(ws,colL('wstat')+first+':'+colL('wstat')+last);stickRules(ws,colL('stick')+first+':'+colL('stick')+last);
+    if(p.history&&p.history.length){
+      var hr=last+3;
+      ws.mergeCells(hr,1,hr,6);ws.getCell(hr,1).value='History: transferred, returned or retired';ws.getCell(hr,1).font=F({bold:true,size:12,color:{argb:NAVY}});
+      header(ws,hr+1,1,['Asset Tag','Item','Category','Reason','Date','Transferred to / notes'],'FF6B7280');
+      p.history.forEach(function(x,i){var r=hr+2+i;
+        [x.assetTag||'',x.name,x.category||'',x.reason||'',d(x.removed),x.to||x.removalNotes||''].forEach(function(v,j){var c=ws.getCell(r,1+j);c.value=v;c.border=box;c.font=F(j===1?{bold:true}:{});if(j===4)c.numFmt='mm/dd/yyyy';});});
+    }
+    if(p.requests&&p.requests.length){
+      var qr=ws.rowCount+3;
+      ws.mergeCells(qr,1,qr,6);ws.getCell(qr,1).value='Item requests';ws.getCell(qr,1).font=F({bold:true,size:12,color:{argb:NAVY}});
+      header(ws,qr+1,1,['Requested','Item','Requested by','Qty','Price each','Status','Decided','Decision note','Link'],'FF1B6CA8');
+      p.requests.forEach(function(r,i){var row=qr+2+i;[d(r.submitted),r.item||'',r.by||'',r.qty||'',r.cost==null?'':r.cost,r.status,d(r.decided),r.decisionNote||'',r.link?{text:'Open link',hyperlink:r.link}:''].forEach(function(v,j){
+        var c=ws.getCell(row,1+j);c.value=v;c.border=box;c.font=F(j===1?{bold:true}:j===8&&r.link?{color:{argb:'FF1B6CA8'},underline:true}:{});if(j===0||j===6)c.numFmt='mm/dd/yyyy';if(j===4)c.numFmt='$#,##0.00';});});
+    }
+    ws.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,printTitlesRow:'6:6'};
+    ws.headerFooter={oddFooter:'&L'+p.pos+' – Foundation First inventory&R&D  Page &P of &N'};
+  }
+  act.forEach(personTab);
+
+  function buildAll(){
+  /* ---- All Items (data the summaries count from) ---- */
+  var all=wb.addWorksheet('All Items',{properties:{tabColor:{argb:GOLD}},views:[{state:'frozen',xSplit:4,ySplit:3,showGridLines:false}]});
+  all.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,printTitlesRow:'3:3'};
+  band(all,1,2,1,4+COLS.length,NAVY);
+  all.getCell('A1').value='All items';all.getCell('A1').font=F({bold:true,size:16,color:{argb:'FFFFFFFF'}});
+  all.getCell('A2').value='Every current item on one sheet. Use the filter arrows to sort or narrow it down. Exported '+fdate(today())+'.';all.getCell('A2').font=F({size:9,color:{argb:GRAYTX}});
+  header(all,3,1,['Position','Name','Title','Office'].concat(COLS.map(function(c){return c[0];})));
+  var ar=4;
+  act.forEach(function(p){p.items.forEach(function(it){
+    var alt=(ar%2)===1;
+    [p.pos,displayName(p),p.title||'',p.office].forEach(function(v,i){var c=all.getCell(ar,1+i);c.value=v;c.border=box;c.fill=fill(alt?ALT:'FFFFFFFF');c.font=F(i===0?{bold:true,color:{argb:OC[p.office]||NAVY}}:{});});
+    all.getCell(ar,1).value={text:p.pos,hyperlink:wsLink(p)};
+    writeItemRow(all,ar,5,it,alt);ar++;});});
+  all.autoFilter={from:{row:3,column:1},to:{row:allLast,column:4+COLS.length}};
+  [10,26,30,8].concat(COLS.map(function(c){return c[2];})).forEach(function(w,i){all.getColumn(i+1).width=w;});
+  statusRules(all,L(5+ci('wstat'))+'4:'+L(5+ci('wstat'))+allLast);stickRules(all,L(5+ci('stick'))+'4:'+L(5+ci('stick'))+allLast);
+  }
+  buildAll();
+
+  /* ---- History (all) ---- */
+  var hs=wb.addWorksheet('Item History',{properties:{tabColor:{argb:'FF6B7280'}},views:[{state:'frozen',ySplit:3,showGridLines:false}]});
+  hs.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0};
+  band(hs,1,2,1,9,NAVY);hs.getCell('A1').value='History: every item transferred, returned or retired';hs.getCell('A1').font=F({bold:true,size:16,color:{argb:'FFFFFFFF'}});
+  header(hs,3,1,['Position','Name','Asset Tag','Item','Category','Reason','Date','Transferred to / notes','Cost']);
+  var hrow=4;sorted.forEach(function(p){(p.history||[]).forEach(function(x){
+    [{text:p.pos,hyperlink:wsLink(p)},displayName(p),x.assetTag||'',x.name,x.category||'',x.reason||'',d(x.removed),x.to||x.removalNotes||'',total(x)].forEach(function(v,j){var c=hs.getCell(hrow,1+j);c.value=v==null?'':v;c.border=box;c.font=F(j===0?{bold:true,color:{argb:OC[p.office]||NAVY}}:j===3?{bold:true}:{});if(j===6)c.numFmt='mm/dd/yyyy';if(j===8)c.numFmt='$#,##0.00';});hrow++;});});
+  if(hrow===4){hs.mergeCells('A4:I4');hs.getCell('A4').value='Nothing has been transferred, returned or retired yet.';hs.getCell('A4').font=F({italic:true,color:{argb:'FF6B7280'}});}
+  else hs.autoFilter={from:{row:3,column:1},to:{row:hrow-1,column:9}};
+  [10,26,12,28,22,18,12,34,11].forEach(function(w,i){hs.getColumn(i+1).width=w;});
+
+
+  /* ---- Requests ---- */
+  var rqs=wb.addWorksheet('Requests',{properties:{tabColor:{argb:'FF1B6CA8'}},views:[{state:'frozen',ySplit:3,showGridLines:false}]});
+  rqs.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,printTitlesRow:'3:3'};
+  band(rqs,1,2,1,16,NAVY);rqs.getCell('A1').value='Item requests';rqs.getCell('A1').font=F({bold:true,size:16,color:{argb:'FFFFFFFF'}});
+  rqs.getCell('A2').value='Every request staff have made, with the approval decision. Status: Pending, Approved, Not approved, Ordered, Received.';rqs.getCell('A2').font=F({size:9,color:{argb:GRAYTX}});
+  var RQC=[['Position',10],['Name',24],['Requested by',20],['Requested',12],['Item',30],['Link',14],['Qty',6],['Price each',11],['Needed by',12],['Why',30],['Status',13],['Decided by',18],['Decided',12],['Decision note',30],['Ordered',12],['Vendor / order #',22]];
+  header(rqs,3,1,RQC.map(function(c){return c[0];}));RQC.forEach(function(c,i){rqs.getColumn(i+1).width=c[1];});
+  var rr=4;sorted.forEach(function(p){(p.requests||[]).forEach(function(r){
+    var v=[{text:p.pos,hyperlink:wsLink(p)},displayName(p),r.by||'',d(r.submitted),r.item||'',r.link?{text:'Open link',hyperlink:r.link}:'',r.qty||'',r.cost==null?'':r.cost,d(r.needed),r.reason||'',r.status,r.decidedBy||'',d(r.decided),r.decisionNote||'',d(r.ordered),r.orderNo||''];
+    v.forEach(function(x,j){var c=rqs.getCell(rr,1+j);c.value=x==null?'':x;c.border=box;c.font=F(j===0?{bold:true,color:{argb:OC[p.office]||NAVY}}:j===5&&r.link?{color:{argb:'FF1B6CA8'},underline:true}:j===4?{bold:true}:{});
+      if([3,8,12,14].indexOf(j)>-1)c.numFmt='mm/dd/yyyy';if(j===7)c.numFmt='$#,##0.00';c.alignment={vertical:'top',wrapText:j===9||j===13};});rr++;});});
+  if(rr===4){rqs.mergeCells('A4:H4');rqs.getCell('A4').value='No requests yet.';rqs.getCell('A4').font=F({italic:true,color:{argb:'FF6B7280'}});}
+  else{rqs.autoFilter={from:{row:3,column:1},to:{row:rr-1,column:16}};
+    [['Pending','FFFEF3C7','FFB45309'],['Approved','FFD1FAE5','FF065F46'],['Not approved','FFFCEBEB','FFB91C1C'],['Ordered','FFDBEAFE','FF1E40AF'],['Received','FFF3F4F6','FF4B5563']].forEach(function(x){
+      rqs.addConditionalFormatting({ref:'K4:K'+(rr-1),rules:[{type:'expression',formulae:['K4="'+x[0]+'"'],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:x[1]}},font:{bold:true,color:{argb:x[2]}}}}]});});}
+
+  /* ---- Archived ---- */
+  if(arch.length){
+    var aw=wb.addWorksheet('Archived',{properties:{tabColor:{argb:'FF9CA3AF'}},views:[{showGridLines:false}]});
+    band(aw,1,2,1,6,NAVY);aw.getCell('A1').value='Archived positions';aw.getCell('A1').font=F({bold:true,size:16,color:{argb:'FFFFFFFF'}});
+    header(aw,3,1,['Position','Name','Title','Office','Archived on','Items still attached']);
+    arch.forEach(function(p,i){[{text:wsName(p),hyperlink:wsLink(p)},displayName(p),p.title||'',p.office,d(p.archived.date),p.items.length].forEach(function(v,j){var c=aw.getCell(4+i,1+j);c.value=v;c.border=box;c.font=F(j===0?{bold:true,underline:true}:{});if(j===4)c.numFmt='mm/dd/yyyy';});});
+    [16,26,30,8,12,12].forEach(function(w,i){aw.getColumn(i+1).width=w;});
+    arch.forEach(personTab);
+  }
+
+  wb.views=[{activeTab:0}];
+
+  wb.xlsx.writeBuffer().then(function(buf){
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+    a.download='FF_Inventory_'+today()+'.xlsx';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},500);
+    toast('Excel file downloaded.');
+  }).catch(function(e){toast('Excel export failed: '+e.message);});
+}
+
+</script>
+</body>
+</html>

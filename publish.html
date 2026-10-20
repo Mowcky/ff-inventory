@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Update inventory data | Foundation First</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{--navy:#0D1B2A;--navy2:#1A2D40;--gold:#C9A84C;--gold2:#E8C76A;--paper:#F0EDE8;--muted:#6B7280;--line:#E5E7EB;--ok:#065F46;--okbg:#D1FAE5;--warn:#7C4A03;--warnbg:#FEF3C7;--bad:#B91C1C;--badbg:#FCEBEB}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Figtree","Segoe UI",Arial,sans-serif;background:var(--paper);color:var(--navy);font-size:15px;line-height:1.5}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.bar{background:var(--navy);color:#fff;padding:12px 18px;display:flex;gap:12px;align-items:center}
+.mark{width:34px;height:34px;border-radius:8px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:800;font-size:13px;text-decoration:none}
+.bar a.back{color:#C9D3DE;text-decoration:none;font-size:14px}
+main{max-width:860px;margin:0 auto;padding:26px 18px 60px}
+h1{font-size:28px;font-weight:800;line-height:1.2}
+.lead{color:#374151;margin-top:6px;max-width:640px}
+.steps{margin:20px 0 22px;padding-left:22px;max-width:660px}
+.steps li{margin:6px 0}
+.drop{border:2px dashed #B9AE97;border-radius:14px;background:#fff;padding:34px 20px;text-align:center;cursor:pointer}
+.drop.over{border-color:var(--navy);background:#FBFAF6}
+.drop b{font-size:18px;display:block}
+.drop span{color:var(--muted);font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{border:1px solid transparent;border-radius:8px;padding:10px 16px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-gold{background:var(--gold);color:var(--navy)}.btn-gold:hover{background:var(--gold2)}
+.btn-line{background:#fff;border-color:#D1D5DB;color:var(--navy)}.btn-line:hover{border-color:var(--navy)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.result{margin-top:24px;background:#fff;border-radius:12px;overflow:hidden;display:none}
+.result h2{font-size:17px;padding:14px 18px;background:var(--navy2);color:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl td,.tbl th{padding:8px 14px;border-top:1px solid var(--line);text-align:left}
+.tbl th{font-size:12.5px;color:var(--muted)}
+.tbl td.n{text-align:right;font-variant-numeric:tabular-nums}
+.msg{padding:10px 18px;font-size:14px}
+.msg.warn{background:var(--warnbg);color:var(--warn)}.msg.bad{background:var(--badbg);color:var(--bad)}.msg.ok{background:var(--okbg);color:var(--ok)}
+.after{margin-top:22px;max-width:660px;display:none}
+.after h3{font-size:17px;margin-bottom:6px}
+.after ol{padding-left:22px}
+</style>
+</head>
+<body>
+<div class="bar"><a class="mark" href="index.html" aria-label="Inventory home">FF</a><a class="back" href="index.html">Back to inventory</a></div>
+<main>
+  <h1>Import Excel files</h1>
+  <p class="lead">Use this only if you have been updating the Excel files instead of the website. Importing replaces everything on the website, including changes made there. Nothing is uploaded from this page; it all happens in your browser.</p>
+  <ol class="steps">
+    <li>Download the latest Excel files from your SharePoint Employees folder (select them all, then Download).</li>
+    <li>Drop all of them below. The template and any files without a position number are skipped.</li>
+    <li>Check the list, then choose <b>Download data.json</b>.</li>
+  </ol>
+  <label class="drop" id="drop" tabindex="0">
+    <b>Drop Excel files here</b>
+    <span>or click to choose files (you can select them all at once)</span>
+    <input id="files" type="file" accept=".xlsx" multiple hidden>
+  </label>
+  <div class="result" id="result">
+    <h2 id="rtitle">Files read</h2>
+    <div id="msgs"></div>
+    <table class="tbl"><thead><tr><th>Position</th><th>Name</th><th>Office</th><th style="text-align:right">Items</th><th style="text-align:right">History</th></tr></thead><tbody id="rows"></tbody></table>
+  </div>
+  <div class="row">
+    <button class="btn btn-gold" id="dl" disabled>Download data.json</button>
+    <button class="btn btn-line" id="pv" disabled>Preview the website with this data</button>
+  </div>
+  <div class="after" id="after">
+    <h3>Put it on the website</h3>
+    <ol>
+      <li>Open your repository on github.com.</li>
+      <li>Choose <b>Add file</b>, then <b>Upload files</b>, and drop in the data.json you just downloaded.</li>
+      <li>Choose <b>Commit changes</b>. The website updates within a minute or two, and every QR sticker keeps working.</li>
+    </ol>
+  </div>
+</main>
+<script>
+var KEYS=["assetTag","name","category","condition","location","desc","serial","vendor","purchased","assigned","qty","unitCost","total","funding","link","warranty","warrantyNo","warrantyProvider","warrantyExp",null,null,null,"stickerApplied","status","ack","notes"];
+var OUT=null;
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function cv(ws,addr){var c=ws[addr];if(!c||c.v==null)return null;var v=c.v;
+  if(v instanceof Date)return iso(v);if(typeof v==='string'){v=v.trim();return v||null;}return v;}
+function col(n){var s='';while(n>0){var m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=Math.floor((n-1)/26);}return s;}
+function lastRow(ws){var r=XLSX.utils.decode_range(ws['!ref']||'A1');return r.e.r+1;}
+function readRow(ws,r,extra){
+  var it={};
+  KEYS.forEach(function(k,i){if(!k)return;var a=col(i+2)+r,c=ws[a];var v=cv(ws,a);
+    if(k==='link'&&c&&c.l&&c.l.Target)v=c.l.Target;
+    if(v!=null)it[k]=v;});
+  (extra||[]).forEach(function(e){var v=cv(ws,col(e[1])+r);if(v!=null)it[e[0]]=v;});
+  return it;
+}
+function parse(file,buf){
+  var wb=XLSX.read(buf,{type:'array',cellDates:true});
+  var ws=wb.Sheets['Inventory'];if(!ws)return {skip:'No Inventory tab'};
+  var m=file.name.match(/^([A-Z]{3}-\d{2})/);
+  var pos=(cv(ws,'E6')||(m&&m[1])||'').toString().toUpperCase().trim();
+  if(!pos)return {skip:'No position number (archived or template)'};
+  var lab=file.name.match(/\(([A-Z]{3}) Office\)/);
+  var p={pos:pos,name:cv(ws,'B2'),title:cv(ws,'M6'),office:String(cv(ws,'C6')||pos.slice(0,3)).replace(/ Office$/,''),reviewed:cv(ws,'H6'),items:[],history:[]};
+  if(lab)p.sheetLabel=lab[1]+' Office';
+  var n=lastRow(ws);
+  for(var r=9;r<=n;r++){if(!cv(ws,'C'+r))continue;var it=readRow(ws,r);if(/EXAMPLE ROW/i.test(it.notes||''))continue;p.items.push(it);}
+  var hs=wb.Sheets['History'];
+  if(hs){var hn=lastRow(hs);for(var r2=5;r2<=hn;r2++){if(!cv(hs,'C'+r2))continue;p.history.push(readRow(hs,r2,[['removed',28],['reason',29],['to',30],['removalNotes',31]]));}}
+  return {person:p};
+}
+function handle(files){
+  files=[].slice.call(files).filter(function(f){return /\.xlsx$/i.test(f.name)&&!/^~\$/.test(f.name);});
+  if(!files.length)return;
+  Promise.all(files.map(function(f){return f.arrayBuffer().then(function(b){try{return {f:f,res:parse(f,b)};}catch(e){return {f:f,res:{skip:'Could not read: '+e.message}};}});})).then(function(list){
+    var people=[],msgs=[],seen={};
+    list.forEach(function(x){
+      if(x.res.skip){if(!/TEMPLATE/i.test(x.f.name))msgs.push(['warn','Skipped '+x.f.name+': '+x.res.skip+'.']);return;}
+      var p=x.res.person;
+      if(seen[p.pos]){msgs.push(['bad','Two files use '+p.pos+' ('+seen[p.pos]+' and '+x.f.name+'). Only the first was kept; fix the Position ID in one of them.']);return;}
+      seen[p.pos]=x.f.name;people.push(p);
+    });
+    people.sort(function(a,b){return a.pos<b.pos?-1:1;});
+    var now=new Date();
+    OUT={generated:iso(now)+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'),people:people};
+    var items=people.reduce(function(s,p){return s+p.items.length;},0);
+    msgs.unshift(['ok','Read '+people.length+' sheets with '+items+' items.']);
+    document.getElementById('msgs').innerHTML=msgs.map(function(m){return '<div class="msg '+m[0]+'">'+esc(m[1])+'</div>';}).join('');
+    document.getElementById('rows').innerHTML=people.map(function(p){
+      return '<tr><td><b>'+esc(p.pos)+'</b></td><td>'+esc(p.name)+(p.sheetLabel?' ('+esc(p.sheetLabel)+')':'')+'</td><td>'+esc(p.office)+'</td><td class="n">'+p.items.length+'</td><td class="n">'+p.history.length+'</td></tr>';}).join('');
+    document.getElementById('result').style.display='block';
+    document.getElementById('dl').disabled=!people.length;document.getElementById('pv').disabled=!people.length;
+  });
+}
+var drop=document.getElementById('drop'),inp=document.getElementById('files');
+inp.addEventListener('change',function(){handle(inp.files);});
+drop.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();inp.click();}});
+['dragenter','dragover'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add('over');});});
+['dragleave','drop'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove('over');});});
+drop.addEventListener('drop',function(e){handle(e.dataTransfer.files);});
+document.getElementById('dl').addEventListener('click',function(){
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(OUT,null,1)],{type:'application/json'}));
+  a.download='data.json';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},200);
+  document.getElementById('after').style.display='block';
+});
+document.getElementById('pv').addEventListener('click',function(){
+  try{localStorage.setItem('ff_inventory_preview',JSON.stringify(OUT));window.open('index.html?preview=1#','_blank');}
+  catch(e){alert('Preview needs browser storage, which is turned off here. Download data.json and upload it instead.');}
+});
+</script>
+</body>
+</html>
