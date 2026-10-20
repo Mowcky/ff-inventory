@@ -38,6 +38,8 @@ textarea{min-height:90px;resize:vertical}
 .done li{margin:4px 0}
 .mail{background:#F7F5F0;border-radius:10px;padding:12px 14px;font-size:13.5px;white-space:pre-wrap;word-break:break-word;margin-top:12px;font-family:ui-monospace,Menlo,Consolas,monospace}
 .note{font-size:13px;color:var(--muted);margin-top:16px}
+.budget{margin-top:8px;background:var(--okbg);color:var(--ok);border-radius:9px;padding:9px 12px;font-size:14px}
+.budget.over{background:var(--warnbg);color:#7C4A03}
 .banner{background:var(--warnbg);color:#7C4A03;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:14.5px}
 @media (max-width:620px){.grid{grid-template-columns:1fr}.hero h1{font-size:24px}}
 </style>
@@ -57,53 +59,101 @@ function siteBase(){return location.href.split('#')[0].split('?')[0].replace(/re
 function people(){
   return (CFG.people||[]).filter(function(p){return p.pos&&!p.archived&&!/-00$/.test(p.pos)&&!/^vacant$/i.test(p.name||'')&&!/vacant/i.test(p.title||'')&&!/extra desk/i.test(p.name||'');});
 }
+var DEF={title:'Request an item',intro:'Need something for your work? Paste a link to it below. Your request goes to the operations team for approval, and you’ll hear back by email.',
+  button:'Send request',done:'You’ll hear back once it’s approved or not.',note:'Your name isn’t listed, or something looks wrong? Contact the operations team.',
+  fields:[{key:'who',label:'Who is this for?',required:true,show:true,type:'person',width:'full'},
+   {key:'kind',label:'What kind of request is this?',hint:'Office supplies come out of your yearly allowance (July 1 – June 30).',required:true,show:true,type:'kind',width:'full',options:['Office supplies (from my yearly allowance)','Equipment or something else']},
+   {key:'item',label:'What do you need?',hint:'For example: Logitech wireless mouse',required:true,show:true,type:'text',width:'full'},
+   {key:'link',label:'Link to the item',hint:'Paste the Amazon or store page so it can be ordered exactly.',required:true,show:true,type:'url',width:'full'},
+   {key:'qty',label:'Quantity',required:false,show:true,type:'number',width:'half'},
+   {key:'cost',label:'Price each ($)',hint:'From the link, if you know it',required:false,show:true,type:'money',width:'half'},
+   {key:'needed',label:'Needed by',required:false,show:true,type:'date',width:'half'},
+   {key:'funding',label:'Funding source',required:false,show:true,type:'select',width:'half',options:FUNDS},
+   {key:'reason',label:'Why do you need it?',required:false,show:true,type:'textarea',width:'full'}]};
+function cfgForm(){
+  var c=JSON.parse(JSON.stringify((CFG.settings&&CFG.settings.requestForm)||DEF));
+  ['title','intro','button','done','note'].forEach(function(k){if(c[k]==null)c[k]=DEF[k];});
+  c.fields=c.fields||[];DEF.fields.forEach(function(d){if(!c.fields.some(function(f){return f.key===d.key;})){var nd=JSON.parse(JSON.stringify(d));
+    if(d.key==='kind'){var wi=c.fields.findIndex(function(f){return f.key==='who';});c.fields.splice(wi+1,0,nd);}else c.fields.push(nd);}});
+  c.fields.forEach(function(f){if(f.key==='kind'){f.type='kind';f.options=(f.options||[]).slice(0,2);while(f.options.length<2)f.options.push(DEF.fields[1].options[f.options.length]);}});
+  c.fields.forEach(function(f){if(f.key==='who'||f.key==='item'){f.show=true;f.required=true;}});
+  return c;
+}
+var FORM=null;
+function input(f){
+  var id='f_'+f.key,pre=decodeURIComponent(location.hash.replace(/^#/,'')).toUpperCase();
+  if(f.type==='person'){
+    return '<select id="'+id+'"><option value="">Choose your name</option>'+['RAP','GPW','LFC'].map(function(o){
+      var ps=people().filter(function(p){return p.office===o;}).sort(function(a,b){return a.pos<b.pos?-1:1;});
+      if(!ps.length)return '';
+      return '<optgroup label="'+OFF[o]+'">'+ps.map(function(p){return '<option value="'+esc(p.pos)+'"'+(p.pos===pre?' selected':'')+'>'+esc(p.name+(p.sheetLabel?' ('+p.sheetLabel+')':''))+'</option>';}).join('')+'</optgroup>';
+    }).join('')+'</select>';
+  }
+  if(f.type==='kind')return '<select id="'+id+'"><option value="">Choose one</option><option value="supplies">'+esc(f.options[0])+'</option><option value="other">'+esc(f.options[1])+'</option></select><div class="budget" id="budgetNote" hidden></div>';
+  if(f.type==='textarea')return '<textarea id="'+id+'"></textarea>';
+  if(f.type==='select')return '<select id="'+id+'"><option value="">'+(f.required?'Choose one':'Not sure')+'</option>'+(f.options||[]).filter(Boolean).map(function(o){return '<option>'+esc(o)+'</option>';}).join('')+'</select>';
+  if(f.type==='yesno')return '<select id="'+id+'"><option value=""></option><option>Yes</option><option>No</option></select>';
+  var t={number:'number',money:'number',date:'date',url:'url'}[f.type]||'text';
+  return '<input id="'+id+'" type="'+t+'"'+(f.type==='money'?' min="0" step="0.01" inputmode="decimal"':'')+(f.type==='number'?' min="0" step="1"':'')+(f.key==='qty'?' value="1"':'')+(f.type==='url'?' inputmode="url" placeholder="https://"':'')+'>';
+}
 function form(){
-  var pre=decodeURIComponent(location.hash.replace(/^#/,'')).toUpperCase();
-  var opts=['RAP','GPW','LFC'].map(function(o){
-    var ps=people().filter(function(p){return p.office===o;}).sort(function(a,b){return a.pos<b.pos?-1:1;});
-    if(!ps.length)return '';
-    return '<optgroup label="'+OFF[o]+'">'+ps.map(function(p){var lab=p.name+(p.sheetLabel?' ('+p.sheetLabel+')':'');return '<option value="'+esc(p.pos)+'"'+(p.pos===pre?' selected':'')+'>'+esc(lab)+'</option>';}).join('')+'</optgroup>';
-  }).join('');
+  FORM=cfgForm();
   var h=(CFG.preview?'<div class="banner">Preview. On the live site, Send opens the person’s email app. Here you’ll see the email that would be sent.</div>':'')+
-   '<section class="hero"><h1>Request an item</h1><p>Need something for your work? Paste a link to it below. Your request goes to the operations team for approval, and you’ll hear back by email.</p></section>'+
-   '<form class="card" id="f" novalidate><div class="grid">'+
-   '<div class="full"><label for="who">Who is this for? *</label><select id="who"><option value="">Choose your name</option>'+opts+'</select></div>'+
-   '<div class="full"><label for="item">What do you need? *</label><input id="item" placeholder="For example: Logitech wireless mouse"></div>'+
-   '<div class="full"><label for="link">Link to the item *</label><input id="link" type="url" inputmode="url" placeholder="https://"><div class="hint">Paste the Amazon or store page so it can be ordered exactly.</div></div>'+
-   '<div><label for="qty">Quantity</label><input id="qty" type="number" min="1" step="1" value="1"></div>'+
-   '<div><label for="cost">Price each ($)</label><input id="cost" type="number" min="0" step="0.01" inputmode="decimal"><div class="hint">From the link, if you know it</div></div>'+
-   '<div><label for="needed">Needed by</label><input id="needed" type="date"></div>'+
-   '<div><label for="funding">Funding source</label><select id="funding"><option value="">Not sure</option>'+FUNDS.map(function(f){return '<option>'+f+'</option>';}).join('')+'</select></div>'+
-   '<div class="full"><label for="reason">Why do you need it?</label><textarea id="reason"></textarea></div>'+
-   '</div><div class="foot"><button class="btn btn-gold" type="submit">Send request</button><span class="err" id="err" role="alert"></span></div></form>'+
-   '<p class="note">Your name isn’t listed, or something looks wrong? Contact the operations team.</p>';
+   '<section class="hero"><h1>'+esc(FORM.title)+'</h1><p>'+esc(FORM.intro)+'</p></section><form class="card" id="f" novalidate><div class="grid">'+
+   FORM.fields.filter(function(f){return f.show;}).map(function(f){
+     return '<div'+(f.width==='half'?'':' class="full"')+'><label for="f_'+esc(f.key)+'">'+esc(f.label)+(f.required?' *':'')+'</label>'+input(f)+(f.hint?'<div class="hint">'+esc(f.hint)+'</div>':'')+'</div>';
+   }).join('')+'</div><div class="foot"><button class="btn btn-gold" type="submit">'+esc(FORM.button)+'</button><span class="err" id="err" role="alert"></span></div></form>'+
+   (FORM.note?'<p class="note">'+esc(FORM.note)+'</p>':'');
   document.getElementById('app').innerHTML=h;
   document.getElementById('f').onsubmit=submit;
-  document.getElementById(pre&&document.querySelector('option[value="'+pre+'"]')?'item':'who').focus();
+  var w=document.getElementById('f_who');(w&&w.value?document.getElementById('f_kind')||document.getElementById('f_item'):w).focus();
+  ['f_who','f_kind','f_cost','f_qty'].forEach(function(id){var el=document.getElementById(id);if(el){el.addEventListener('change',budgetNote);el.addEventListener('input',budgetNote);}});budgetNote();
 }
-function v(id){return document.getElementById(id).value.trim();}
+function fyOf(d){var y=+String(d).slice(0,4),m=+String(d).slice(5,7);return m>=7?y+1:y;}
+function money(n){n=Number(n||0);return (n<0?'-':'')+'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function leftFor(name){
+  var s=CFG.supplies||{},fy=fyOf(today()),allow=s.overrides&&s.overrides[name]!=null?+s.overrides[name]:(s.allowance!=null?+s.allowance:100);
+  var spent=(s.purchases||[]).filter(function(x){return x.name===name&&fyOf(x.date)===fy;}).reduce(function(t,x){return t+(+x.amount||0);},0);
+  return {allow:allow,left:Math.round((allow-spent)*100)/100,fy:fy};
+}
+function budgetNote(){
+  var el=document.getElementById('budgetNote');if(!el)return;
+  var pos=v('who'),kind=v('kind');
+  if(kind!=='supplies'||!pos){el.hidden=true;return;}
+  var p=people().find(function(x){return x.pos===pos;});if(!p){el.hidden=true;return;}
+  var b=leftFor(p.name),cost=(+v('cost')||0)*(+v('qty')||1);
+  el.hidden=false;el.className='budget'+(cost>b.left?' over':'');
+  el.innerHTML='You have <b>'+money(b.left)+'</b> left of '+money(b.allow)+' for July 1, '+(b.fy-1)+' – June 30, '+b.fy+'.'+(cost>b.left?' This request is '+money(cost-b.left)+' over. You can still send it; the operations team will decide.':'');
+}
+function v(key){var el=document.getElementById('f_'+key);return el?el.value.trim():'';}
 function submit(e){
   e.preventDefault();
-  var err=document.getElementById('err');
-  var pos=v('who'),item=v('item'),link=v('link');
-  if(!pos){err.textContent='Choose your name.';return;}
-  if(!item){err.textContent='Say what you need.';return;}
-  if(!link){err.textContent='Paste a link to the item.';return;}
+  var err=document.getElementById('err'),shown=FORM.fields.filter(function(f){return f.show;});
+  for(var i=0;i<shown.length;i++){var f=shown[i];if(f.required&&!v(f.key)){err.textContent=(f.type==='person'?'Choose your name.':'Please answer “'+f.label+'”.');document.getElementById('f_'+f.key).focus();return;}}
   err.textContent='';
-  var p=people().find(function(x){return x.pos===pos;});
-  var r={by:p.name,item:item,link:link,qty:+v('qty')||1,submitted:today(),status:'Pending',id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};
+  var pos=v('who'),p=people().find(function(x){return x.pos===pos;});
+  var r={by:p.name,kind:v('kind')||undefined,item:v('item'),submitted:today(),status:'Pending',id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)};
+  if(v('link'))r.link=v('link');r.qty=+v('qty')||1;
   if(v('cost')!==''&&!isNaN(+v('cost')))r.cost=+v('cost');
   ['needed','funding','reason'].forEach(function(k){if(v(k))r[k]=v(k);});
+  var extra=shown.filter(function(f){return /^c_/.test(f.key)&&v(f.key);}).map(function(f){return {label:f.label,value:f.type==='date'?fdate(v(f.key)):v(f.key)};});
+  if(extra.length)r.extra=extra;
   var add=siteBase()+'#'+pos+'/request/'+b64url(JSON.stringify(r));
-  var lines=['New inventory request','','For: '+p.name+' ('+pos+')','Item: '+r.item,'Link: '+r.link,'Quantity: '+r.qty];
+  var kf=FORM.fields.find(function(f){return f.key==='kind';});
+  var lines=['New '+(r.kind==='supplies'?'office supply':'inventory')+' request','','For: '+p.name+' ('+pos+')'];
+  if(r.kind)lines.push('Type: '+(r.kind==='supplies'?kf.options[0]:kf.options[1]));
+  if(r.kind==='supplies'){var bl=leftFor(p.name);lines.push('Allowance left: '+money(bl.left)+' of '+money(bl.allow));}
+  lines.push('Item: '+r.item);
+  if(r.link)lines.push('Link: '+r.link);lines.push('Quantity: '+r.qty);
   if(r.cost!=null)lines.push('Price each: $'+r.cost.toFixed(2));if(r.needed)lines.push('Needed by: '+fdate(r.needed));if(r.funding)lines.push('Funding: '+r.funding);if(r.reason)lines.push('Why: '+r.reason);
+  (r.extra||[]).forEach(function(x){lines.push(x.label+': '+x.value);});
   lines.push('','To add this to the inventory tracker, open:',add);
   var to=(CFG.settings||{}).requestEmail||'';
-  var subject='Inventory request – '+pos+' – '+r.item;
+  var subject=(r.kind==='supplies'?'Office supply request – ':'Inventory request – ')+pos+' – '+r.item;
   var href='mailto:'+encodeURIComponent(to)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));
   if(!CFG.preview){var a=document.createElement('a');a.href=href;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},1000);}
   document.getElementById('app').innerHTML='<div class="done"><h2>'+(CFG.preview?'Here’s the email that would be sent':'Almost done: press Send in your email')+'</h2>'+
-    (CFG.preview?'':'<p>Your email app should have opened a message to the operations team with your request filled in.</p><ol><li>Switch to your email app.</li><li>Press <b>Send</b>.</li></ol><p>You’ll hear back once it’s approved or not.</p>')+
+    (CFG.preview?'':'<p>Your email app should have opened a message to the operations team with your request filled in.</p><ol><li>Switch to your email app.</li><li>Press <b>Send</b>.</li></ol><p>'+esc(FORM.done)+'</p>')+
     '<div class="mail"><b>To:</b> '+esc(to||'(request email not set yet)')+'\n<b>Subject:</b> '+esc(subject)+'\n\n'+esc(lines.join('\n'))+'</div>'+
     '<div class="foot">'+(CFG.preview?'':'<a class="btn btn-gold" href="'+esc(href)+'">Open the email again</a>')+'<button class="btn btn-line" id="again">Request something else</button></div></div>';
   document.getElementById('again').onclick=function(){form();window.scrollTo(0,0);};

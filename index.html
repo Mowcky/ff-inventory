@@ -242,6 +242,28 @@ details.hist summary{cursor:pointer;font-weight:700}
 .pv-f textarea{min-height:60px}
 .pv-f .hint{font-size:12px;color:var(--muted);margin-top:3px}
 @media (max-width:900px){.fe{grid-template-columns:1fr}.fe-sticky{position:static}}
+
+/* ---- supply budget ---- */
+.sup-oh{font-size:17px;font-weight:800;margin:22px 0 10px}
+.sup-head,.sup-row{display:grid;grid-template-columns:minmax(170px,2fr) 1fr 1fr 1fr .8fr 1.1fr;gap:12px;align-items:center;padding:11px 16px}
+.sup-head{background:var(--navy2);color:#fff;font-size:12.5px;font-weight:700}
+.sup-row{border-top:1px solid var(--line);cursor:pointer}
+.sup-row:nth-child(odd){background:#FAFAF8}
+.sup-row:hover{background:#F3F1EC}
+.sup-row small{display:block;color:var(--muted);font-size:12.5px}
+.sup-detail{grid-column:1 / -1;display:none;background:#F7F5F0;border-radius:10px;padding:8px 14px 12px;cursor:default}
+.sup-row.open .sup-detail{display:block}
+.sup-p{display:grid;grid-template-columns:minmax(0,2.4fr) auto auto auto;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.sup-p:first-child{border-top:none}
+.sup-p small{display:block;color:var(--muted);font-size:12.5px}
+.sup-p b{overflow-wrap:anywhere}
+.sup-card{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:12px 18px;margin-bottom:12px;text-decoration:none;border-left:5px solid var(--gold)}
+.sup-card:hover{box-shadow:0 0 0 1px var(--gold) inset}
+.sup-home{display:flex;gap:28px;align-items:center;padding:16px 18px;text-decoration:none;flex-wrap:wrap}
+.sup-home span{font-size:14px;color:var(--muted)}.sup-home b{color:var(--ink);font-size:17px;font-variant-numeric:tabular-nums}
+.sup-home .go{margin-left:auto;font-weight:700;color:var(--gpw)}
+@media (max-width:760px){.sup-head{display:none}.sup-row{grid-template-columns:1fr auto;gap:4px 10px}.sup-row>.num:nth-child(2),.sup-row>.num:nth-child(3),.sup-row>.num:nth-child(5){display:none}
+  .sup-p{grid-template-columns:1fr auto}.sup-p .acts{grid-column:1 / -1}}
 </style>
 </head>
 <body>
@@ -270,7 +292,7 @@ var K_DRAFT='ffinv_draft', K_GH='ffinv_github';
 
 /* ---------- helpers ---------- */
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function money(n){return n==null||n===''?'':'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function money(n){if(n==null||n==='')return '';n=Number(n);return (n<0?'-':'')+'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function money0(n){return '$'+Math.round(n||0).toLocaleString('en-US');}
 function fdate(s){if(!s)return '';var p=String(s).slice(0,10).split('-');return p.length===3?p[1]+'/'+p[2]+'/'+p[0]:s;}
 function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
@@ -545,7 +567,7 @@ function localWarn(){
 
 /* ---------- views ---------- */
 function viewHome(){
-  setBar([['All offices','#']],'<a class="btn btn-ghost hide-m" href="#print">Print all stickers</a> <a class="btn btn-gold" href="#settings">Settings &amp; backup</a>');
+  setBar([['All offices','#']],(isAdmin()?'<a class="btn btn-ghost hide-m" href="#supplies">Supply budget</a> ':'')+'<a class="btn btn-ghost hide-m" href="#print">Print all stickers</a> <a class="btn btn-gold" href="#settings">Settings &amp; backup</a>');
   var A=active(),all={items:0,value:0,soon:0,stick:0};A.forEach(function(p){var s=summary(p);all.items+=s.items;all.value+=s.value;all.soon+=s.soon;all.stick+=s.stick;});
   var arch=PEOPLE.filter(function(p){return p.archived;}).length,rcH=reqCounts(A);
   var h=localWarn()+'<section class="hero"><h1>Foundation First inventory</h1><div class="sub">Equipment assigned to each person and office. Last change '+esc(DB.generated||'')+'.</div>'+
@@ -563,6 +585,7 @@ function viewHome(){
   var alerts=[];A.forEach(function(p){p.items.forEach(function(it){var w=wStatus(it);if(w==='soon'||w==='expired'||w==='nodate')alerts.push({p:p,it:it});});});
   alerts.sort(function(a,b){return (a.it.warrantyExp||'9')<(b.it.warrantyExp||'9')?-1:1;});
   h+=homeRequestsPanel();
+  h+=homeSupplyPanel();
   h+='<div class="section"><h3>Warranties needing attention</h3><div class="panel">'+(alerts.length?alerts.map(function(a){
     return '<a class="alert-row" href="#'+a.p.pos+'"><b style="color:'+OFF[a.p.office].c+'">'+esc(a.p.pos)+'</b><span><b>'+esc(a.it.name)+'</b> <span style="color:var(--muted)">with '+esc(displayName(a.p))+'</span></span>'+wBadge(a.it)+'</a>';
   }).join(''):'<div class="empty">No warranties end in the next 90 days.</div>')+'</div></div>';
@@ -613,6 +636,7 @@ function viewPerson(pos){
       '<button class="btn btn-line btn-sm" id="revP">Mark reviewed today</button></div>')+
     (p.former&&p.former.length?'<div class="sub" style="margin-top:10px">Previously: '+p.former.map(function(f){return esc(f.name)+' (left '+fdate(f.left)+')';}).join(', ')+'</div>':'')+
     '</div><div class="bigqr"><canvas data-qr="'+esc(linkFor(pos))+'" data-px="360"></canvas><small>'+esc(pos)+'</small></div></div></section>';
+  h+=supplyCard(p);
   h+=requestsSection(p);
   var cats=[];p.items.forEach(function(it){if(it.category&&cats.indexOf(it.category)<0)cats.push(it.category);});
   h+='<h3 class="noprint" style="font-size:17px;font-weight:800;margin:22px 0 10px">Assigned items</h3><div class="tools"><input id="pq" type="search" placeholder="Search this list" aria-label="Search this list"><div class="chipset" role="group" aria-label="Filter">'+
@@ -754,6 +778,7 @@ function route(keep){
   else if(h==='SETTINGS')viewSettings();
   else if(h==='REQUEST-POSTER')viewRequestPoster();
   else if(h==='REQUEST-FORM')viewRequestForm();
+  else if(h==='SUPPLIES')viewSupplies();
   else if(OFF[h])viewOffice(h);
   else if(BYPOS[h])viewPerson(h);
   else viewMissing(h);
@@ -800,7 +825,8 @@ function unb64url(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+
 
 function requestForm(p,r){
   r=r||{by:/^vacant$/i.test(p.name)?'':p.name,qty:1};
-  return '<div class="fgrid">'+fld('Your name *','by',r.by,'text',null,'full')+
+  var kf=formCfg().fields.find(function(f){return f.key==='kind';});
+  return '<div class="fgrid">'+fld('Your name *','by',r.by,'text',null,'full')+fld('Request type *','kind',r.kind,'select',[['supplies',kf.options[0]],['other',kf.options[1]]],'full')+
     fld('What do you need? *','item',r.item,'text',null,'full','For example: Logitech wireless mouse')+
     fld('Link to the item *','link',r.link,'url',null,'full','Paste the Amazon or store page')+
     fld('Quantity','qty',r.qty,'number')+fld('Price each ($)','cost',r.cost,'number',null,'','From the link, if you know it')+
@@ -809,14 +835,14 @@ function requestForm(p,r){
 }
 function readReq(fd,base){
   var r=Object.assign({},base||{});
-  ['by','item','link','needed','funding','reason'].forEach(function(k){var v=g(fd,k);if(v)r[k]=v;else delete r[k];});
+  ['by','kind','item','link','needed','funding','reason'].forEach(function(k){var v=g(fd,k);if(v)r[k]=v;else delete r[k];});
   ['qty','cost'].forEach(function(k){var v=g(fd,k);if(v!==''&&!isNaN(+v))r[k]=+v;else delete r[k];});
   if(!r.id)r.id='r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
   if(!r.submitted)r.submitted=today();
   if(!r.status)r.status='Pending';
   return r;
 }
-function reqCheck(fd){if(!g(fd,'by'))return 'Enter your name.';if(!g(fd,'item'))return 'Say what you need.';if(!g(fd,'link'))return 'Paste a link to the item so it can be ordered.';return null;}
+function reqCheck(fd){if(!g(fd,'by'))return 'Enter your name.';if(!g(fd,'kind'))return 'Choose the request type.';if(!g(fd,'item'))return 'Say what you need.';if(!g(fd,'link'))return 'Paste a link to the item so it can be ordered.';return null;}
 function newRequest(pos){
   var p=BYPOS[pos];
   if(isAdmin()){
@@ -851,15 +877,16 @@ function importRequestLink(pos,code){
   history.replaceState(null,'','#'+pos);viewPerson(pos);
   if(!isAdmin()){toast('Request links are for the operations team. Open it on a device connected to GitHub.');return;}
   if((p.requests||[]).some(function(x){return x.id===r.id;})){toast('This request is already in '+pos+'’s list.');return;}
-  modal('Add this request to '+pos+'?',esc(r.by||'')+' asked for this on '+fdate(r.submitted)+'.',
+  modal('Add this request to '+pos+'?',esc(r.by||'')+' asked for this on '+fdate(r.submitted)+'.'+(isSupplyReq(r)?' <b>'+esc(reqBudgetLine(p,r))+'</b>':''),
     '<div class="detail" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">'+
-    [['Item',r.item],['Quantity',r.qty||1],['Price each',money(r.cost)],['Needed by',fdate(r.needed)],['Funding',r.funding],['Why',r.reason]].concat((r.extra||[]).map(function(x){return [x.label,x.value];})).filter(function(x){return x[1];}).map(function(x){return '<div><span>'+x[0]+'</span>'+esc(x[1])+'</div>';}).join('')+
+    [['Type',isSupplyReq(r)?'Office supplies':'Equipment or other'],['Item',r.item],['Quantity',r.qty||1],['Price each',money(r.cost)],['Needed by',fdate(r.needed)],['Funding',r.funding],['Why',r.reason]].concat((r.extra||[]).map(function(x){return [x.label,x.value];})).filter(function(x){return x[1];}).map(function(x){return '<div><span>'+x[0]+'</span>'+esc(x[1])+'</div>';}).join('')+
     (r.link?'<div style="grid-column:1/-1"><span>Link</span><a href="'+esc(r.link)+'" target="_blank" rel="noopener">'+esc(r.link)+'</a></div>':'')+'</div>',
     'Add as Pending',function(){r.status='Pending';p.requests=p.requests||[];p.requests.push(r);changed('Request added to '+pos+'. Approve it or not from their page.');});
 }
 function decideReq(pos,id,ok){
   var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});
-  modal((ok?'Approve ':'Don’t approve ')+r.item,ok?'Next you’ll order it and mark it Ordered.':'The note is shown on '+esc(pos)+'’s page, so keep it short and clear.',
+  var bl=reqBudgetLine(p,r);
+  modal((ok?'Approve ':'Don’t approve ')+r.item,(bl?'<b>'+esc(bl)+'</b> ':'')+(ok?'Next you’ll order it and mark it Ordered'+(isSupplyReq(r)?', which counts it against the allowance':'')+'.':'The note is shown on '+esc(pos)+'’s page, so keep it short and clear.'),
    '<div class="fgrid">'+fld('Decided by','decidedBy',settings().approver||'','text')+fld('Date','decided',today(),'date')+fld(ok?'Note (optional)':'Reason *','decisionNote','','textarea',null,'full')+'</div>',
    ok?'Approve':'Not approved',function(fd){
     if(!ok&&!g(fd,'decisionNote'))return 'Add a short reason.';
@@ -870,12 +897,13 @@ function decideReq(pos,id,ok){
 }
 function orderReq(pos,id){
   var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});
-  modal('Mark '+r.item+' as ordered','',
+  modal('Mark '+r.item+' as ordered',isSupplyReq(r)?'This logs the cost (price × quantity) against the office supply allowance.':'',
    '<div class="fgrid">'+fld('Date ordered','ordered',today(),'date')+fld('Vendor / order #','orderNo',r.orderNo,'text')+
    fld('Actual price each ($)','actualCost',r.actualCost||r.cost,'number')+fld('Funding source','funding',r.funding,'select',FUNDS)+'</div>',
    'Mark ordered',function(fd){
     r.status='Ordered';r.ordered=g(fd,'ordered')||today();r.orderNo=g(fd,'orderNo')||null;var c=g(fd,'actualCost');r.actualCost=c!==''&&!isNaN(+c)?+c:null;r.funding=g(fd,'funding')||r.funding||null;
-    changed(r.item+' marked ordered.');
+    logRequestPurchase(p,r);
+    changed(r.item+' marked ordered.'+(isSupplyReq(r)?' '+reqBudgetLine(p,{kind:'supplies'}):''));
    });
 }
 function receiveReq(pos,id){
@@ -884,11 +912,12 @@ function receiveReq(pos,id){
   modal('Received: add '+r.item+' to '+pos,'Check the details, add the serial number if it has one, then save. The request closes as Received.',itemForm(draft),'Add to inventory',function(fd){
     if(!g(fd,'name'))return 'Enter an item name.';
     var it=readItem(fd);p.items.push(it);r.status='Received';r.received=today();r.itemId=it.id;
+    if(r.purchaseId){var px=SUP().purchases.find(function(y){return y.id===r.purchaseId;});if(px){px.addedToInventory=true;px.itemId=it.id;}}
     changed(it.name+' added to '+pos+'.'+(total(it)>50?' It needs a '+pos+' sticker.':''));
   });
 }
-function reopenReq(pos,id){var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});r.status='Pending';delete r.decided;delete r.decisionNote;changed(r.item+' set back to Pending.');}
-function deleteReq(pos,id){var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});if(!confirm('Delete the request for '+r.item+'? This can’t be undone.'))return;p.requests.splice(p.requests.indexOf(r),1);changed('Request deleted.');}
+function reopenReq(pos,id){var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});unlogRequestPurchase(r);r.status='Pending';delete r.decided;delete r.decisionNote;changed(r.item+' set back to Pending.');}
+function deleteReq(pos,id){var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});if(!confirm('Delete the request for '+r.item+'?'+(r.purchaseId?' Its cost will also come off the supply budget.':'')+' This can’t be undone.'))return;unlogRequestPurchase(r);p.requests.splice(p.requests.indexOf(r),1);changed('Request deleted.');}
 function editReq(pos,id){
   var p=BYPOS[pos],r=p.requests.find(function(x){return x.id===id;});
   modal('Edit request','',requestForm(p,r),'Save',function(fd){var e=reqCheck(fd);if(e)return e;p.requests[p.requests.indexOf(r)]=readReq(fd,r);changed('Request updated.');});
@@ -898,7 +927,7 @@ function reqRow(p,r){
   if(adm){
     if(r.status==='Pending')acts='<button class="btn btn-gold btn-sm" data-q="ok" data-id="'+r.id+'">Approve</button><button class="btn btn-danger btn-sm" data-q="no" data-id="'+r.id+'">Not approved</button><button class="btn btn-line btn-sm" data-q="edit" data-id="'+r.id+'">Edit</button>';
     else if(r.status==='Approved')acts='<button class="btn btn-gold btn-sm" data-q="order" data-id="'+r.id+'">Mark ordered</button><button class="btn btn-line btn-sm" data-q="reopen" data-id="'+r.id+'">Back to pending</button>';
-    else if(r.status==='Ordered')acts='<button class="btn btn-gold btn-sm" data-q="recv" data-id="'+r.id+'">Received: add to inventory</button>';
+    else if(r.status==='Ordered')acts='<button class="btn btn-gold btn-sm" data-q="recv" data-id="'+r.id+'">Received: add to inventory</button>'+(isSupplyReq(r)?'<button class="btn btn-line btn-sm" data-q="recvs" data-id="'+r.id+'">Received: supplies only</button>':'');
     else acts='<button class="btn btn-line btn-sm" data-q="reopen" data-id="'+r.id+'">Reopen</button>';
     acts+='<button class="btn btn-line btn-sm" data-q="del" data-id="'+r.id+'">Delete</button>';
   }
@@ -908,7 +937,8 @@ function reqRow(p,r){
   if(r.status==='Approved'||r.status==='Not approved')dec=(r.status==='Approved'?'Approved':'Not approved')+(r.decidedBy?' by '+esc(r.decidedBy):'')+' on '+fdate(r.decided)+(r.decisionNote?': '+esc(r.decisionNote):'');
   if(r.status==='Ordered')dec='Ordered '+fdate(r.ordered)+(r.orderNo?' ('+esc(r.orderNo)+')':'');
   if(r.status==='Received')dec='Received '+fdate(r.received)+' and added to the list';
-  return '<div class="rq"><div class="rq-main"><div class="rq-top"><b>'+esc(r.item)+'</b> '+reqBadge(r)+'</div>'+
+  var bline=adm&&isSupplyReq(r)&&(r.status==='Pending'||r.status==='Approved')?reqBudgetLine(p,r):'';
+  return '<div class="rq"><div class="rq-main"><div class="rq-top"><b>'+esc(r.item)+'</b> '+reqBadge(r)+(isSupplyReq(r)?' <span class="badge c-sup">Office supplies</span>':'')+'</div>'+(bline?'<div class="rq-meta" style="color:var(--ink)"><b>'+esc(bline)+'</b></div>':'')+
     '<div class="rq-meta">'+esc(meta.join(', '))+'</div>'+
     (r.link?'<div class="rq-meta"><a href="'+esc(r.link)+'" target="_blank" rel="noopener">Open item link</a></div>':'')+
     (r.reason?'<div class="rq-meta">Why: '+esc(r.reason)+'</div>':'')+(r.extra||[]).map(function(x){return '<div class="rq-meta">'+esc(x.label)+': '+esc(x.value)+'</div>';}).join('')+(dec?'<div class="rq-dec">'+dec+'</div>':'')+'</div>'+
@@ -927,7 +957,8 @@ function wireRequests(p){
   var b=document.getElementById('reqBtn');if(b)b.onclick=function(){newRequest(p.pos);};
   document.querySelectorAll('[data-q]').forEach(function(x){x.onclick=function(){var id=x.getAttribute('data-id'),a=x.getAttribute('data-q');
     ({ok:function(){decideReq(p.pos,id,true);},no:function(){decideReq(p.pos,id,false);},edit:function(){editReq(p.pos,id);},order:function(){orderReq(p.pos,id);},
-      recv:function(){receiveReq(p.pos,id);},reopen:function(){reopenReq(p.pos,id);},del:function(){deleteReq(p.pos,id);}})[a]();};});
+      recv:function(){receiveReq(p.pos,id);},recvs:function(){var q=p.requests.find(function(x){return x.id===id;});q.status='Received';q.received=today();
+      if(q.purchaseId){var px=SUP().purchases.find(function(y){return y.id===q.purchaseId;});if(px)px.noInventory=true;}changed(q.item+' received.');},reopen:function(){reopenReq(p.pos,id);},del:function(){deleteReq(p.pos,id);}})[a]();};});
 }
 function homeRequestsPanel(){
   var rows=[];active().forEach(function(p){(p.requests||[]).forEach(function(r){if(['Pending','Approved','Ordered'].indexOf(r.status)>-1)rows.push({p:p,r:r});});});
@@ -976,6 +1007,7 @@ var FORM_DEFAULT={title:'Request an item',
   note:'Your name isn’t listed, or something looks wrong? Contact the operations team.',
   fields:[
    {key:'who',label:'Who is this for?',hint:'',required:true,show:true,type:'person',width:'full',locked:true},
+   {key:'kind',label:'What kind of request is this?',hint:'Office supplies come out of your yearly allowance (July 1 – June 30).',required:true,show:true,type:'kind',width:'full',options:['Office supplies (from my yearly allowance)','Equipment or something else']},
    {key:'item',label:'What do you need?',hint:'For example: Logitech wireless mouse',required:true,show:true,type:'text',width:'full',locked:true},
    {key:'link',label:'Link to the item',hint:'Paste the Amazon or store page so it can be ordered exactly.',required:true,show:true,type:'url',width:'full'},
    {key:'qty',label:'Quantity',hint:'',required:false,show:true,type:'number',width:'half'},
@@ -983,12 +1015,14 @@ var FORM_DEFAULT={title:'Request an item',
    {key:'needed',label:'Needed by',hint:'',required:false,show:true,type:'date',width:'half'},
    {key:'funding',label:'Funding source',hint:'',required:false,show:true,type:'select',width:'half',options:['Mixed Delivery','Business Academy','ITSN','General Operating','Other Grant']},
    {key:'reason',label:'Why do you need it?',hint:'',required:false,show:true,type:'textarea',width:'full'}]};
-var FTYPES={person:'Name list',text:'Short answer',url:'Web link',textarea:'Long answer',number:'Number',money:'Dollar amount',date:'Date',select:'Dropdown',yesno:'Yes / No'};
+var FTYPES={kind:'Request type',person:'Name list',text:'Short answer',url:'Web link',textarea:'Long answer',number:'Number',money:'Dollar amount',date:'Date',select:'Dropdown',yesno:'Yes / No'};
 function formCfg(src){
   var c=JSON.parse(JSON.stringify(src||(DB.settings&&DB.settings.requestForm)||FORM_DEFAULT));
   ['title','intro','button','done','note'].forEach(function(k){if(c[k]==null)c[k]=FORM_DEFAULT[k];});
   c.fields=c.fields||[];
-  FORM_DEFAULT.fields.forEach(function(d){if(!c.fields.some(function(f){return f.key===d.key;}))c.fields.push(JSON.parse(JSON.stringify(d)));});
+  FORM_DEFAULT.fields.forEach(function(d){if(!c.fields.some(function(f){return f.key===d.key;})){var nd=JSON.parse(JSON.stringify(d));
+    if(d.key==='kind'){var wi=c.fields.findIndex(function(f){return f.key==='who';});c.fields.splice(wi+1,0,nd);}else c.fields.push(nd);}});
+  c.fields.forEach(function(f){if(f.key==='kind'){f.type='kind';f.options=(f.options||[]).slice(0,2);while(f.options.length<2)f.options.push(FORM_DEFAULT.fields[1].options[f.options.length]);}});
   c.fields.forEach(function(f){if(f.key==='who'||f.key==='item'){f.locked=true;f.show=true;f.required=true;}});
   return c;
 }
@@ -1034,6 +1068,7 @@ function renderFieldEditors(){
       (f.custom?'<div class="fld"><label>Answer type</label><select data-k="type">'+['text','textarea','number','money','date','select','yesno','url'].map(function(t){return '<option value="'+t+'"'+(f.type===t?' selected':'')+'>'+FTYPES[t]+'</option>';}).join('')+'</select></div>':'')+
       '<div class="fld"><label>Width</label><select data-k="width"><option value="full"'+(f.width!=='half'?' selected':'')+'>Full row</option><option value="half"'+(f.width==='half'?' selected':'')+'>Half row</option></select></div>'+
       (f.type==='select'?'<div class="fld full"><label>Choices, one per line</label><textarea data-k="options">'+esc((f.options||[]).join('\n'))+'</textarea></div>':'')+
+      (f.type==='kind'?'<div class="fld full"><label>Wording for the office-supplies choice</label><input data-k="opt0" value="'+esc(f.options[0])+'"><div class="hint">Requests with this choice count toward the person’s supply allowance.</div></div><div class="fld full"><label>Wording for the other choice</label><input data-k="opt1" value="'+esc(f.options[1])+'"></div>':'')+
      '</div><div class="fe-checks">'+
       '<label class="fe-chk"><input type="checkbox" data-k="show" '+(f.show?'checked':'')+(lock?' disabled':'')+'> Show this question</label>'+
       '<label class="fe-chk"><input type="checkbox" data-k="required" '+(f.required?'checked':'')+(lock||!f.show?' disabled':'')+'> Required</label>'+
@@ -1046,7 +1081,7 @@ function renderFieldEditors(){
       var k=inp.getAttribute('data-k');
       var ev=inp.type==='checkbox'||inp.tagName==='SELECT'?'change':'input';
       inp.addEventListener(ev,function(){
-        if(inp.type==='checkbox')f[k]=inp.checked;else if(k==='options')f.options=inp.value.split('\n');else f[k]=inp.value;
+        if(inp.type==='checkbox')f[k]=inp.checked;else if(k==='options')f.options=inp.value.split('\n');else if(k==='opt0'||k==='opt1')f.options[+k.slice(3)]=inp.value;else f[k]=inp.value;
         if(k==='show'&&!f.show)f.required=false;
         if(k==='type'&&f.type==='select'&&!f.options)f.options=['Option 1','Option 2'];
         if(k==='show'||k==='type')renderFieldEditors();
@@ -1064,6 +1099,7 @@ function fieldInputHTML(f,id){
   var t=f.type;
   if(t==='person')return '<select id="'+id+'"><option value="">Choose your name</option><optgroup label="RAP Office"><option>Heather Gudowicz</option><option>Dawn Chapman</option></optgroup><optgroup label="GPW Office"><option>Megan Miloser</option></optgroup></select>';
   if(t==='textarea')return '<textarea id="'+id+'"></textarea>';
+  if(t==='kind')return '<select id="'+id+'"><option value="">Choose one</option><option>'+esc(f.options[0])+'</option><option>'+esc(f.options[1])+'</option></select>';
   if(t==='select')return '<select id="'+id+'"><option value="">'+(f.required?'Choose one':'Not sure')+'</option>'+(f.options||[]).filter(Boolean).map(function(o){return '<option>'+esc(o)+'</option>';}).join('')+'</select>';
   if(t==='yesno')return '<select id="'+id+'"><option value=""></option><option>Yes</option><option>No</option></select>';
   var it={number:'number',money:'number',date:'date',url:'url'}[t]||'text';
@@ -1076,6 +1112,182 @@ function renderFormPreview(){
       return '<div class="pv-f'+(f.width==='half'?'':' full')+'"><label>'+esc(f.label)+(f.required?' *':'')+'</label>'+fieldInputHTML(f,'pv'+i)+(f.hint?'<div class="hint">'+esc(f.hint)+'</div>':'')+'</div>';
     }).join('')+'</div><div style="margin-top:14px"><span class="btn btn-gold" style="pointer-events:none">'+esc(c.button)+'</span></div></div><p class="note">'+esc(c.note)+'</p>';
 }
+
+/* ---------- office supply budget ($ per person per fiscal year, July 1 – June 30) ---------- */
+function SUP(){DB.supplies=DB.supplies||{};var s=DB.supplies;if(s.allowance==null)s.allowance=100;s.overrides=s.overrides||{};s.purchases=s.purchases||[];return s;}
+function fyOf(d){if(!d)return null;var y=+String(d).slice(0,4),m=+String(d).slice(5,7);return m>=7?y+1:y;}
+function fyLabel(fy){return 'FY'+String(fy).slice(2);}
+function fyRange(fy){return 'July 1, '+(fy-1)+' – June 30, '+fy;}
+function curFY(){return fyOf(today());}
+var SUPFY=null;
+function budgetPeople(){
+  var by={};
+  active().forEach(function(p){
+    if(/-00$/.test(p.pos)||isVacant(p)||!OFF[p.office])return;
+    var k=(p.name||'').trim();if(!k)return;
+    (by[k]=by[k]||{name:k,positions:[]}).positions.push(p);
+  });
+  return Object.keys(by).map(function(k){var b=by[k];
+    b.positions.sort(function(a,c){return (+a.pos.slice(4))-(+c.pos.slice(4))||(a.pos<c.pos?-1:1);});
+    b.primary=b.positions[0];b.office=b.primary.office;return b;});
+}
+function allowanceFor(name){var s=SUP();return s.overrides[name]!=null?+s.overrides[name]:+s.allowance;}
+function purchasesFor(name,fy){return SUP().purchases.filter(function(x){return x.name===name&&(!fy||fyOf(x.date)===fy);});}
+function spentFor(name,fy){return Math.round(purchasesFor(name,fy).reduce(function(t,x){return t+(+x.amount||0);},0)*100)/100;}
+function leftFor(name,fy){return Math.round((allowanceFor(name)-spentFor(name,fy))*100)/100;}
+function supStatus(rem){return rem<0?['Over budget','w-exp']:rem===0?['Fully spent','c-misc']:rem<25?['Low balance','w-soon']:['Available','w-ok'];}
+function supBadge(rem){var s=supStatus(rem);return '<span class="badge '+s[1]+'">'+s[0]+'</span>';}
+function budgetOf(p){var b=budgetPeople().find(function(x){return x.name===p.name;});return b||null;}
+
+function viewSupplies(){
+  if(!isAdmin()){viewHome();return;}
+  var s=SUP(),fy=SUPFY||curFY();
+  setBar([['All offices','#'],['Office supply budget','#supplies']],'<button class="btn btn-ghost hide-m" id="supImp">Import from Excel</button> <button class="btn btn-gold" id="supAdd">Add purchase</button>');
+  var people=budgetPeople(),fys={};fys[curFY()]=1;s.purchases.forEach(function(x){var f=fyOf(x.date);if(f)fys[f]=1;});
+  var tot={allow:0,spent:0,low:0};people.forEach(function(b){var a=allowanceFor(b.name),sp=spentFor(b.name,fy);tot.allow+=a;tot.spent+=sp;if(a-sp<25)tot.low++;});
+  var pending=s.purchases.filter(function(x){return fyOf(x.date)===fy&&!x.addedToInventory&&!x.noInventory;}).length;
+  var h='<section class="hero"><h1>Office supply budget '+fyLabel(fy)+'</h1><div class="sub">Each person has '+money(s.allowance)+' for personal office supplies from '+fyRange(fy)+'. Spending counts when a purchase is logged or a supply request is marked ordered.</div>'+
+   '<div class="stats"><div class="stat"><b>'+money0(tot.allow)+'</b><span>team allowance</span></div><div class="stat"><b>'+money(tot.spent)+'</b><span>spent</span></div><div class="stat"><b>'+money(tot.allow-tot.spent)+'</b><span>remaining</span></div>'+
+   '<div class="stat"><b>'+(tot.allow?Math.round(tot.spent/tot.allow*100):0)+'%</b><span>of budget used</span></div><div class="stat'+(tot.low?' alert':'')+'"><b>'+tot.low+'</b><span>low, spent or over</span></div>'+
+   '<div class="stat"><b>'+pending+'</b><span>not yet in inventory</span></div></div></section>';
+  h+='<div class="tools noprint"><div class="chipset">'+Object.keys(fys).sort().reverse().map(function(f){return '<button class="chip" data-fy="'+f+'" aria-pressed="'+(+f===fy)+'">'+fyLabel(+f)+'</button>';}).join('')+'</div>'+
+     '<span class="note" style="margin:0 0 0 auto">Allowance per person: <b>'+money(s.allowance)+'</b> <button class="btn btn-line btn-sm" id="supAllow">Change</button></span></div>';
+  OFFICES.forEach(function(o){
+    var ps=people.filter(function(b){return b.office===o.k;}).sort(function(a,c){return a.primary.pos<c.primary.pos?-1:1;});
+    if(!ps.length)return;
+    h+='<h3 class="sup-oh" style="color:'+o.c+'">'+o.name+'</h3><div class="items sup-tbl"><div class="sup-head"><span>Person</span><span class="num">Allowance</span><span class="num">Spent</span><span class="num">Left</span><span class="num">Purchases</span><span>Status</span></div>'+
+     ps.map(function(b){
+       var a=allowanceFor(b.name),sp=spentFor(b.name,fy),rem=Math.round((a-sp)*100)/100,list=purchasesFor(b.name,fy).sort(function(x,y){return x.date<y.date?1:-1;});
+       return '<div class="sup-row" tabindex="0" data-n="'+esc(b.name)+'"><div><b>'+esc(b.name)+'</b><small>'+b.positions.map(function(p){return p.pos;}).join(', ')+'</small></div>'+
+        '<div class="num">'+money(a)+(s.overrides[b.name]!=null?' <span class="badge c-elec" title="Custom allowance">custom</span>':'')+'</div><div class="num">'+money(sp)+'</div><div class="num"><b>'+money(rem)+'</b></div><div class="num">'+list.length+'</div><div>'+supBadge(rem)+'</div>'+
+        '<div class="sup-detail">'+(list.length?list.map(function(x){return purchaseRow(x);}).join(''):'<div class="empty" style="padding:6px 0">No purchases in '+fyLabel(fy)+'.</div>')+
+        '<div class="acts"><button class="btn btn-gold btn-sm" data-sa="add" data-n="'+esc(b.name)+'">Add purchase for '+esc(b.name.split(' ')[0])+'</button><button class="btn btn-line btn-sm" data-sa="allow" data-n="'+esc(b.name)+'">Change '+esc(b.name.split(' ')[0])+'’s allowance</button><a class="btn btn-line btn-sm" href="#'+b.primary.pos+'">Open '+b.primary.pos+'</a></div></div></div>';
+     }).join('')+'</div>';
+  });
+  var orphans=s.purchases.filter(function(x){return fyOf(x.date)===fy&&!people.some(function(b){return b.name===x.name;});});
+  if(orphans.length)h+='<h3 class="sup-oh">Not matched to a current person</h3><div class="panel" style="padding:4px 18px">'+orphans.map(function(x){return purchaseRow(x,true);}).join('')+'</div>';
+  document.getElementById('app').innerHTML=h;
+  document.querySelectorAll('[data-fy]').forEach(function(b){b.onclick=function(){SUPFY=+b.getAttribute('data-fy');viewSupplies();};});
+  document.querySelectorAll('.sup-row').forEach(function(r){r.addEventListener('click',function(e){if(e.target.closest('button,a'))return;r.classList.toggle('open');});
+    r.addEventListener('keydown',function(e){if(e.target===r&&(e.key==='Enter'||e.key===' ')){e.preventDefault();r.classList.toggle('open');}});});
+  if(window.__supOpen){var el=document.querySelector('.sup-row[data-n="'+window.__supOpen.replace(/"/g,'\\"')+'"]');if(el)el.classList.add('open');window.__supOpen=null;}
+  document.getElementById('supAdd').onclick=function(){purchaseModal(null);};
+  document.getElementById('supImp').onclick=importSupplyExcel;
+  document.getElementById('supAllow').onclick=function(){allowModal(null);};
+  document.querySelectorAll('[data-sa]').forEach(function(b){b.onclick=function(){var n=b.getAttribute('data-n'),a=b.getAttribute('data-sa');if(a==='add')purchaseModal(null,n);else allowModal(n);};});
+  document.querySelectorAll('[data-pa]').forEach(function(b){b.onclick=function(){var id=b.getAttribute('data-id'),x=SUP().purchases.find(function(y){return y.id===id;}),a=b.getAttribute('data-pa');
+    if(a==='edit')purchaseModal(x);else if(a==='del')deletePurchase(x);else if(a==='inv')purchaseToInventory(x);else if(a==='noinv'){x.noInventory=true;window.__supOpen=x.name;changed('Marked as not needing inventory.');}};});
+}
+function purchaseRow(x,showName){
+  var inv=x.addedToInventory?'<span class="badge w-ok">In inventory</span>':x.noInventory?'<span class="badge c-misc">No inventory needed</span>':'<span class="badge w-soon">Not in inventory yet</span>';
+  return '<div class="sup-p"><div><b>'+esc(x.item)+'</b><small>'+fdate(x.date)+(showName?', '+esc(x.name):'')+(x.vendor?', '+esc(x.vendor):'')+(x.receipt?', '+esc(x.receipt):'')+(x.requestId?', from a request':'')+'</small></div>'+
+   '<div class="num"><b>'+money(x.amount)+'</b></div><div>'+inv+'</div><div class="acts" style="margin:0">'+
+   (!x.addedToInventory?'<button class="btn btn-line btn-sm" data-pa="inv" data-id="'+x.id+'">Add to inventory</button>':'')+
+   (!x.addedToInventory&&!x.noInventory?'<button class="btn btn-line btn-sm" data-pa="noinv" data-id="'+x.id+'">Not needed</button>':'')+
+   '<button class="btn btn-line btn-sm" data-pa="edit" data-id="'+x.id+'">Edit</button><button class="btn btn-danger btn-sm" data-pa="del" data-id="'+x.id+'">Delete</button></div></div>';
+}
+function purchaseModal(x,name){
+  var people=budgetPeople().sort(function(a,b){return a.name<b.name?-1:1;});
+  x=x||{date:today(),name:name||''};
+  var body='<div class="fgrid">'+fld('Person *','name',x.name,'select',people.map(function(b){return [b.name,b.name+' ('+b.positions.map(function(p){return p.pos;}).join(', ')+')'];}),'full')+
+    fld('Date *','date',x.date,'date')+fld('Amount ($) *','amount',x.amount,'number',null,'','The total for this purchase')+
+    fld('Item *','item',x.item,'text',null,'full')+fld('Vendor / store','vendor',x.vendor)+fld('Receipt or order #','receipt',x.receipt)+
+    fld('Added to inventory?','inv',x.addedToInventory?'Yes':x.noInventory?'Not needed':'No','select',['No','Yes','Not needed'])+fld('Notes','notes',x.notes,'text')+'</div><div class="err" id="supWarn" style="color:var(--warn)"></div>';
+  modal(x.id?'Edit purchase':'Add an office supply purchase','Counts toward the person’s '+money(SUP().allowance)+' for the fiscal year of the purchase date (July 1 – June 30).',body,x.id?'Save':'Add purchase',function(fd){
+    var n=g(fd,'name'),a=g(fd,'amount'),it=g(fd,'item'),d=g(fd,'date');
+    if(!n)return 'Choose the person.';if(!d)return 'Enter the date.';if(!it)return 'Describe the item.';if(a===''||isNaN(+a))return 'Enter the amount.';
+    var b=budgetPeople().find(function(y){return y.name===n;});
+    var rec=x.id?x:{id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)};
+    Object.assign(rec,{name:n,pos:b?b.primary.pos:rec.pos,date:d,amount:Math.round(+a*100)/100,item:it,vendor:g(fd,'vendor')||undefined,receipt:g(fd,'receipt')||undefined,notes:g(fd,'notes')||undefined,
+      addedToInventory:g(fd,'inv')==='Yes',noInventory:g(fd,'inv')==='Not needed'});
+    if(!x.id)SUP().purchases.push(rec);
+    window.__supOpen=n;var left=leftFor(n,fyOf(d));
+    changed((x.id?'Purchase updated. ':'Purchase added. ')+n+' has '+money(left)+' left for '+fyLabel(fyOf(d))+'.');
+  });
+  var warn=function(){var n=document.getElementById('f_name').value,a=+document.getElementById('f_amount').value||0,d=document.getElementById('f_date').value;
+    if(!n||!d){document.getElementById('supWarn').textContent='';return;}
+    var left=allowanceFor(n)-spentFor(n,fyOf(d))+(x.id&&x.name===n&&fyOf(x.date)===fyOf(d)?(+x.amount||0):0);
+    document.getElementById('supWarn').textContent=n+' has '+money(left)+' left for '+fyLabel(fyOf(d))+(a>left?'. This purchase would put them over by '+money(a-left)+'.':'.');};
+  ['f_name','f_amount','f_date'].forEach(function(id){var e=document.getElementById(id);e.addEventListener('input',warn);e.addEventListener('change',warn);});warn();
+}
+function deletePurchase(x){if(!confirm('Delete '+x.item+' ('+money(x.amount)+') from '+x.name+'’s supply spending?'))return;var s=SUP();s.purchases.splice(s.purchases.indexOf(x),1);window.__supOpen=x.name;changed('Purchase deleted. '+x.name+' has '+money(leftFor(x.name,fyOf(x.date)))+' left.');}
+function allowModal(name){
+  var s=SUP();
+  if(!name){modal('Allowance per person','The standard amount each person gets for personal office supplies each fiscal year.',
+    '<div class="fgrid">'+fld('Amount ($)','amt',s.allowance,'number')+'</div>','Save',function(fd){var a=g(fd,'amt');if(a===''||isNaN(+a))return 'Enter an amount.';s.allowance=+a;changed('Allowance set to '+money(+a)+' per person.');});return;}
+  modal(name+'’s allowance','Leave blank to use the standard '+money(s.allowance)+'.','<div class="fgrid">'+fld('Amount ($)','amt',s.overrides[name],'number')+'</div>','Save',function(fd){var a=g(fd,'amt');
+    if(a==='')delete s.overrides[name];else if(isNaN(+a))return 'Enter an amount or leave it blank.';else s.overrides[name]=+a;window.__supOpen=name;changed(name+'’s allowance is now '+money(allowanceFor(name))+'.');});
+}
+function purchaseToInventory(x){
+  var b=budgetPeople().find(function(y){return y.name===x.name;});var p=b?b.primary:BYPOS[x.pos];
+  if(!p){toast('Couldn’t find a sheet for '+x.name+'.');return;}
+  modal('Add '+x.item+' to '+p.pos,'It’s added to '+esc(displayName(p))+'’s inventory list.',itemForm({name:x.item,qty:1,unitCost:x.amount,vendor:[x.vendor,x.receipt].filter(Boolean).join(' '),purchased:x.date,assigned:x.date,category:'Office Supplies',status:'Assigned',condition:'New'}),'Add to inventory',function(fd){
+    if(!g(fd,'name'))return 'Enter an item name.';var it=readItem(fd);p.items.push(it);x.addedToInventory=true;x.noInventory=false;x.itemId=it.id;window.__supOpen=x.name;changed(it.name+' added to '+p.pos+'.');
+  });
+}
+function cellVal(v){if(v==null)return null;if(v instanceof Date)return v;if(typeof v==='object'){if('result' in v)return cellVal(v.result);if(v.richText)return v.richText.map(function(t){return t.text;}).join('');if(v.text)return v.text;}return v;}
+function isoD(d){if(d instanceof Date)return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');
+  var m=String(d||'').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m)return m[3]+'-'+m[1].padStart(2,'0')+'-'+m[2].padStart(2,'0');m=String(d||'').match(/(\d{4})-(\d{2})-(\d{2})/);return m?m[0]:null;}
+function matchName(n){
+  var people=budgetPeople(),t=String(n||'').trim().toLowerCase().replace(/\s+/g,' ');if(!t)return null;
+  var ex=people.find(function(b){return b.name.toLowerCase()===t;});if(ex)return ex.name;
+  var parts=t.split(' '),last=parts[parts.length-1];
+  var cands=people.filter(function(b){var bp=b.name.toLowerCase().split(' ');return bp[bp.length-1]===last&&bp[0][0]===parts[0][0];});
+  return cands.length===1?cands[0].name:null;
+}
+function importSupplyExcel(){
+  if(!window.ExcelJS){toast('The Excel reader is still loading. Try again in a moment.');return;}
+  var inp=document.createElement('input');inp.type='file';inp.accept='.xlsx';inp.onchange=function(){var f=inp.files[0];if(!f)return;
+    f.arrayBuffer().then(function(buf){var wb=new ExcelJS.Workbook();return wb.xlsx.load(buf).then(function(){return wb;});}).then(function(wb){
+      var ws=wb.getWorksheet('Purchase Log'),hr=0,cols={};
+      var scan=function(w){for(var r=1;r<=Math.min(10,w.rowCount);r++){var row=w.getRow(r),m={};row.eachCell(function(c,ci){var v=String(cellVal(c.value)||'').trim().toLowerCase();if(v)m[v]=ci;});if(m['date']&&(m['employee name']||m['employee'])){return {r:r,m:m};}}return null;};
+      var found=ws?scan(ws):null;if(!found)wb.eachSheet(function(w){if(!found){var x=scan(w);if(x){ws=w;found=x;}}});
+      if(!found){toast('Couldn’t find a sheet with Date and Employee Name columns.');return;}
+      var m=found.m,col=function(names){for(var i=0;i<names.length;i++){var k=Object.keys(m).find(function(h){return h.indexOf(names[i])===0;});if(k)return m[k];}return null;};
+      var C={date:col(['date']),name:col(['employee name','employee']),item:col(['item']),vendor:col(['vendor']),amount:col(['amount','cost','price']),receipt:col(['receipt','order']),inv:col(['added to inventory'])};
+      var rows=[],unmatched={},dup=0,s=SUP();
+      for(var r=found.r+1;r<=ws.rowCount;r++){var row=ws.getRow(r),gv=function(c){return c?cellVal(row.getCell(c).value):null;};
+        var nm=gv(C.name),amt=gv(C.amount);if(!nm||amt==null||amt==='')continue;
+        var who=matchName(nm);if(!who){unmatched[nm]=(unmatched[nm]||0)+1;continue;}
+        var rec={name:who,date:isoD(gv(C.date))||today(),item:String(gv(C.item)||'Office supplies').trim(),vendor:gv(C.vendor)?String(gv(C.vendor)).trim():undefined,amount:Math.round(+amt*100)/100,
+          receipt:gv(C.receipt)?String(gv(C.receipt)).replace(/\u00a0/g,' ').replace(/^(Order #\s*)+/i,'Order # ').trim():undefined,addedToInventory:gv(C.inv)===true||String(gv(C.inv)).toUpperCase()==='TRUE'};
+        var key=rec.name+'|'+rec.date+'|'+rec.item+'|'+rec.amount;
+        if(s.purchases.some(function(x){return x.name+'|'+x.date+'|'+x.item+'|'+x.amount===key;})){dup++;continue;}
+        rows.push(rec);}
+      var um=Object.keys(unmatched);
+      if(!rows.length){toast('Nothing new to import'+(dup?' ('+dup+' already here)':'')+(um.length?'. Not matched: '+um.join(', '):'')+'.');return;}
+      modal('Import '+rows.length+' purchase'+(rows.length>1?'s':''),'From '+esc(f.name)+(dup?'. '+dup+' already here will be skipped.':'.')+(um.length?' <b>Not matched to anyone:</b> '+esc(um.join(', '))+'. Fix the name in the file or add those purchases by hand.':''),
+        '<div class="panel" style="max-height:300px;overflow:auto;padding:4px 12px">'+rows.map(function(x){return '<div class="sup-p"><div><b>'+esc(x.item.length>70?x.item.slice(0,70)+'…':x.item)+'</b><small>'+fdate(x.date)+', '+esc(x.name)+'</small></div><div class="num">'+money(x.amount)+'</div></div>';}).join('')+'</div>',
+        'Import',function(){rows.forEach(function(x){var b=budgetPeople().find(function(y){return y.name===x.name;});x.pos=b?b.primary.pos:undefined;x.id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);s.purchases.push(x);});
+          changed('Imported '+rows.length+' purchases.');});
+    }).catch(function(e){toast('Couldn’t read that file: '+e.message);});};
+  inp.click();
+}
+/* ---- pieces used by other screens ---- */
+function supplyCard(p){
+  var b=budgetOf(p);if(!b||!isAdmin())return '';
+  var fy=curFY(),a=allowanceFor(b.name),sp=spentFor(b.name,fy),rem=Math.round((a-sp)*100)/100,n=purchasesFor(b.name,fy).length;
+  return '<a class="sup-card noprint" href="#supplies"><span><b>Office supply budget '+fyLabel(fy)+':</b> '+money(rem)+' left of '+money(a)+(n?', '+n+' purchase'+(n>1?'s':''):'')+'</span>'+supBadge(rem)+'</a>';
+}
+function homeSupplyPanel(){
+  if(!isAdmin())return '';
+  var fy=curFY(),people=budgetPeople(),allow=0,spent=0,low=0;people.forEach(function(b){var a=allowanceFor(b.name),sp=spentFor(b.name,fy);allow+=a;spent+=sp;if(a-sp<25)low++;});
+  return '<div class="section"><h3>Office supply budget '+fyLabel(fy)+'</h3><a class="panel sup-home" href="#supplies"><span><b>'+money(spent)+'</b> spent of '+money0(allow)+'</span><span><b>'+money(allow-spent)+'</b> remaining</span><span><b>'+low+'</b> low, spent or over</span><span class="go">Open the budget</span></a></div>';
+}
+function isSupplyReq(r){return r&&r.kind==='supplies';}
+function reqBudgetLine(p,r,extra){
+  if(!isSupplyReq(r))return '';
+  var name=(budgetOf(p)||{}).name||p.name,fy=curFY(),left=leftFor(name,fy),cost=(r.actualCost!=null?r.actualCost:r.cost||0)*(r.qty||1);
+  return name+' has '+money(left)+' left for '+fyLabel(fy)+'.'+(cost?' This request is about '+money(cost)+(cost>left?', which is '+money(cost-left)+' over.':'.'):'')+(extra||'');
+}
+function logRequestPurchase(p,r){
+  if(!isSupplyReq(r))return;
+  var s=SUP(),name=(budgetOf(p)||{}).name||p.name,amt=Math.round(((r.actualCost!=null?r.actualCost:r.cost)||0)*(r.qty||1)*100)/100;
+  var x=r.purchaseId&&s.purchases.find(function(y){return y.id===r.purchaseId;});
+  if(!x){x={id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)};s.purchases.push(x);r.purchaseId=x.id;}
+  Object.assign(x,{name:name,pos:p.pos,date:r.ordered||today(),item:r.item,vendor:r.orderNo||undefined,receipt:r.orderNo||undefined,amount:amt,requestId:r.id});
+}
+function unlogRequestPurchase(r){if(!r||!r.purchaseId)return;var s=SUP(),i=s.purchases.findIndex(function(y){return y.id===r.purchaseId;});if(i>-1)s.purchases.splice(i,1);delete r.purchaseId;}
 
 /* ---------- Excel export (mirrors the website) ---------- */
 function exportExcel(){
@@ -1185,7 +1397,7 @@ function exportExcel(){
     [{text:a[0].pos,hyperlink:wsLink(a[0])},a[1].name,displayName(a[0]),null,d(a[1].warrantyExp),{soon:'Expiring soon',expired:'Expired',nodate:'Missing date'}[a[2]]].forEach(function(v,j){if(j===3)return;var c=home.getCell(r,2+j);c.value=v;c.border=box;c.font=F(j===0?{bold:true,color:{argb:OC[a[0].office]}}:{});if(j===4)c.numFmt='mm/dd/yyyy';});});
   var nr=hr+3+Math.max(al.length,1);
   home.mergeCells('B'+nr+':G'+nr);
-  home.getCell('B'+nr).value='Tabs: Home · RAP / GPW / LFC office dashboards · one tab per position (click a position to jump to it) · All Items · Item History · Requests'+(arch.length?' · Archived':'')+'.';
+  home.getCell('B'+nr).value='Tabs: Home · RAP / GPW / LFC office dashboards · one tab per position (click a position to jump to it) · All Items · Item History · Requests · Supply Budget · Supply Purchases'+(arch.length?' · Archived':'')+'.';
   home.getCell('B'+nr).font=F({size:9,italic:true,color:{argb:'FF6B7280'}});
 
   /* ---- Office dashboards ---- */
@@ -1302,6 +1514,55 @@ function exportExcel(){
   else{rqs.autoFilter={from:{row:3,column:1},to:{row:rr-1,column:17}};
     [['Pending','FFFEF3C7','FFB45309'],['Approved','FFD1FAE5','FF065F46'],['Not approved','FFFCEBEB','FFB91C1C'],['Ordered','FFDBEAFE','FF1E40AF'],['Received','FFF3F4F6','FF4B5563']].forEach(function(x){
       rqs.addConditionalFormatting({ref:'K4:K'+(rr-1),rules:[{type:'expression',formulae:['K4="'+x[0]+'"'],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:x[1]}},font:{bold:true,color:{argb:x[2]}}}}]});});}
+
+
+  /* ---- Office supply budget ---- */
+  (function(){
+    var S=SUP(),fy=curFY(),ppl=budgetPeople().sort(function(a,b){var x=(ORD[a.office]||9)-(ORD[b.office]||9);return x||(a.primary.pos<b.primary.pos?-1:1);});
+    var sb=wb.addWorksheet('Supply Budget',{properties:{tabColor:{argb:'FF9D174D'}},views:[{state:'frozen',ySplit:5,showGridLines:false}]});
+    var sp=wb.addWorksheet('Supply Purchases',{properties:{tabColor:{argb:'FF9D174D'}},views:[{state:'frozen',ySplit:3,showGridLines:false}]});
+    /* purchases */
+    band(sp,1,2,1,11,NAVY);sp.getCell('A1').value='Office supply purchases';sp.getCell('A1').font=F({bold:true,size:16,color:{argb:'FFFFFFFF'}});
+    sp.getCell('A2').value='Every purchase counted against the yearly allowance. Fiscal year runs July 1 – June 30.';sp.getCell('A2').font=F({size:9,color:{argb:GRAYTX}});
+    var PC=[['Date',12],['Fiscal Year',10],['Person',24],['Position',10],['Office',10],['Item',44],['Vendor',16],['Amount',11],['Receipt / Order #',26],['In Inventory',13],['From Request',12]];
+    header(sp,3,1,PC.map(function(c){return c[0];}));PC.forEach(function(c,i){sp.getColumn(i+1).width=c[1];});
+    var pr=4,list=S.purchases.slice().sort(function(a,b){return a.date<b.date?-1:1;});
+    list.forEach(function(x){var pp=BYPOS[x.pos];
+      [d(x.date),fyLabel(fyOf(x.date)),x.name,x.pos||'',pp?pp.office:'',x.item,x.vendor||'',x.amount,x.receipt||'',x.addedToInventory?'Yes':x.noInventory?'Not needed':'No',x.requestId?'Yes':''].forEach(function(v,j){
+        var c=sp.getCell(pr,1+j);c.value=v;c.border=box;c.font=F(j===2?{bold:true}:{});c.alignment={vertical:'top',wrapText:j===5};if(j===0)c.numFmt='mm/dd/yyyy';if(j===7)c.numFmt='$#,##0.00';});pr++;});
+    var pLast=Math.max(pr-1,4);
+    if(pr===4){sp.mergeCells('A4:F4');sp.getCell('A4').value='No purchases logged yet.';sp.getCell('A4').font=F({italic:true,color:{argb:'FF6B7280'}});}
+    else{sp.autoFilter={from:{row:3,column:1},to:{row:pLast,column:11}};
+      sp.addConditionalFormatting({ref:'J4:J'+pLast,rules:[{type:'expression',formulae:['J4="No"'],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:'FFFEF3C7'}},font:{bold:true,color:{argb:'FFB45309'}}}}]});}
+    sp.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,printTitlesRow:'3:3'};
+    /* budget */
+    [3,24,16,10,13,13,13,11,15,3].forEach(function(w,i){sb.getColumn(i+1).width=w;});
+    band(sb,1,3,1,10,NAVY);
+    sb.getCell('B1').value='Office supply budget';sb.getCell('B1').font=F({bold:true,size:18,color:{argb:'FFFFFFFF'}});
+    sb.getCell('B2').value='Each person gets an allowance for personal office supplies each fiscal year (July 1 – June 30). Spent and Left come from the Supply Purchases tab.';sb.getCell('B2').font=F({size:9,color:{argb:GRAYTX}});
+    sb.getCell('B4').value='Fiscal year shown:';sb.getCell('B4').font=F({bold:true});sb.getCell('B4').alignment={horizontal:'right'};
+    var fyc=sb.getCell('C4');fyc.value=fyLabel(fy);fyc.font=F({bold:true,color:{argb:'FF0000FF'}});fyc.fill=fill('FFFFF7D6');fyc.border=box;
+    sb.getCell('D4').value='Type another year (for example FY28) to see it.';sb.getCell('D4').font=F({size:9,italic:true,color:{argb:'FF6B7280'}});
+    header(sb,5,2,['Person','Position(s)','Office','Allowance','Spent','Left','Purchases','Status']);
+    var P="'Supply Purchases'!",rng=function(col){return P+'$'+col+'$4:$'+col+'$'+pLast;};
+    var br=6;ppl.forEach(function(b,i){
+      var a=allowanceFor(b.name),spv=spentFor(b.name,fy),lf=Math.round((a-spv)*100)/100,alt=i%2===1;
+      var vals=[b.name,b.positions.map(function(p){return p.pos;}).join(', '),(OFF[b.office]||{name:b.office}).name,a,
+        {formula:'SUMIFS('+rng('H')+','+rng('C')+',B'+br+','+rng('B')+',$C$4)',result:spv},{formula:'E'+br+'-F'+br,result:lf},
+        {formula:'COUNTIFS('+rng('C')+',B'+br+','+rng('B')+',$C$4)',result:purchasesFor(b.name,fy).length},
+        {formula:'IF(G'+br+'<0,"Over budget",IF(G'+br+'=0,"Fully spent",IF(G'+br+'<25,"Low balance","Available")))',result:supStatus(lf)[0]}];
+      vals.forEach(function(v,j){var c=sb.getCell(br,2+j);c.value=v;c.border=box;c.fill=fill(alt?ALT:'FFFFFFFF');c.font=F(j===0?{bold:true,color:{argb:NAVY}}:j===3?{color:{argb:'FF0000FF'}}:{});
+        if(j>=3&&j<=5)c.numFmt='$#,##0.00';if(j===6||j===7)c.alignment={horizontal:'center'};});
+      br++;});
+    var bl=br-1;
+    var tl=sb.getCell(br,2);tl.value='TEAM TOTALS';tl.font=F({bold:true,color:{argb:'FFFFFFFF'}});
+    for(var c=2;c<=9;c++){sb.getCell(br,c).fill=fill(NAVY2);sb.getCell(br,c).font=F({bold:true,color:{argb:'FFFFFFFF'}});}
+    ['E','F','G','H'].forEach(function(col){var c=sb.getCell(col+br);c.value={formula:'SUM('+col+'6:'+col+bl+')'};if(col!=='H')c.numFmt='$#,##0.00';else c.alignment={horizontal:'center'};});
+    sb.getCell('B'+(br+2)).value='Blue numbers can be changed. Allowance per person: '+money(S.allowance)+' unless noted.';sb.getCell('B'+(br+2)).font=F({size:9,italic:true,color:{argb:'FF6B7280'}});
+    [['Over budget','FFFCEBEB','FFB91C1C'],['Fully spent','FFF3F4F6','FF4B5563'],['Low balance','FFFEF3C7','FFB45309'],['Available','FFD1FAE5','FF065F46']].forEach(function(x){
+      sb.addConditionalFormatting({ref:'I6:I'+bl,rules:[{type:'expression',formulae:['I6="'+x[0]+'"'],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:x[1]}},font:{bold:true,color:{argb:x[2]}}}}]});});
+    sb.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0};
+  })();
 
   /* ---- Archived ---- */
   if(arch.length){
