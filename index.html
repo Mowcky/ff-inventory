@@ -215,6 +215,33 @@ details.hist summary{cursor:pointer;font-weight:700}
 .rq .acts{grid-column:auto;margin-top:0;justify-content:flex-end}
 .rq-closed{margin-top:6px}.rq-closed summary{cursor:pointer;font-weight:700;font-size:14px;padding:8px 0;color:var(--muted)}
 @media (max-width:760px){.rq{grid-template-columns:1fr}.rq .acts{justify-content:flex-start}}
+
+/* ---- request form editor ---- */
+.fe{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
+.fe-h{font-size:17px;font-weight:800;margin-bottom:10px}
+.fe-field{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;background:#fff}
+.fe-field.off{background:#F7F7F5;opacity:.75}
+.fe-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.fe-type{font-size:12.5px;font-weight:700;color:var(--muted)}
+.fe-move{display:flex;gap:6px}.fe-move .btn{padding:4px 10px}.fe-move .btn:disabled{opacity:.35;cursor:default}
+.fe-checks{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.fe-chk{font-size:14px;display:flex;gap:6px;align-items:center;cursor:pointer}
+.fe-chk input{width:17px;height:17px}
+.fe-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.fe-sticky{position:sticky;top:76px}
+.fe-plabel{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.fe-preview{background:var(--paper);border:1px solid #E2DCCF;border-radius:14px;padding:14px;max-height:calc(100vh - 120px);overflow:auto}
+.pv-hero{background:var(--navy);color:#fff;border-radius:12px;padding:16px 16px 14px;border-bottom:4px solid var(--gold);margin-bottom:12px}
+.pv-h1{font-size:21px;font-weight:800}
+.pv-hero p{color:#B8C4D1;font-size:13.5px;margin-top:6px}
+.pv-card{background:#fff;border-radius:12px;padding:14px}
+.pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+.pv-f.full{grid-column:1 / -1}
+.pv-f label{display:block;font-size:12.5px;font-weight:700;color:#374151;margin-bottom:4px}
+.pv-f input,.pv-f select,.pv-f textarea{width:100%;padding:8px 10px;border:1px solid #D1D5DB;border-radius:8px;font-size:14px;font-family:inherit;background:#fff}
+.pv-f textarea{min-height:60px}
+.pv-f .hint{font-size:12px;color:var(--muted);margin-top:3px}
+@media (max-width:900px){.fe{grid-template-columns:1fr}.fe-sticky{position:static}}
 </style>
 </head>
 <body>
@@ -575,7 +602,7 @@ function viewPerson(pos){
   var p=BYPOS[pos];var o=OFF[p.office]||{name:p.office,c:'var(--gold)',k:p.office};
   setBar([['All offices','#'],[o.name,'#'+o.k],[pos,'#'+pos]],'<button class="btn btn-ghost hide-m" onclick="window.print()">Print or save PDF</button> '+(p.archived||!isAdmin()?'':'<button class="btn btn-gold" id="addI">Add item</button>'));
   var s=summary(p),vac=/^vacant$/i.test(p.name);
-  var h=(p.archived?'<div class="banner-warn">'+esc(pos)+' was archived on '+fdate(p.archived.date)+'. It does not appear on the '+esc(o.name)+' dashboard. <button class="btn btn-line btn-sm" id="restP">Restore position</button></div>':'')+
+  var h=(p.archived?'<div class="banner-warn">'+esc(pos)+' was archived on '+fdate(p.archived.date)+'. '+(OFF[p.office]?'It does not appear on the '+esc(o.name)+' dashboard. ':'')+'You can still transfer, archive or edit its items below.'+(OFF[p.office]&&isAdmin()?' <button class="btn btn-line btn-sm" id="restP">Restore position</button>':'')+'</div>':'')+
     '<section class="hero" style="--accent:'+o.c+'"><div class="person-head"><div><div class="pos">'+esc(pos)+'</div><h1>'+esc(displayName(p))+'</h1>'+
     '<div class="sub">'+esc([p.title,o.name].filter(Boolean).join(', '))+(p.reviewed?'. Last reviewed '+fdate(p.reviewed):'')+'</div>'+
     '<div class="stats"><div class="stat"><b>'+s.items+'</b><span>items</span></div><div class="stat"><b>'+s.war+'</b><span>under warranty</span></div>'+
@@ -630,7 +657,7 @@ function renderItems(p,q){
       .filter(function(d){return d[1]!=null&&d[1]!=='';}).map(function(d){return '<div><span>'+d[0]+'</span>'+esc(d[1])+'</div>';}).join('');
     if(it.link)det+='<div><span>Receipt</span><a href="'+esc(it.link)+'" target="_blank" rel="noopener">Open order</a></div>';
     if(!det)det='<div>No extra details recorded.</div>';
-    var acts=p.archived||!isAdmin()?'':'<div class="acts noprint"><button class="btn btn-line btn-sm" data-a="edit" data-id="'+it.id+'">Edit</button><button class="btn btn-line btn-sm" data-a="xfr" data-id="'+it.id+'">Transfer</button>'+
+    var acts=!isAdmin()?'':'<div class="acts noprint"><button class="btn btn-line btn-sm" data-a="edit" data-id="'+it.id+'">Edit</button><button class="btn btn-line btn-sm" data-a="xfr" data-id="'+it.id+'">Transfer</button>'+
       (it.stickerApplied!=='Yes'&&t>50?'<button class="btn btn-line btn-sm" data-a="stk" data-id="'+it.id+'">Sticker is on</button>':'')+
       '<button class="btn btn-danger btn-sm" data-a="arch" data-id="'+it.id+'">Archive</button></div>';
     return '<div class="irow" tabindex="0" data-id="'+it.id+'"><div class="iname">'+esc(it.name)+(it.desc&&it.desc!==it.name?'<small>'+esc(it.desc)+'</small>':'')+'</div>'+
@@ -652,7 +679,7 @@ function viewArchived(){
   var ps=PEOPLE.filter(function(p){return p.archived;}).sort(function(a,b){return a.pos<b.pos?-1:1;});
   var h='<section class="hero"><h1>Archived positions</h1><div class="sub">Positions no longer on an office dashboard. Their items and history are kept here.</div></section><div class="panel">'+
    (ps.length?ps.map(function(p){var s=summary(p);return '<div class="arch-row"><b>'+esc(p.pos)+'</b><a href="#'+p.pos+'"><b>'+esc(displayName(p))+'</b> <span style="color:var(--muted)">archived '+fdate(p.archived.date)+', '+s.items+' items</span></a>'+
-     '<a class="btn btn-line btn-sm" href="#'+p.pos+'">Open</a><button class="btn btn-line btn-sm" data-r="'+p.pos+'">Restore</button></div>';}).join(''):'<div class="empty">Nothing is archived. When someone leaves, open their page and choose Person leaving.</div>')+'</div>';
+     '<a class="btn btn-line btn-sm" href="#'+p.pos+'">Open</a>'+(OFF[p.office]&&isAdmin()?'<button class="btn btn-line btn-sm" data-r="'+p.pos+'">Restore</button>':'<span></span>')+'</div>';}).join(''):'<div class="empty">Nothing is archived. When someone leaves, open their page and choose Person leaving.</div>')+'</div>';
   document.getElementById('app').innerHTML=h;
   document.querySelectorAll('[data-r]').forEach(function(b){b.onclick=function(){restorePerson(b.getAttribute('data-r'));};});
 }
@@ -666,7 +693,7 @@ function viewSettings(){
   '<button class="btn btn-gold" id="ghBtn">'+(gh()?'Change connection':'Connect GitHub')+'</button> '+(gh()?'<button class="btn btn-line" id="ghOff">Disconnect this device</button>':'')+'</div>'+settingsRequestsPanel()+
   '<div class="panel" style="padding:18px 20px;margin-top:16px"><h3 style="font-size:17px;margin-bottom:6px">Backup and export</h3>'+
   '<p class="note" style="margin:0 0 12px">Download a backup at each quarterly check. Restoring replaces everything on this device; save afterwards to publish it.</p>'+
-  '<button class="btn btn-line" id="bk">Download backup (data.json)</button> <button class="btn btn-line" id="rs">Restore from backup</button> <button class="btn btn-line" id="xl">Export to Excel</button><p class="note" style="margin:10px 0 0">The Excel file mirrors the website: a Home tab, RAP, GPW and LFC dashboards, a tab for every position, All Items and Item History.</p>'+
+  '<button class="btn btn-line" id="bk">Download backup (data.json)</button> <button class="btn btn-line" id="rs">Restore from backup</button> <button class="btn btn-line" id="mg">Add positions from a file</button> <button class="btn btn-line" id="xl">Export to Excel</button><p class="note" style="margin:10px 0 0">The Excel file mirrors the website: a Home tab, RAP, GPW and LFC dashboards, a tab for every position, All Items and Item History.</p>'+
   '<input type="file" id="rsf" accept=".json,application/json" hidden></div>'+
   (PREVIEW?'':'<div class="panel" style="padding:18px 20px;margin-top:16px"><h3 style="font-size:17px;margin-bottom:6px">Import from Excel</h3><p class="note" style="margin:0 0 12px">Only needed if you go back to editing in Excel. Importing replaces everything on the website.</p><a class="btn btn-line" href="publish.html">Import Excel files</a></div>');
   document.getElementById('app').innerHTML=h;
@@ -674,6 +701,13 @@ function viewSettings(){
   var off=document.getElementById('ghOff');if(off)off.onclick=function(){store(K_GH,null);toast('This device is disconnected from GitHub.');route();renderSaveBar();};
   document.getElementById('bk').onclick=function(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(DB,null,1)],{type:'application/json'}));a.download='FF_Inventory_Backup_'+today()+'.json';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();},300);};
   var rsf=document.getElementById('rsf');document.getElementById('rs').onclick=function(){rsf.click();};
+  var mgf=document.createElement('input');mgf.type='file';mgf.accept='.json,application/json';mgf.hidden=true;document.body.appendChild(mgf);
+  document.getElementById('mg').onclick=function(){mgf.value='';mgf.click();};
+  mgf.onchange=function(){var f=mgf.files[0];if(!f)return;f.text().then(function(t){var d;try{d=JSON.parse(t);if(!d.people)throw 0;}catch(e){toast('That file doesn’t contain any positions.');return;}
+    var add=d.people.filter(function(p){return p.pos&&!BYPOS[String(p.pos).toUpperCase()];}),skip=d.people.length-add.length;
+    if(!add.length){toast('Everything in that file is already here.');return;}
+    if(!confirm('Add '+add.map(function(p){return p.pos+' ('+p.name+')';}).join(', ')+'?'+(skip?'\n\n'+skip+' already here will be skipped.':'')))return;
+    add.forEach(function(p){PEOPLE.push(p);});normalize();changed('Added '+add.length+' position'+(add.length>1?'s':'')+'.'+(PREVIEW?'':' Save to GitHub to keep it.'));});};
   rsf.onchange=function(){var f=rsf.files[0];if(!f)return;f.text().then(function(t){try{var d=JSON.parse(t);if(!d.people)throw 0;
     if(!confirm('Replace all current data with this backup ('+d.people.length+' sheets, saved '+(d.generated||'unknown')+')?'))return;
     DB=d;PEOPLE=d.people;normalize();changed('Backup restored. Save to publish it.');}catch(e){toast('That file is not an inventory backup.');}});};
@@ -719,6 +753,7 @@ function route(keep){
   else if(h==='ARCHIVED')viewArchived();
   else if(h==='SETTINGS')viewSettings();
   else if(h==='REQUEST-POSTER')viewRequestPoster();
+  else if(h==='REQUEST-FORM')viewRequestForm();
   else if(OFF[h])viewOffice(h);
   else if(BYPOS[h])viewPerson(h);
   else viewMissing(h);
@@ -818,7 +853,7 @@ function importRequestLink(pos,code){
   if((p.requests||[]).some(function(x){return x.id===r.id;})){toast('This request is already in '+pos+'’s list.');return;}
   modal('Add this request to '+pos+'?',esc(r.by||'')+' asked for this on '+fdate(r.submitted)+'.',
     '<div class="detail" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">'+
-    [['Item',r.item],['Quantity',r.qty||1],['Price each',money(r.cost)],['Needed by',fdate(r.needed)],['Funding',r.funding],['Why',r.reason]].filter(function(x){return x[1];}).map(function(x){return '<div><span>'+x[0]+'</span>'+esc(x[1])+'</div>';}).join('')+
+    [['Item',r.item],['Quantity',r.qty||1],['Price each',money(r.cost)],['Needed by',fdate(r.needed)],['Funding',r.funding],['Why',r.reason]].concat((r.extra||[]).map(function(x){return [x.label,x.value];})).filter(function(x){return x[1];}).map(function(x){return '<div><span>'+x[0]+'</span>'+esc(x[1])+'</div>';}).join('')+
     (r.link?'<div style="grid-column:1/-1"><span>Link</span><a href="'+esc(r.link)+'" target="_blank" rel="noopener">'+esc(r.link)+'</a></div>':'')+'</div>',
     'Add as Pending',function(){r.status='Pending';p.requests=p.requests||[];p.requests.push(r);changed('Request added to '+pos+'. Approve it or not from their page.');});
 }
@@ -876,7 +911,7 @@ function reqRow(p,r){
   return '<div class="rq"><div class="rq-main"><div class="rq-top"><b>'+esc(r.item)+'</b> '+reqBadge(r)+'</div>'+
     '<div class="rq-meta">'+esc(meta.join(', '))+'</div>'+
     (r.link?'<div class="rq-meta"><a href="'+esc(r.link)+'" target="_blank" rel="noopener">Open item link</a></div>':'')+
-    (r.reason?'<div class="rq-meta">Why: '+esc(r.reason)+'</div>':'')+(dec?'<div class="rq-dec">'+dec+'</div>':'')+'</div>'+
+    (r.reason?'<div class="rq-meta">Why: '+esc(r.reason)+'</div>':'')+(r.extra||[]).map(function(x){return '<div class="rq-meta">'+esc(x.label)+': '+esc(x.value)+'</div>';}).join('')+(dec?'<div class="rq-dec">'+dec+'</div>':'')+'</div>'+
     (acts?'<div class="acts noprint">'+acts+'</div>':'')+'</div>';
 }
 function requestsSection(p){
@@ -909,6 +944,7 @@ function settingsRequestsPanel(){
    (PREVIEW?'':'<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:14px"><canvas data-qr="'+esc(requestPageURL())+'" data-px="200" style="width:110px;height:110px;border:1px solid var(--line);border-radius:8px"></canvas>'+
    '<div><div style="font-weight:700;margin-bottom:4px">Request page</div><code style="font-size:13px;word-break:break-all">'+esc(requestPageURL())+'</code>'+
    '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn btn-line btn-sm" id="reqCopy">Copy link</button><a class="btn btn-line btn-sm" href="request.html" target="_blank" rel="noopener">Open it</a><a class="btn btn-line btn-sm" href="#request-poster">Print a poster</a></div></div></div>')+
+   '<div style="margin-bottom:14px"><a class="btn btn-gold" href="#request-form">Edit the request form</a> <span class="note" style="margin-left:6px">Change the wording, questions, required fields and order.</span></div>'+
    '<div class="fgrid" style="max-width:560px"><div class="fld"><label for="reqEmail">Send requests to</label><input id="reqEmail" type="email" value="'+esc(s.requestEmail||'')+'" placeholder="you@foundationfirst.org"></div>'+
    '<div class="fld"><label for="reqAppr">Default approver name</label><input id="reqAppr" type="text" value="'+esc(s.approver||'')+'"></div></div>'+
    '<div style="margin-top:12px"><button class="btn btn-line" id="reqSave">Save request settings</button></div></div>';
@@ -931,6 +967,114 @@ function viewRequestPoster(){
    '<canvas data-qr="'+esc(requestPageURL())+'" data-px="700" style="width:3.6in;height:3.6in;margin:28px auto 14px;display:block"></canvas>'+
    '<div style="font-size:14px;color:var(--muted);word-break:break-all">'+esc(requestPageURL())+'</div></div>';
   paintQRs();
+}
+
+/* ---------- request form settings (shared shape with request.html) ---------- */
+var FORM_DEFAULT={title:'Request an item',
+  intro:'Need something for your work? Paste a link to it below. Your request goes to the operations team for approval, and you’ll hear back by email.',
+  button:'Send request',done:'You’ll hear back once it’s approved or not.',
+  note:'Your name isn’t listed, or something looks wrong? Contact the operations team.',
+  fields:[
+   {key:'who',label:'Who is this for?',hint:'',required:true,show:true,type:'person',width:'full',locked:true},
+   {key:'item',label:'What do you need?',hint:'For example: Logitech wireless mouse',required:true,show:true,type:'text',width:'full',locked:true},
+   {key:'link',label:'Link to the item',hint:'Paste the Amazon or store page so it can be ordered exactly.',required:true,show:true,type:'url',width:'full'},
+   {key:'qty',label:'Quantity',hint:'',required:false,show:true,type:'number',width:'half'},
+   {key:'cost',label:'Price each ($)',hint:'From the link, if you know it',required:false,show:true,type:'money',width:'half'},
+   {key:'needed',label:'Needed by',hint:'',required:false,show:true,type:'date',width:'half'},
+   {key:'funding',label:'Funding source',hint:'',required:false,show:true,type:'select',width:'half',options:['Mixed Delivery','Business Academy','ITSN','General Operating','Other Grant']},
+   {key:'reason',label:'Why do you need it?',hint:'',required:false,show:true,type:'textarea',width:'full'}]};
+var FTYPES={person:'Name list',text:'Short answer',url:'Web link',textarea:'Long answer',number:'Number',money:'Dollar amount',date:'Date',select:'Dropdown',yesno:'Yes / No'};
+function formCfg(src){
+  var c=JSON.parse(JSON.stringify(src||(DB.settings&&DB.settings.requestForm)||FORM_DEFAULT));
+  ['title','intro','button','done','note'].forEach(function(k){if(c[k]==null)c[k]=FORM_DEFAULT[k];});
+  c.fields=c.fields||[];
+  FORM_DEFAULT.fields.forEach(function(d){if(!c.fields.some(function(f){return f.key===d.key;}))c.fields.push(JSON.parse(JSON.stringify(d)));});
+  c.fields.forEach(function(f){if(f.key==='who'||f.key==='item'){f.locked=true;f.show=true;f.required=true;}});
+  return c;
+}
+var FORM_EDIT=null;
+function viewRequestForm(){
+  setBar([['All offices','#'],['Settings & backup','#settings'],['Request form','#request-form']],'');
+  if(!isAdmin()){viewHome();return;}
+  if(!FORM_EDIT)FORM_EDIT=formCfg();
+  var c=FORM_EDIT;
+  var t=function(id,label,val,area,hint){return '<div class="fld full"><label for="'+id+'">'+label+'</label>'+(area?'<textarea id="'+id+'">'+esc(val)+'</textarea>':'<input id="'+id+'" value="'+esc(val)+'">')+(hint?'<div class="hint">'+hint+'</div>':'')+'</div>';};
+  var h='<section class="hero"><h1>Edit the request form</h1><div class="sub">Change the wording, which questions appear, which are required, and their order. The preview on the right updates as you type. Choose Save form, then Save to GitHub to publish it.</div></section>'+
+   '<div class="fe"><div class="fe-left">'+
+   '<div class="panel" style="padding:16px 18px"><h3 class="fe-h">Page text</h3><div class="fgrid">'+
+     t('fe_title','Heading',c.title)+t('fe_intro','Introduction',c.intro,true)+t('fe_button','Send button',c.button)+
+     t('fe_done','Message after sending',c.done,true,'Shown after someone sends a request.')+t('fe_note','Note under the form',c.note,true)+'</div></div>'+
+   '<div class="panel" style="padding:16px 18px;margin-top:14px"><h3 class="fe-h">Questions</h3><div id="fe_fields"></div>'+
+     '<button class="btn btn-line" id="fe_add" style="margin-top:12px">Add a question</button></div>'+
+   '<div class="fe-actions"><button class="btn btn-gold" id="fe_save">Save form</button><button class="btn btn-line" id="fe_cancel">Cancel</button><button class="btn btn-line" id="fe_reset">Reset to the original form</button></div>'+
+   '</div><div class="fe-right"><div class="fe-sticky"><div class="fe-plabel">Preview: what staff see</div><div id="fe_preview" class="fe-preview"></div></div></div></div>';
+  document.getElementById('app').innerHTML=h;
+  ['title','intro','button','done','note'].forEach(function(k){document.getElementById('fe_'+k).oninput=function(e){c[k]=e.target.value;renderFormPreview();};});
+  renderFieldEditors();renderFormPreview();
+  document.getElementById('fe_add').onclick=function(){c.fields.push({key:'c_'+Date.now().toString(36),label:'New question',hint:'',required:false,show:true,type:'text',width:'full',custom:true});renderFieldEditors();renderFormPreview();
+    var all=document.querySelectorAll('.fe-field');var last=all[all.length-1];if(last){last.scrollIntoView({block:'center'});var i=last.querySelector('input');if(i){i.focus();i.select();}}};
+  document.getElementById('fe_save').onclick=function(){
+    var bad=c.fields.filter(function(f){return f.show&&!String(f.label||'').trim();});if(bad.length){toast('Every visible question needs a label.');return;}
+    var bado=c.fields.filter(function(f){return f.show&&f.type==='select'&&!(f.options||[]).filter(Boolean).length;});if(bado.length){toast('“'+bado[0].label+'” is a dropdown with no choices. Add at least one.');return;}
+    c.fields.forEach(function(f){if(f.options)f.options=f.options.map(function(o){return String(o).trim();}).filter(Boolean);});
+    settings().requestForm=JSON.parse(JSON.stringify(c));FORM_EDIT=null;location.hash='settings';changed('Request form saved.'+(PREVIEW?'':' Save to GitHub to publish it.'));};
+  document.getElementById('fe_cancel').onclick=function(){FORM_EDIT=null;location.hash='settings';};
+  document.getElementById('fe_reset').onclick=function(){if(!confirm('Go back to the original form? Your wording and any questions you added will be removed when you save.'))return;FORM_EDIT=formCfg(FORM_DEFAULT);viewRequestForm();};
+}
+function renderFieldEditors(){
+  var c=FORM_EDIT,box=document.getElementById('fe_fields');
+  box.innerHTML=c.fields.map(function(f,i){
+    var lock=f.locked;
+    return '<div class="fe-field'+(f.show?'':' off')+'" data-i="'+i+'">'+
+     '<div class="fe-top"><span class="fe-type">'+esc(FTYPES[f.type]||f.type)+(lock?' · always shown':'')+'</span><span class="fe-move">'+
+       '<button class="btn btn-line btn-sm" data-m="up" '+(i===0?'disabled':'')+' aria-label="Move up">↑</button><button class="btn btn-line btn-sm" data-m="down" '+(i===c.fields.length-1?'disabled':'')+' aria-label="Move down">↓</button></span></div>'+
+     '<div class="fgrid">'+
+      '<div class="fld full"><label>Question</label><input data-k="label" value="'+esc(f.label)+'"></div>'+
+      (f.type==='person'?'':'<div class="fld full"><label>Help text (optional)</label><input data-k="hint" value="'+esc(f.hint||'')+'"></div>')+
+      (f.custom?'<div class="fld"><label>Answer type</label><select data-k="type">'+['text','textarea','number','money','date','select','yesno','url'].map(function(t){return '<option value="'+t+'"'+(f.type===t?' selected':'')+'>'+FTYPES[t]+'</option>';}).join('')+'</select></div>':'')+
+      '<div class="fld"><label>Width</label><select data-k="width"><option value="full"'+(f.width!=='half'?' selected':'')+'>Full row</option><option value="half"'+(f.width==='half'?' selected':'')+'>Half row</option></select></div>'+
+      (f.type==='select'?'<div class="fld full"><label>Choices, one per line</label><textarea data-k="options">'+esc((f.options||[]).join('\n'))+'</textarea></div>':'')+
+     '</div><div class="fe-checks">'+
+      '<label class="fe-chk"><input type="checkbox" data-k="show" '+(f.show?'checked':'')+(lock?' disabled':'')+'> Show this question</label>'+
+      '<label class="fe-chk"><input type="checkbox" data-k="required" '+(f.required?'checked':'')+(lock||!f.show?' disabled':'')+'> Required</label>'+
+      (f.custom?'<button class="btn btn-danger btn-sm" data-m="del">Remove question</button>':'')+
+     '</div></div>';
+  }).join('');
+  box.querySelectorAll('.fe-field').forEach(function(el){
+    var i=+el.getAttribute('data-i'),f=c.fields[i];
+    el.querySelectorAll('[data-k]').forEach(function(inp){
+      var k=inp.getAttribute('data-k');
+      var ev=inp.type==='checkbox'||inp.tagName==='SELECT'?'change':'input';
+      inp.addEventListener(ev,function(){
+        if(inp.type==='checkbox')f[k]=inp.checked;else if(k==='options')f.options=inp.value.split('\n');else f[k]=inp.value;
+        if(k==='show'&&!f.show)f.required=false;
+        if(k==='type'&&f.type==='select'&&!f.options)f.options=['Option 1','Option 2'];
+        if(k==='show'||k==='type')renderFieldEditors();
+        renderFormPreview();
+      });
+    });
+    el.querySelectorAll('[data-m]').forEach(function(b){b.onclick=function(){var m=b.getAttribute('data-m');
+      if(m==='up'&&i>0){c.fields.splice(i-1,0,c.fields.splice(i,1)[0]);}
+      else if(m==='down'&&i<c.fields.length-1){c.fields.splice(i+1,0,c.fields.splice(i,1)[0]);}
+      else if(m==='del'){if(!confirm('Remove “'+f.label+'”?'))return;c.fields.splice(i,1);}
+      renderFieldEditors();renderFormPreview();};});
+  });
+}
+function fieldInputHTML(f,id){
+  var t=f.type;
+  if(t==='person')return '<select id="'+id+'"><option value="">Choose your name</option><optgroup label="RAP Office"><option>Heather Gudowicz</option><option>Dawn Chapman</option></optgroup><optgroup label="GPW Office"><option>Megan Miloser</option></optgroup></select>';
+  if(t==='textarea')return '<textarea id="'+id+'"></textarea>';
+  if(t==='select')return '<select id="'+id+'"><option value="">'+(f.required?'Choose one':'Not sure')+'</option>'+(f.options||[]).filter(Boolean).map(function(o){return '<option>'+esc(o)+'</option>';}).join('')+'</select>';
+  if(t==='yesno')return '<select id="'+id+'"><option value=""></option><option>Yes</option><option>No</option></select>';
+  var it={number:'number',money:'number',date:'date',url:'url'}[t]||'text';
+  return '<input id="'+id+'" type="'+it+'"'+(t==='number'&&f.key==='qty'?' value="1"':'')+(t==='url'?' placeholder="https://"':'')+'>';
+}
+function renderFormPreview(){
+  var c=FORM_EDIT,box=document.getElementById('fe_preview');if(!box)return;
+  box.innerHTML='<div class="pv-hero"><div class="pv-h1">'+esc(c.title)+'</div><p>'+esc(c.intro)+'</p></div><div class="pv-card"><div class="pv-grid">'+
+    c.fields.filter(function(f){return f.show;}).map(function(f,i){
+      return '<div class="pv-f'+(f.width==='half'?'':' full')+'"><label>'+esc(f.label)+(f.required?' *':'')+'</label>'+fieldInputHTML(f,'pv'+i)+(f.hint?'<div class="hint">'+esc(f.hint)+'</div>':'')+'</div>';
+    }).join('')+'</div><div style="margin-top:14px"><span class="btn btn-gold" style="pointer-events:none">'+esc(c.button)+'</span></div></div><p class="note">'+esc(c.note)+'</p>';
 }
 
 /* ---------- Excel export (mirrors the website) ---------- */
@@ -1146,16 +1290,16 @@ function exportExcel(){
   /* ---- Requests ---- */
   var rqs=wb.addWorksheet('Requests',{properties:{tabColor:{argb:'FF1B6CA8'}},views:[{state:'frozen',ySplit:3,showGridLines:false}]});
   rqs.pageSetup={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0,printTitlesRow:'3:3'};
-  band(rqs,1,2,1,16,NAVY);rqs.getCell('A1').value='Item requests';rqs.getCell('A1').font=F({bold:true,size:16,color:{argb:'FFFFFFFF'}});
+  band(rqs,1,2,1,17,NAVY);rqs.getCell('A1').value='Item requests';rqs.getCell('A1').font=F({bold:true,size:16,color:{argb:'FFFFFFFF'}});
   rqs.getCell('A2').value='Every request staff have made, with the approval decision. Status: Pending, Approved, Not approved, Ordered, Received.';rqs.getCell('A2').font=F({size:9,color:{argb:GRAYTX}});
-  var RQC=[['Position',10],['Name',24],['Requested by',20],['Requested',12],['Item',30],['Link',14],['Qty',6],['Price each',11],['Needed by',12],['Why',30],['Status',13],['Decided by',18],['Decided',12],['Decision note',30],['Ordered',12],['Vendor / order #',22]];
+  var RQC=[['Position',10],['Name',24],['Requested by',20],['Requested',12],['Item',30],['Link',14],['Qty',6],['Price each',11],['Needed by',12],['Why',30],['Status',13],['Decided by',18],['Decided',12],['Decision note',30],['Ordered',12],['Vendor / order #',22],['Other answers',34]];
   header(rqs,3,1,RQC.map(function(c){return c[0];}));RQC.forEach(function(c,i){rqs.getColumn(i+1).width=c[1];});
   var rr=4;sorted.forEach(function(p){(p.requests||[]).forEach(function(r){
-    var v=[{text:p.pos,hyperlink:wsLink(p)},displayName(p),r.by||'',d(r.submitted),r.item||'',r.link?{text:'Open link',hyperlink:r.link}:'',r.qty||'',r.cost==null?'':r.cost,d(r.needed),r.reason||'',r.status,r.decidedBy||'',d(r.decided),r.decisionNote||'',d(r.ordered),r.orderNo||''];
+    var v=[{text:p.pos,hyperlink:wsLink(p)},displayName(p),r.by||'',d(r.submitted),r.item||'',r.link?{text:'Open link',hyperlink:r.link}:'',r.qty||'',r.cost==null?'':r.cost,d(r.needed),r.reason||'',r.status,r.decidedBy||'',d(r.decided),r.decisionNote||'',d(r.ordered),r.orderNo||'',(r.extra||[]).map(function(x){return x.label+': '+x.value;}).join('\n')];
     v.forEach(function(x,j){var c=rqs.getCell(rr,1+j);c.value=x==null?'':x;c.border=box;c.font=F(j===0?{bold:true,color:{argb:OC[p.office]||NAVY}}:j===5&&r.link?{color:{argb:'FF1B6CA8'},underline:true}:j===4?{bold:true}:{});
-      if([3,8,12,14].indexOf(j)>-1)c.numFmt='mm/dd/yyyy';if(j===7)c.numFmt='$#,##0.00';c.alignment={vertical:'top',wrapText:j===9||j===13};});rr++;});});
+      if([3,8,12,14].indexOf(j)>-1)c.numFmt='mm/dd/yyyy';if(j===7)c.numFmt='$#,##0.00';c.alignment={vertical:'top',wrapText:j===9||j===13||j===16};});rr++;});});
   if(rr===4){rqs.mergeCells('A4:H4');rqs.getCell('A4').value='No requests yet.';rqs.getCell('A4').font=F({italic:true,color:{argb:'FF6B7280'}});}
-  else{rqs.autoFilter={from:{row:3,column:1},to:{row:rr-1,column:16}};
+  else{rqs.autoFilter={from:{row:3,column:1},to:{row:rr-1,column:17}};
     [['Pending','FFFEF3C7','FFB45309'],['Approved','FFD1FAE5','FF065F46'],['Not approved','FFFCEBEB','FFB91C1C'],['Ordered','FFDBEAFE','FF1E40AF'],['Received','FFF3F4F6','FF4B5563']].forEach(function(x){
       rqs.addConditionalFormatting({ref:'K4:K'+(rr-1),rules:[{type:'expression',formulae:['K4="'+x[0]+'"'],style:{fill:{type:'pattern',pattern:'solid',bgColor:{argb:x[1]}},font:{bold:true,color:{argb:x[2]}}}}]});});}
 
